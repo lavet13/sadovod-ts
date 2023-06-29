@@ -1,4 +1,5 @@
 import '@material-ui/core/styles/createPalette';
+import { ButtonBaseProps } from '@mui/material';
 
 declare module '@mui/material/styles/createPalette' {
   interface Palette {
@@ -21,6 +22,8 @@ declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
     'nav-button': true;
     'nav-button-contained': true;
+    'order-btn': true;
+    'tel-btn': true;
   }
 }
 
@@ -52,5 +55,14 @@ declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
     logoText1: true;
     logoText2: true;
+  }
+}
+
+declare module '@mui/system' {
+  interface Shape {
+    xs: number;
+    sm: number;
+    md: number;
+    lg: number;
   }
 }

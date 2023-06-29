@@ -1,7 +1,9 @@
 import { NavigationBackground } from './navigation.styles';
 import Grid from '@mui/material/Unstable_Grid2';
-import { Button, ButtonGroup, Container, Stack } from '@mui/material';
+import { ButtonGroup, Container, Stack } from '@mui/material';
 import Logo from '../logo/logo.component';
+import { NavLink } from 'react-router-dom';
+import GenericButtonComponent from '../button/button.component';
 
 const Navigation = () => {
   return (
@@ -15,25 +17,36 @@ const Navigation = () => {
           </Grid>
           <Grid xs={8} container justifyContent='end'>
             <ButtonGroup aria-label='large button group'>
-              <Button variant='nav-button' color='secondary'>
+              <GenericButtonComponent
+                to={'/'}
+                component={NavLink}
+                variant='nav-button'
+              >
                 Главная
-              </Button>
-              <Button variant='text' color='secondary'>
+              </GenericButtonComponent>
+              <GenericButtonComponent
+                to={'/delivery'}
+                component={NavLink}
+                variant='nav-button'
+              >
                 Оплата и доставка
-              </Button>
-              <Button variant='text' color='secondary'>
+              </GenericButtonComponent>
+              <GenericButtonComponent
+                to={'/sign-in'}
+                component={NavLink}
+                variant='nav-button'
+              >
                 Вход
-              </Button>
-              <Button
+              </GenericButtonComponent>
+              <GenericButtonComponent
+                to={'/catalogs'}
+                component={NavLink}
                 variant='nav-button-contained'
                 color='secondary'
                 disableElevation
               >
                 Каталог
-              </Button>
-              <Button variant='contained' color='secondary'>
-                Каталог
-              </Button>
+              </GenericButtonComponent>
             </ButtonGroup>
           </Grid>
         </Grid>

@@ -23,7 +23,10 @@ import SubNavigation from '../sub-navigation/sub-navigation.component';
 import Logo from '../logo/logo.component';
 import React, { ReactElement, useState } from 'react';
 import Shopping2 from '../../assets/icons/luggages2.svg';
-import { HeaderButton } from './header.styles';
+import { NavLink } from 'react-router-dom';
+import GenericButtonComponent, {
+  GenericListItemButton,
+} from '../button/button.component';
 
 type HideOnScrollProps = {
   children: ReactElement;
@@ -40,6 +43,18 @@ const HideOnScroll = (props: HideOnScrollProps) => {
     </Slide>
   );
 };
+
+const pages = [
+  { path: '/', title: 'Главная' },
+  { path: '/catalogs', title: 'Каталог' },
+  { path: '/delivery', title: 'Оплата и доставка' },
+];
+
+const pagesAuth = [
+  { path: '/discount', title: 'Скидочная карта' },
+  { path: '/calculator', title: 'Калькулятор доставки' },
+  { path: '/mobile-app', title: 'Мобильное приложение' },
+];
 
 const Header = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
@@ -85,6 +100,7 @@ const Header = () => {
                 direction='row'
                 justifyContent='space-between'
                 alignItems='center'
+                maxHeight={{ xs: 40, sm: 50 }}
               >
                 <Tooltip title='Меню' arrow>
                   <IconButton
@@ -99,13 +115,14 @@ const Header = () => {
                   </IconButton>
                 </Tooltip>
                 <Logo />
-                <HeaderButton
+                <GenericButtonComponent
+                  to={'/catalogs'}
+                  component={NavLink}
+                  variant='nav-button-contained'
                   color='primary'
-                  variant='contained'
-                  disableElevation
                 >
                   Каталог
-                </HeaderButton>
+                </GenericButtonComponent>
               </Stack>
             </AppBar>
           </HideOnScroll>
@@ -130,69 +147,30 @@ const Header = () => {
                   borderWidth: 2,
                 })}
               />
+
               <List>
-                {['Главная', 'Каталог', 'Оплата и доставка'].map(
-                  (text, index) => (
-                    <ListItem key={index} disablePadding>
-                      <ListItemButton
-                        selected={selectedIndex === index}
-                        onClick={event => handleListItemClick(event, index)}
-                        sx={theme => ({
-                          '&& .MuiTouchRipple-child': {
-                            backgroundColor: theme.palette.primary.light,
-                          },
-                          ':hover': {
-                            backgroundColor: alpha(
-                              theme.palette.primary.main,
-                              0.04
-                            ),
-                          },
-                        })}
-                      >
-                        <ListItemText primary={text} disableTypography />
-                      </ListItemButton>
-                    </ListItem>
-                  )
-                )}
+                {pages.map(({ path, title }) => (
+                  <ListItem key={title} disablePadding>
+                    <GenericListItemButton to={path} component={NavLink}>
+                      <ListItemText primary={title} disableTypography />
+                    </GenericListItemButton>
+                  </ListItem>
+                ))}
               </List>
               <Divider />
               {/* @Authenticated user */}
               <List sx={{ mb: 'auto' }}>
-                {[
-                  'Скидочная карта',
-                  'Калькулятор доставки',
-                  'Мобильное приложение',
-                ].map((text, index) => (
-                  <ListItem key={index} disablePadding>
-                    <ListItemButton
-                      sx={theme => ({
-                        '&& .MuiTouchRipple-child': {
-                          backgroundColor: theme.palette.primary.light,
-                        },
-                        ':hover': {
-                          backgroundColor: alpha(
-                            theme.palette.primary.main,
-                            0.04
-                          ),
-                        },
-                      })}
-                    >
-                      <ListItemText primary={text} disableTypography />
-                    </ListItemButton>
+                {pagesAuth.map(({ path, title }) => (
+                  <ListItem key={title} disablePadding>
+                    <GenericListItemButton to={path} component={NavLink}>
+                      <ListItemText primary={title} disableTypography />
+                    </GenericListItemButton>
                   </ListItem>
                 ))}
               </List>
               <List>
                 <ListItem disablePadding>
-                  <ListItemButton
-                    sx={theme => ({
-                      color: theme.palette.error.main,
-                      fontWeight: 700,
-                      ':hover': {
-                        backgroundColor: alpha(theme.palette.error.main, 0.04),
-                      },
-                    })}
-                  >
+                  <ListItemButton color='error'>
                     <ListItemText disableTypography primary='Выход' />
                   </ListItemButton>
                 </ListItem>

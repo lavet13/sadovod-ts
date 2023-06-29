@@ -1,10 +1,11 @@
 import { Stack, Typography } from '@mui/material';
-import { LogoButton } from './logo.styles';
 import { LogoSVG } from './logo.styles';
+import { NavLink } from 'react-router-dom';
+import { GenericButtonBase } from '../button/button.component';
 
 const Logo = () => {
   return (
-    <LogoButton focusRipple>
+    <GenericButtonBase to={'/'} component={NavLink} focusRipple>
       <LogoSVG />
       <Stack>
         <Typography color='secondary' variant='logoText1'>
@@ -21,7 +22,7 @@ const Logo = () => {
           Online
         </Typography>
       </Stack>
-    </LogoButton>
+    </GenericButtonBase>
   );
 };
 

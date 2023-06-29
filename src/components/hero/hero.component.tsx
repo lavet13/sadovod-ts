@@ -1,13 +1,10 @@
 import {
   ClipPathGreenBackground,
   HeroBackground,
-  HeroDivider,
-  OrderButton,
   PlaceholderForImage,
-  TelephoneButton,
 } from './hero.styles';
 import Grid from '@mui/material/Unstable_Grid2';
-import { Container, Link, Stack, Typography } from '@mui/material';
+import { Button, Container, Divider, Stack, Typography } from '@mui/material';
 
 const Hero = () => {
   return (
@@ -33,13 +30,22 @@ const Hero = () => {
                 <Typography variant='h1' color='primary'>
                   Садовод
                 </Typography>
-                <HeroDivider
+                <Divider
                   variant='fullWidth'
                   flexItem
                   sx={theme => ({
                     borderColor: theme.palette.primary.main,
                     borderWidth: { xs: 1, sm: 2 },
                     mb: { md: 2, xs: 1 },
+                    [theme.breakpoints.down('xl')]: {
+                      width: '450px',
+                      alignSelf: 'end',
+                    },
+
+                    [theme.breakpoints.down('md')]: {
+                      width: '100%',
+                      alignSelf: 'center',
+                    },
                   })}
                 />
                 <Typography color='secondary' variant='h2' noWrap>
@@ -60,17 +66,12 @@ const Hero = () => {
                 spacing={2}
                 sx={{ height: '100%' }}
               >
-                <TelephoneButton
-                  href='tel:+7 (949) 516-25-12'
-                  color='white'
-                  component={Link}
-                  noWrap
-                >
+                <Button href='tel:+7 (949) 516-25-12' variant='tel-btn'>
                   +7 (949) 516-25-12
-                </TelephoneButton>
-                <OrderButton variant='contained' color='yellow'>
+                </Button>
+                <Button variant='order-btn' color='yellow'>
                   Сделать заказ
-                </OrderButton>
+                </Button>
               </Stack>
             </Stack>
           </Grid>

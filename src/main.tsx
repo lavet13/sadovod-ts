@@ -1,7 +1,21 @@
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  NavLink,
+  NavLinkProps,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
 
-import { CssBaseline, StyledEngineProvider, alpha } from '@mui/material';
+import {
+  alpha,
+  CssBaseline,
+  keyframes,
+  LinkProps,
+  StyledEngineProvider,
+} from '@mui/material';
 
 import { ThemeProvider, createTheme } from '@mui/material';
 
@@ -13,6 +27,23 @@ import RalewaySemiBoldTTF from './assets/fonts/Raleway/Raleway-SemiBold.ttf';
 import RalewayBoldTTF from './assets/fonts/Raleway/Raleway-Bold.ttf';
 import RalewayExtraBoldTTF from './assets/fonts/Raleway/Raleway-ExtraBold.ttf';
 import RalewayBlackTTF from './assets/fonts/Raleway/Raleway-Black.ttf';
+import HomePage from './pages/home-page.component';
+import React from 'react';
+import ErrorPage from './pages/error-page.component';
+import DeliveryPage from './pages/delivery-page.component';
+import CatalogsPage from './pages/catalogs-page.component';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<App />} errorElement={<ErrorPage />}>
+      <Route errorElement={<ErrorPage />}>
+        <Route index element={<HomePage />} />
+        <Route path='delivery' element={<DeliveryPage />} />
+        <Route path='catalogs' element={<CatalogsPage />} />
+      </Route>
+    </Route>
+  )
+);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -75,23 +106,31 @@ const RalewayBlack = {
 };
 
 const defaultTheme = createTheme({
+  unstable_sxConfig: {
+    borderRadius: {
+      themeKey: 'shape',
+    },
+  },
+  shape: {
+    borderRadius: 0,
+    sm: 3,
+  },
   palette: {
     mode: 'light',
     primary: {
       main: '#4CAF50',
-      contrastText: '#FFF',
+      contrastText: '#fff',
     },
     secondary: {
       main: '#3D3D3D',
-      contrastText: '#FFF',
+      contrastText: '#fff',
     },
     yellow: {
       main: '#FFAD1D',
-      contrastText: '#FFF',
+      contrastText: '#fff',
     },
     white: {
       main: '#FFF',
-      contrastText: '#FFF',
     },
     contrastThreshold: 4.5,
   },
@@ -127,7 +166,7 @@ const theme = createTheme({
       fontSize: pxToRem(28),
       lineHeight: 1,
       [breakpoints.down('md')]: {
-        fontSize: 'clamp(0.6rem, 2.5vw + 0.6rem, 1.8rem)',
+        fontSize: 'clamp(0.6rem, 1.7vw + 0.6rem, 1.4rem)',
       },
     },
     logoText2: {
@@ -135,7 +174,7 @@ const theme = createTheme({
       fontWeight: 900,
       lineHeight: 1,
       [breakpoints.down('md')]: {
-        fontSize: 'clamp(0.3rem, 1.5vw + 0.3rem, 1rem)',
+        fontSize: 'clamp(0.4rem, 0.8vw + 0.4rem, 0.8rem)',
       },
     },
     body1: {
@@ -194,33 +233,66 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiButtonBase: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          paddingLeft: theme.spacing(3),
+          paddingRight: theme.spacing(3),
+          '&& .MuiTouchRipple-child': {
+            backgroundColor: theme.palette.primary.main,
+          },
+          '&& .MuiTouchRipple-rippleVisible': {
+            opacity: 0.5,
+            animationName: keyframes`
+              0% {
+                transform: scale(0);
+                opacity: 0.1;
+              }
+              100% {
+                transform: scale(1);
+                opacity: 0.5;
+              }
+            `,
+            animationDuration: '550ms',
+            animationTimingFunction: theme.transitions.easing.easeInOut,
+          },
+          [theme.breakpoints.down('md')]: {
+            paddingRight: theme.spacing(1),
+            paddingLeft: theme.spacing(1),
+            alignSelf: 'stretch',
+          },
+        }),
+      },
+    },
     MuiButton: {
       variants: [
         {
           props: { variant: 'nav-button-contained' },
-          style: ({ theme }) =>
-            theme.unstable_sx({
-              color: palette.common.white,
+          style: {
+            color: palette.common.white,
+            backgroundColor: palette.secondary.main,
+
+            ':hover': {
               backgroundColor: palette.primary.main,
-              ':hover': {
-                backgroundColor: palette.primary.dark,
-              },
+            },
 
-              '&& .MuiTouchRipple-child': {
-                backgroundColor: palette.secondary.contrastText,
-              },
+            '&& .MuiTouchRipple-child': {
+              backgroundColor: palette.primary.contrastText,
+            },
 
-              alignSelf: 'stretch',
+            '&.active': {
+              backgroundColor: palette.primary.main,
+            },
 
-              lineHeight: 1,
-              fontSize: pxToRem(23),
-            }),
+            alignSelf: 'stretch',
+            lineHeight: 1,
+            fontSize: pxToRem(23),
+          },
         },
         {
           props: { variant: 'nav-button-contained', color: 'primary' },
           style: ({ theme }) =>
             theme.unstable_sx({
-              fontSize: pxToRem(10),
               px: { sm: theme.spacing(4), xs: theme.spacing(2) },
               py: 0,
               [theme.breakpoints.down('md')]: {
@@ -232,37 +304,73 @@ const theme = createTheme({
             }),
         },
         {
-          props: { variant: 'nav-button-contained', color: 'secondary' },
-          style: {
-            backgroundColor: palette.secondary.main,
-
-            ':hover': {
-              backgroundColor: palette.secondary.dark,
-            },
-
-            '&& .MuiTouchRipple-child': {
-              backgroundColor: palette.secondary.contrastText,
-            },
-          },
-        },
-        {
           props: { variant: 'nav-button' },
           style: {
-            color: palette.primary.main,
+            color: palette.secondary.main,
             fontSize: pxToRem(23),
+            '&.active': {
+              color: palette.primary.main,
+              backgroundColor: alpha(palette.primary.main, 0.04),
+            },
+            ':hover': {
+              backgroundColor: alpha(palette.secondary.main, 0.04),
+            },
           },
         },
         {
-          props: { variant: 'nav-button', color: 'secondary' },
-          style: {
-            color: palette.secondary.main,
-          },
+          props: { variant: 'order-btn', color: 'yellow' },
+          style: ({ theme }) =>
+            theme.unstable_sx({
+              fontSize: pxToRem(37),
+              color: palette.common.white,
+              backgroundColor: palette.yellow.main,
+              ':hover': {
+                boxShadow: theme.shadows[4],
+                backgroundColor: palette.yellow.main,
+              },
+              '&& .MuiTouchRipple-child': {
+                backgroundColor: palette.yellow.contrastText,
+              },
+              px: 4,
+              borderRadius: 'sm',
+              whiteSpace: 'nowrap',
+              [theme.breakpoints.down('md')]: {
+                fontSize: 'clamp(1rem, 0.4vw + 1rem, 1.2rem)',
+              },
+            }),
+        },
+        {
+          props: { variant: 'tel-btn' },
+          style: ({ theme }) =>
+            theme.unstable_sx({
+              fontSize: pxToRem(54),
+              color: palette.common.white,
+              ':hover': {
+                backgroundColor: alpha(palette.common.white, 0.04),
+              },
+              px: 2,
+              borderRadius: 'sm',
+              whiteSpace: 'nowrap',
+              [theme.breakpoints.down('md')]: {
+                fontSize: 'clamp(1.1rem, 0.4vw + 1.1rem, 1.3rem)',
+              },
+            }),
         },
       ],
     },
     MuiListItemButton: {
       styleOverrides: {
-        root: {
+        root: ({ theme, ownerState }) => ({
+          '&& .MuiTouchRipple-child': {
+            backgroundColor: theme.palette.primary.light,
+          },
+          ':hover': {
+            backgroundColor: alpha(theme.palette.primary.main, 0.04),
+          },
+          '&.active': {
+            fontWeight: 700,
+            color: palette.primary.main,
+          },
           [breakpoints.down('md')]: {
             fontSize: 'clamp(0.8rem, 0.6vw + 0.8rem, 1.1rem)',
           },
@@ -270,7 +378,19 @@ const theme = createTheme({
             fontWeight: 700,
             color: palette.primary.main,
           },
-        },
+          ...(ownerState.color === 'error'
+            ? {
+                color: theme.palette.error.main,
+                '&& .MuiTouchRipple-child': {
+                  backgroundColor: theme.palette.error.dark,
+                },
+                fontWeight: 700,
+                ':hover': {
+                  backgroundColor: alpha(theme.palette.error.main, 0.04),
+                },
+              }
+            : {}),
+        }),
       },
     },
     MuiTypography: {
@@ -308,18 +428,15 @@ const theme = createTheme({
       },
     },
   },
-  shape: {
-    borderRadius: 0,
-  },
 });
 
 root.render(
-  // <React.StrictMode>
-  <StyledEngineProvider injectFirst>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
-  </StyledEngineProvider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </StyledEngineProvider>
+  </React.StrictMode>
 );
