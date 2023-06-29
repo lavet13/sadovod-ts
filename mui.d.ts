@@ -24,6 +24,7 @@ declare module '@mui/material/Button' {
     'nav-button-contained': true;
     'order-btn': true;
     'tel-btn': true;
+    'logo-btn': true;
   }
 }
 

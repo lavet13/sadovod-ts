@@ -233,17 +233,19 @@ const theme = createTheme({
     },
   },
   components: {
-    MuiButtonBase: {
-      styleOverrides: {
-        root: ({ theme }) => ({
-          paddingLeft: theme.spacing(3),
-          paddingRight: theme.spacing(3),
-          '&& .MuiTouchRipple-child': {
-            backgroundColor: theme.palette.primary.main,
-          },
-          '&& .MuiTouchRipple-rippleVisible': {
-            opacity: 0.5,
-            animationName: keyframes`
+    MuiButton: {
+      variants: [
+        {
+          props: { variant: 'logo-btn' },
+          style: ({ theme }) => ({
+            paddingLeft: theme.spacing(3),
+            paddingRight: theme.spacing(3),
+            '&& .MuiTouchRipple-child': {
+              backgroundColor: theme.palette.primary.main,
+            },
+            '&& .MuiTouchRipple-rippleVisible': {
+              opacity: 0.5,
+              animationName: keyframes`
               0% {
                 transform: scale(0);
                 opacity: 0.1;
@@ -253,19 +255,16 @@ const theme = createTheme({
                 opacity: 0.5;
               }
             `,
-            animationDuration: '550ms',
-            animationTimingFunction: theme.transitions.easing.easeInOut,
-          },
-          [theme.breakpoints.down('md')]: {
-            paddingRight: theme.spacing(1),
-            paddingLeft: theme.spacing(1),
-            alignSelf: 'stretch',
-          },
-        }),
-      },
-    },
-    MuiButton: {
-      variants: [
+              animationDuration: '550ms',
+              animationTimingFunction: theme.transitions.easing.easeInOut,
+            },
+            [theme.breakpoints.down('md')]: {
+              paddingRight: theme.spacing(1),
+              paddingLeft: theme.spacing(1),
+              alignSelf: 'stretch',
+            },
+          }),
+        },
         {
           props: { variant: 'nav-button-contained' },
           style: {
