@@ -1,6 +1,11 @@
-import { ClipPathGreenBackground, GridContainer, Image } from './hero.styles';
+import {
+  ClipPathGreenBackground,
+  GridContainer,
+  HeroDivider,
+  Image,
+} from './hero.styles';
 import Grid from '@mui/material/Unstable_Grid2';
-import { Button, Container, Divider, Stack, Typography } from '@mui/material';
+import { Button, Container, Stack, Typography } from '@mui/material';
 import WomanWithBaggages from '../../assets/images/womanWithBaggages.png';
 
 const Hero = () => {
@@ -27,24 +32,7 @@ const Hero = () => {
                 <Typography variant='h1' color='primary'>
                   Садовод
                 </Typography>
-                <Divider
-                  variant='fullWidth'
-                  flexItem
-                  sx={theme => ({
-                    borderColor: theme.palette.primary.main,
-                    borderWidth: { xs: 1, sm: 2 },
-                    mb: { md: 2, xs: 1 },
-                    [theme.breakpoints.down('xl')]: {
-                      width: '450px',
-                      alignSelf: 'end',
-                    },
-
-                    [theme.breakpoints.down('md')]: {
-                      width: '100%',
-                      alignSelf: 'center',
-                    },
-                  })}
-                />
+                <HeroDivider variant='fullWidth' flexItem />
                 <Typography color='secondary' variant='h2' noWrap>
                   Покупай выгодно!!
                 </Typography>

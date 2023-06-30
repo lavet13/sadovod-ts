@@ -1,8 +1,10 @@
+import { Divider } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 
-import Grid, { Grid2Props } from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Unstable_Grid2';
 
 const navigationOffset = 50;
+const minHeight = 800;
 const maxHeight = 850;
 
 export const ClipPathGreenBackground = styled('div')(({ theme }) => ({
@@ -13,9 +15,9 @@ export const ClipPathGreenBackground = styled('div')(({ theme }) => ({
   clipPath: 'polygon(0 60%, 100% 50%, 100% 100%, 0 100%)',
   zIndex: -100,
 
-  [`@media screen and (max-height: 700px)`]: {
-    clipPath: 'polygon(0 420px, 100% 320px, 100% 700px, 0 700px)',
-    height: '700px',
+  [`@media screen and (max-height: ${minHeight}px)`]: {
+    clipPath: `polygon(0 420px, 100% 320px, 100% ${minHeight}px, 0 ${minHeight}px)`,
+    height: `${minHeight}px`,
   },
   [`@media screen and (min-height: ${maxHeight}px)`]: {
     height: `${maxHeight}px`,
@@ -23,28 +25,87 @@ export const ClipPathGreenBackground = styled('div')(({ theme }) => ({
   },
 }));
 
-export const Image = styled('img')(({ theme }) => ({
-  display: 'block',
-  position: 'absolute',
-  width: '200%',
-  bottom: 0,
-  left: '50%',
-  transform: `translateX(-50%)`,
-  [`${theme.breakpoints.up('lg')} and (min-height: ${maxHeight}px)`]: {
-    left: '55%',
-    transform: `translateX(-55%)`,
-    width: '225%',
-  },
-}));
+export const Image = styled('img')(({ theme }) => {
+  console.log(theme.breakpoints.between('md', 'lg'));
+  return {
+    display: 'block',
+    position: 'absolute',
+    objectFit: 'cover',
+    width: '200%',
+    bottom: 0,
+    left: '60%',
+    transform: `translateX(-60%)`,
+    [`${theme.breakpoints.up('lg')} and (min-height: ${maxHeight}px)`]: {
+      width: '250%',
+    },
+    [`${theme.breakpoints.between(
+      'md',
+      'lg'
+    )} and (min-height: ${maxHeight}px)`]: {
+      width: '115%',
+      objectFit: 'cover',
+      aspectRatio: '2 / 3',
+    },
+    [`@media (min-width: ${theme.breakpoints.values.md}px) and (max-width: ${
+      theme.breakpoints.values.lg - 200
+    }px) and (max-height: ${maxHeight - 1}px)`]: {
+      width: '120%',
+      left: '90%',
+      transform: `translateX(-90%)`,
+      objectFit: 'cover',
+      aspectRatio: '2 / 3',
+    },
+    [`@media (min-width: ${
+      theme.breakpoints.values.lg - 200
+    }px) and (max-width: ${theme.breakpoints.values.lg}px) and (max-height: ${
+      maxHeight - 1
+    }px)`]: {
+      width: '160%',
+      left: '80%',
+      transform: `translateX(-80%)`,
+      objectFit: 'cover',
+      aspectRatio: '1 / 1',
+    },
+    [`${theme.breakpoints.up('lg')} and (max-height: ${minHeight}px)`]: {
+      width: '200%',
+      objectFit: 'cover',
+      aspectRatio: '5 / 4',
+    },
+  };
+});
 
-export const GridContainer = styled(Grid)<Grid2Props>({
+export const GridContainer = styled(Grid)({
   height: `calc(100vh - ${navigationOffset}px)`,
 
-  [`@media screen and (max-height: 700px)`]: {
-    height: '700px',
+  [`@media screen and (max-height: ${minHeight}px)`]: {
+    height: `${minHeight}px`,
   },
 
   [`@media screen and (min-height: ${maxHeight}px)`]: {
     height: `${maxHeight}px`,
   },
 });
+
+export const HeroDivider = styled(Divider)(({ theme }) =>
+  theme.unstable_sx({
+    borderColor: theme.palette.primary.main,
+    borderWidth: { xs: 1, sm: 2 },
+    mb: { md: 2, xs: 1 },
+    [theme.breakpoints.up('xl')]: {
+      width: '410px',
+      alignSelf: 'end',
+    },
+    [theme.breakpoints.between('lg', 'xl')]: {
+      width: '408px',
+      alignSelf: 'end',
+    },
+    [theme.breakpoints.down('lg')]: {
+      width: '365px',
+      alignSelf: 'end',
+    },
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
+      alignSelf: 'center',
+    },
+  })
+);
