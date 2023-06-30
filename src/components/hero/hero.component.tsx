@@ -5,7 +5,7 @@ import {
   Image,
 } from './hero.styles';
 import Grid from '@mui/material/Unstable_Grid2';
-import { Button, Container, Stack, Typography } from '@mui/material';
+import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import WomanWithBaggages from '../../assets/images/womanWithBaggages.png';
 
 const Hero = () => {
@@ -18,9 +18,13 @@ const Hero = () => {
             <Image src={WomanWithBaggages} alt={'Woman'} />
           </Grid>
           <Grid xs={2} md />
-          <Grid xs={20} md={10} lg={12} sx={{ mt: { xs: 10, md: 12 } }}>
-            <Stack height={'100%'} spacing={15}>
-              <Stack alignItems={{ xs: 'center', md: 'flex-end' }}>
+          <Grid xs={20} md={10} lg={12} sx={{ mt: { xs: 4, md: 12 } }}>
+            <Stack sx={{ height: '100%' }}>
+              <Stack
+                alignItems={{ xs: 'center', md: 'flex-end' }}
+                justifyContent={{ md: 'flex-start', xs: 'flex-end' }}
+                flexBasis={'50%'}
+              >
                 <Typography
                   color='secondary'
                   variant='subtitle1'
@@ -47,9 +51,9 @@ const Hero = () => {
               </Stack>
               <Stack
                 alignItems={{ xs: 'center', md: 'flex-end' }}
-                justifyContent='center'
+                justifyContent={{ xs: 'flex-start', md: 'center' }}
                 spacing={2}
-                sx={{ height: '100%' }}
+                flexBasis={'50%'}
               >
                 <Button href='tel:+7 (949) 516-25-12' variant='tel-btn'>
                   +7 (949) 516-25-12

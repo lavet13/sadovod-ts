@@ -30,7 +30,6 @@ export const Image = styled('img')(({ theme }) => {
   return {
     display: 'block',
     position: 'absolute',
-    objectFit: 'cover',
     width: '200%',
     bottom: 0,
     left: '60%',
@@ -42,9 +41,9 @@ export const Image = styled('img')(({ theme }) => {
       'md',
       'lg'
     )} and (min-height: ${maxHeight}px)`]: {
-      width: '115%',
+      width: '170%',
       objectFit: 'cover',
-      aspectRatio: '2 / 3',
+      aspectRatio: '2 / 2',
     },
     [`@media (min-width: ${theme.breakpoints.values.md}px) and (max-width: ${
       theme.breakpoints.values.lg - 200
@@ -74,7 +73,7 @@ export const Image = styled('img')(({ theme }) => {
   };
 });
 
-export const GridContainer = styled(Grid)({
+export const GridContainer = styled(Grid)(({ theme }) => ({
   height: `calc(100vh - ${navigationOffset}px)`,
 
   [`@media screen and (max-height: ${minHeight}px)`]: {
@@ -84,7 +83,16 @@ export const GridContainer = styled(Grid)({
   [`@media screen and (min-height: ${maxHeight}px)`]: {
     height: `${maxHeight}px`,
   },
-});
+  [`${theme.breakpoints.down('md')} and (max-height: ${minHeight}px)`]: {
+    height: `60vh`,
+  },
+  [`${theme.breakpoints.down('md')} and (min-height: ${minHeight}px)`]: {
+    height: `700px`,
+  },
+  [`${theme.breakpoints.down('md')} and (max-height: 700px)`]: {
+    height: `420px`,
+  },
+}));
 
 export const HeroDivider = styled(Divider)(({ theme }) =>
   theme.unstable_sx({

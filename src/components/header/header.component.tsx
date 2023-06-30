@@ -100,7 +100,6 @@ const Header = () => {
                 direction='row'
                 justifyContent='space-between'
                 alignItems='center'
-                maxHeight={{ xs: 40, sm: 50 }}
               >
                 <Tooltip title='Меню' arrow>
                   <IconButton
