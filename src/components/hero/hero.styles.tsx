@@ -1,7 +1,7 @@
 import { Divider } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
-
 import Grid from '@mui/material/Unstable_Grid2';
+import BackgroundImage from '../../assets/images/back-min.png';
 
 const navigationOffset = 50;
 const minHeight = 800;
@@ -117,3 +117,23 @@ export const HeroDivider = styled(Divider)(({ theme }) =>
     },
   })
 );
+
+export const HeroBackground = styled('div')(({ theme }) => ({
+  background: `linear-gradient(to right bottom, ${alpha(
+    theme.palette.common.white,
+    0.9
+  )}, ${alpha(
+    theme.palette.common.white,
+    0.9
+  )}), url(${BackgroundImage}) top center/cover no-repeat`,
+
+  position: 'absolute',
+  width: '100%',
+  height: `calc(100vh - ${navigationOffset}px)`,
+
+  [`@media (max-height: ${minHeight}px)`]: {
+    height: `1000px`,
+  },
+
+  zIndex: -100,
+}));

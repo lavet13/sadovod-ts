@@ -1,18 +1,24 @@
 import {
   ClipPathGreenBackground,
   GridContainer,
+  HeroBackground,
   HeroDivider,
   Image,
 } from './hero.styles';
 import Grid from '@mui/material/Unstable_Grid2';
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
+import { Button, Container, Stack, Typography } from '@mui/material';
 import WomanWithBaggages from '../../assets/images/womanWithBaggages.png';
+
+const defaultMaxWidthContainer = 1024;
 
 const Hero = () => {
   return (
     <>
+      <HeroBackground />
       <ClipPathGreenBackground sx={{ display: { md: 'block', xs: 'none' } }} />
-      <Container sx={{ maxWidth: { md: '100%', lg: '1024px' } }}>
+      <Container
+        sx={{ maxWidth: { md: '100%', lg: `${defaultMaxWidthContainer}px` } }}
+      >
         <GridContainer container columns={24}>
           <Grid xs={0} md={12} lg={12} container sx={{ position: 'relative' }}>
             <Image src={WomanWithBaggages} alt={'Woman'} />

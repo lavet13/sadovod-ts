@@ -3,8 +3,6 @@ import App from './App';
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  NavLink,
-  NavLinkProps,
   Route,
   RouterProvider,
 } from 'react-router-dom';
@@ -13,7 +11,6 @@ import {
   alpha,
   CssBaseline,
   keyframes,
-  LinkProps,
   StyledEngineProvider,
 } from '@mui/material';
 
@@ -358,6 +355,7 @@ const theme = createTheme({
               whiteSpace: 'nowrap',
               [theme.breakpoints.down('md')]: {
                 fontSize: 'clamp(1.1rem, 0.4vw + 1.1rem, 1.3rem)',
+                color: theme.palette.secondary.main,
               },
             }),
         },
