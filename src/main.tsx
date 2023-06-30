@@ -238,6 +238,8 @@ const theme = createTheme({
         {
           props: { variant: 'logo-btn' },
           style: ({ theme }) => ({
+            paddingBottom: 0,
+            paddingTop: 0,
             paddingLeft: theme.spacing(3),
             paddingRight: theme.spacing(3),
             '&& .MuiTouchRipple-child': {
@@ -268,6 +270,8 @@ const theme = createTheme({
         {
           props: { variant: 'nav-button-contained' },
           style: {
+            paddingBottom: 0,
+            paddingTop: 0,
             color: palette.common.white,
             backgroundColor: palette.secondary.main,
 
@@ -305,6 +309,8 @@ const theme = createTheme({
         {
           props: { variant: 'nav-button' },
           style: {
+            paddingBottom: 0,
+            paddingTop: 0,
             color: palette.secondary.main,
             fontSize: pxToRem(23),
             '&.active': {

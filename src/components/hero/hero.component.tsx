@@ -1,22 +1,19 @@
-import {
-  ClipPathGreenBackground,
-  HeroBackground,
-  PlaceholderForImage,
-} from './hero.styles';
+import { ClipPathGreenBackground, GridContainer, Image } from './hero.styles';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Button, Container, Divider, Stack, Typography } from '@mui/material';
+import WomanWithBaggages from '../../assets/images/womanWithBaggages.png';
 
 const Hero = () => {
   return (
-    <HeroBackground>
-      <ClipPathGreenBackground />
-      <Container>
-        <Grid container columns={24}>
-          <Grid xs={0} md={10} lg={12}>
-            <PlaceholderForImage />
+    <>
+      <ClipPathGreenBackground sx={{ display: { md: 'block', xs: 'none' } }} />
+      <Container sx={{ maxWidth: { md: '100%', lg: '1024px' } }}>
+        <GridContainer container columns={24}>
+          <Grid xs={0} md={12} lg={12} container sx={{ position: 'relative' }}>
+            <Image src={WomanWithBaggages} alt={'Woman'} />
           </Grid>
-          <Grid md={3} lg xl />
-          <Grid xs={24} md={11} lg={9} sx={{ mt: { xs: 10, md: 12 } }}>
+          <Grid xs={2} md />
+          <Grid xs={20} md={10} lg={12} sx={{ mt: { xs: 10, md: 12 } }}>
             <Stack height={'100%'} spacing={15}>
               <Stack alignItems={{ xs: 'center', md: 'flex-end' }}>
                 <Typography
@@ -75,9 +72,10 @@ const Hero = () => {
               </Stack>
             </Stack>
           </Grid>
-        </Grid>
+          <Grid xs={2} md />
+        </GridContainer>
       </Container>
-    </HeroBackground>
+    </>
   );
 };
 
