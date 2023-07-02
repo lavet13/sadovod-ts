@@ -3,13 +3,14 @@ import { ButtonProps, Stack, Typography } from '@mui/material';
 import { LogoSVG } from './logo.styles';
 import { NavLink } from 'react-router-dom';
 import GenericButtonComponent from '../button/button.component';
+import { PATHS } from '../../pages';
 
 type LogoProps = ButtonProps<any, { component?: any }>;
 
 const Logo: FC<LogoProps> = props => {
   return (
     <GenericButtonComponent
-      to={'/'}
+      to={PATHS.HOME_PAGE}
       component={NavLink}
       focusRipple
       variant='logo-btn'

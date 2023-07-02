@@ -27,6 +27,19 @@ import GenericButtonComponent, {
   GenericListItemButton,
 } from '../button/button.component';
 import { HeroBackground } from '../hero/hero.styles';
+import { PAGES, PATHS } from '../../pages';
+
+const PAGES_UNAUTH: Record<string, PATHS> = {
+  [PATHS.HOME_PAGE]: PATHS.HOME_PAGE,
+  [PATHS.CATALOGS_PAGE]: PATHS.CATALOGS_PAGE,
+  [PATHS.DELIVERY_PAGE]: PATHS.DELIVERY_PAGE,
+};
+
+const PAGES_AUTH: Record<string, PATHS> = {
+  [PATHS.DISCOUNT_PAGE]: PATHS.DISCOUNT_PAGE,
+  [PATHS.CALCULATOR_PAGE]: PATHS.CALCULATOR_PAGE,
+  [PATHS.MOBILE_PAGE]: PATHS.MOBILE_PAGE,
+};
 
 type HideOnScrollProps = {
   children: ReactElement;
@@ -43,18 +56,6 @@ const HideOnScroll = (props: HideOnScrollProps) => {
     </Slide>
   );
 };
-
-const pages = [
-  { path: '/', title: 'Главная' },
-  { path: '/catalogs', title: 'Каталог' },
-  { path: '/delivery', title: 'Оплата и доставка' },
-];
-
-const pagesAuth = [
-  { path: '/discount', title: 'Скидочная карта' },
-  { path: '/calculator', title: 'Калькулятор доставки' },
-  { path: '/mobile-app', title: 'Мобильное приложение' },
-];
 
 const Header = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
@@ -108,7 +109,7 @@ const Header = () => {
                 </Tooltip>
                 <Logo sx={{ flexGrow: 1 }} />
                 <GenericButtonComponent
-                  to={'/catalogs'}
+                  to={PATHS.CATALOGS_PAGE}
                   component={NavLink}
                   variant='nav-button-contained'
                   color='primary'
@@ -128,7 +129,7 @@ const Header = () => {
           >
             <Stack
               sx={{
-                width: 230,
+                width: 220,
                 height: '100%',
                 background: `url(${Shopping2}) bottom right/8rem no-repeat`,
               }}
@@ -142,24 +143,30 @@ const Header = () => {
               />
 
               <List>
-                {pages.map(({ path, title }) => (
-                  <ListItem key={title} disablePadding>
-                    <GenericListItemButton to={path} component={NavLink}>
-                      <ListItemText primary={title} disableTypography />
-                    </GenericListItemButton>
-                  </ListItem>
-                ))}
+                {PAGES.map(
+                  ({ path, title }) =>
+                    PAGES_UNAUTH[path] && (
+                      <ListItem key={title} disablePadding>
+                        <GenericListItemButton to={path} component={NavLink}>
+                          <ListItemText primary={title} disableTypography />
+                        </GenericListItemButton>
+                      </ListItem>
+                    )
+                )}
               </List>
               <Divider />
               {/* @Authenticated user */}
               <List sx={{ mb: 'auto' }}>
-                {pagesAuth.map(({ path, title }) => (
-                  <ListItem key={title} disablePadding>
-                    <GenericListItemButton to={path} component={NavLink}>
-                      <ListItemText primary={title} disableTypography />
-                    </GenericListItemButton>
-                  </ListItem>
-                ))}
+                {PAGES.map(
+                  ({ path, title }) =>
+                    PAGES_AUTH[path] && (
+                      <ListItem key={title} disablePadding>
+                        <GenericListItemButton to={path} component={NavLink}>
+                          <ListItemText primary={title} disableTypography />
+                        </GenericListItemButton>
+                      </ListItem>
+                    )
+                )}
               </List>
               <List>
                 <ListItem disablePadding>

@@ -24,19 +24,18 @@ import RalewaySemiBoldTTF from './assets/fonts/Raleway/Raleway-SemiBold.ttf';
 import RalewayBoldTTF from './assets/fonts/Raleway/Raleway-Bold.ttf';
 import RalewayExtraBoldTTF from './assets/fonts/Raleway/Raleway-ExtraBold.ttf';
 import RalewayBlackTTF from './assets/fonts/Raleway/Raleway-Black.ttf';
-import HomePage from './pages/home-page.component';
 import React from 'react';
 import ErrorPage from './pages/error-page.component';
-import DeliveryPage from './pages/delivery-page.component';
-import CatalogsPage from './pages/catalogs-page.component';
+
+import { PAGES, PAGES_COMPONENTS } from './pages';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />} errorElement={<ErrorPage />}>
       <Route errorElement={<ErrorPage />}>
-        <Route index element={<HomePage />} />
-        <Route path='delivery' element={<DeliveryPage />} />
-        <Route path='catalogs' element={<CatalogsPage />} />
+        {PAGES.map(({ path }) => (
+          <Route key={path} path={path} element={PAGES_COMPONENTS[path]} />
+        ))}
       </Route>
     </Route>
   )
@@ -342,6 +341,35 @@ const theme = createTheme({
               ),
             },
           },
+        },
+        {
+          props: { variant: 'nav-button', color: 'white' },
+          style: ({ theme }) =>
+            theme.unstable_sx({
+              color: palette.common.white,
+              py: theme.spacing(1),
+              lineHeight: 1.8,
+              fontWeight: 600,
+              ':hover': {
+                backgroundColor: alpha(
+                  palette.common.white,
+                  palette.action.hoverOpacity
+                ),
+              },
+              ':active': {
+                backgroundColor: alpha(
+                  palette.common.white,
+                  palette.action.activatedOpacity
+                ),
+              },
+              '&.active': {
+                color: palette.common.white,
+                backgroundColor: alpha(
+                  palette.common.white,
+                  palette.action.focusOpacity
+                ),
+              },
+            }),
         },
         {
           props: { variant: 'order-btn', color: 'yellow' },
