@@ -1,18 +1,17 @@
 import {
   AppBar,
-  Button,
   Divider,
   IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
+  Paper,
   Slide,
   Stack,
   SwipeableDrawer,
   Toolbar,
   Tooltip,
-  alpha,
   useMediaQuery,
   useScrollTrigger,
   useTheme,
@@ -27,6 +26,7 @@ import { NavLink } from 'react-router-dom';
 import GenericButtonComponent, {
   GenericListItemButton,
 } from '../button/button.component';
+import { HeroBackground } from '../hero/hero.styles';
 
 type HideOnScrollProps = {
   children: ReactElement;
@@ -58,7 +58,6 @@ const pagesAuth = [
 
 const Header = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -75,20 +74,14 @@ const Header = () => {
       setDrawerIsOpen(flag);
     };
 
-  const handleListItemClick = (
-    _: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number
-  ) => {
-    setSelectedIndex(index);
-  };
-
   return (
     <>
+      <HeroBackground />
       {isSmall ? (
-        <>
+        <Paper elevation={3}>
           <Navigation></Navigation>
           <SubNavigation></SubNavigation>
-        </>
+        </Paper>
       ) : (
         <>
           <HideOnScroll>
@@ -101,7 +94,7 @@ const Header = () => {
                 justifyContent='space-between'
                 alignItems='center'
               >
-                <Tooltip title='Меню' arrow>
+                <Tooltip title='Меню' arrow sx={{ flexGrow: 0 }}>
                   <IconButton
                     onClick={toggleDrawer(true)}
                     size='large'
@@ -113,12 +106,13 @@ const Header = () => {
                     <Menu />
                   </IconButton>
                 </Tooltip>
-                <Logo />
+                <Logo sx={{ flexGrow: 1 }} />
                 <GenericButtonComponent
                   to={'/catalogs'}
                   component={NavLink}
                   variant='nav-button-contained'
                   color='primary'
+                  sx={{ flexGrow: 0 }}
                 >
                   Каталог
                 </GenericButtonComponent>

@@ -30,12 +30,17 @@ export const Image = styled('img')(({ theme }) => {
   return {
     display: 'block',
     position: 'absolute',
-    width: '200%',
+    width: '180%',
     bottom: 0,
-    left: '60%',
-    transform: `translateX(-60%)`,
+    left: '70%',
+    transform: `translateX(-70%)`,
     [`${theme.breakpoints.up('lg')} and (min-height: ${maxHeight}px)`]: {
-      width: '250%',
+      width: '200%',
+    },
+    [`${theme.breakpoints.up('lg')} and (max-height: ${minHeight}px)`]: {
+      width: '160%',
+      objectFit: 'cover',
+      aspectRatio: '5 / 4',
     },
     [`${theme.breakpoints.between(
       'md',
@@ -48,7 +53,7 @@ export const Image = styled('img')(({ theme }) => {
     [`@media (min-width: ${theme.breakpoints.values.md}px) and (max-width: ${
       theme.breakpoints.values.lg - 200
     }px) and (max-height: ${maxHeight - 1}px)`]: {
-      width: '120%',
+      width: '115%',
       left: '90%',
       transform: `translateX(-90%)`,
       objectFit: 'cover',
@@ -59,16 +64,11 @@ export const Image = styled('img')(({ theme }) => {
     }px) and (max-width: ${theme.breakpoints.values.lg}px) and (max-height: ${
       maxHeight - 1
     }px)`]: {
-      width: '160%',
+      width: '155%',
       left: '80%',
       transform: `translateX(-80%)`,
       objectFit: 'cover',
       aspectRatio: '1 / 1',
-    },
-    [`${theme.breakpoints.up('lg')} and (max-height: ${minHeight}px)`]: {
-      width: '200%',
-      objectFit: 'cover',
-      aspectRatio: '5 / 4',
     },
   };
 });
@@ -128,12 +128,13 @@ export const HeroBackground = styled('div')(({ theme }) => ({
   )}), url(${BackgroundImage}) top center/cover no-repeat`,
 
   position: 'absolute',
+  top: 0,
+  zIndex: -100,
+
   width: '100%',
-  height: `calc(100vh - ${navigationOffset}px)`,
+  height: `100vh`,
 
   [`@media (max-height: ${minHeight}px)`]: {
-    height: `1000px`,
+    height: `4000px`,
   },
-
-  zIndex: -100,
 }));

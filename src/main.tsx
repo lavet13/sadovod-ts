@@ -14,7 +14,7 @@ import {
   StyledEngineProvider,
 } from '@mui/material';
 
-import { ThemeProvider, createTheme } from '@mui/material';
+import { ThemeProvider, createTheme, lighten } from '@mui/material/styles';
 
 import RalewayExtraLightTTF from './assets/fonts/Raleway/Raleway-ExtraLight.ttf';
 import RalewayLightTTF from './assets/fonts/Raleway/Raleway-Light.ttf';
@@ -153,15 +153,15 @@ const {
 } = defaultTheme;
 
 // https://fluid-typography.netlify.app/
-
+// https://mui.com/material-ui/customization/default-theme/
 const theme = createTheme({
   ...defaultTheme,
   typography: {
     fontFamily: 'Raleway',
     logoText1: {
       fontWeight: 700,
-      fontSize: pxToRem(28),
-      lineHeight: 1,
+      fontSize: pxToRem(34),
+      lineHeight: 1.1,
       [breakpoints.down('md')]: {
         fontSize: 'clamp(0.6rem, 1.7vw + 0.6rem, 1.4rem)',
       },
@@ -239,8 +239,20 @@ const theme = createTheme({
             paddingTop: 0,
             paddingLeft: theme.spacing(3),
             paddingRight: theme.spacing(3),
+            ':hover': {
+              backgroundColor: alpha(
+                theme.palette.primary.main,
+                palette.action.hoverOpacity
+              ),
+            },
+            ':active': {
+              backgroundColor: alpha(
+                theme.palette.primary.main,
+                palette.action.activatedOpacity
+              ),
+            },
             '&& .MuiTouchRipple-child': {
-              backgroundColor: theme.palette.primary.main,
+              backgroundColor: alpha(theme.palette.primary.main, 0.5),
             },
             '&& .MuiTouchRipple-rippleVisible': {
               opacity: 0.5,
@@ -258,8 +270,8 @@ const theme = createTheme({
               animationTimingFunction: theme.transitions.easing.easeInOut,
             },
             [theme.breakpoints.down('md')]: {
-              paddingRight: theme.spacing(1),
-              paddingLeft: theme.spacing(1),
+              paddingRight: theme.spacing(1), // 8px
+              paddingLeft: theme.spacing(1), // 8px
               alignSelf: 'stretch',
             },
           }),
@@ -273,7 +285,7 @@ const theme = createTheme({
             backgroundColor: palette.secondary.main,
 
             ':hover': {
-              backgroundColor: palette.primary.main,
+              backgroundColor: lighten(palette.primary.dark, 0.05),
             },
 
             '&& .MuiTouchRipple-child': {
@@ -310,12 +322,24 @@ const theme = createTheme({
             paddingTop: 0,
             color: palette.secondary.main,
             fontSize: pxToRem(23),
+            ':hover': {
+              backgroundColor: alpha(
+                palette.secondary.main,
+                palette.action.hoverOpacity
+              ),
+            },
+            ':active': {
+              backgroundColor: alpha(
+                palette.secondary.main,
+                palette.action.activatedOpacity
+              ),
+            },
             '&.active': {
               color: palette.primary.main,
-              backgroundColor: alpha(palette.primary.main, 0.04),
-            },
-            ':hover': {
-              backgroundColor: alpha(palette.secondary.main, 0.04),
+              backgroundColor: alpha(
+                palette.primary.main,
+                palette.action.focusOpacity
+              ),
             },
           },
         },
@@ -348,7 +372,10 @@ const theme = createTheme({
               fontSize: pxToRem(54),
               color: palette.common.white,
               ':hover': {
-                backgroundColor: alpha(palette.common.white, 0.04),
+                backgroundColor: alpha(
+                  palette.common.white,
+                  palette.action.hoverOpacity
+                ),
               },
               px: 2,
               borderRadius: 'sm',
@@ -368,7 +395,10 @@ const theme = createTheme({
             backgroundColor: theme.palette.primary.light,
           },
           ':hover': {
-            backgroundColor: alpha(theme.palette.primary.main, 0.04),
+            backgroundColor: alpha(
+              theme.palette.primary.main,
+              palette.action.hoverOpacity
+            ),
           },
           '&.active': {
             fontWeight: 700,
@@ -389,7 +419,10 @@ const theme = createTheme({
                 },
                 fontWeight: 700,
                 ':hover': {
-                  backgroundColor: alpha(theme.palette.error.main, 0.04),
+                  backgroundColor: alpha(
+                    theme.palette.error.main,
+                    palette.action.hoverOpacity
+                  ),
                 },
               }
             : {}),
@@ -405,6 +438,18 @@ const theme = createTheme({
         },
       },
     },
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          [breakpoints.up('md')]: {
+            maxWidth: '100%',
+          },
+          [breakpoints.up('lg')]: {
+            maxWidth: `${breakpoints.values.xl}px`,
+          },
+        },
+      },
+    },
     MuiCssBaseline: {
       styleOverrides: {
         ':root': {
@@ -413,6 +458,12 @@ const theme = createTheme({
           },
           [breakpoints.up('lg')]: {
             fontSize: pxToRem(10),
+          },
+          [breakpoints.up('xl')]: {
+            fontSize: pxToRem(11),
+          },
+          [breakpoints.up('3xl')]: {
+            fontSize: pxToRem(13),
           },
         },
         html: [

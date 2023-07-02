@@ -1,15 +1,19 @@
-import { Stack, Typography } from '@mui/material';
+import { FC } from 'react';
+import { ButtonProps, Stack, Typography } from '@mui/material';
 import { LogoSVG } from './logo.styles';
 import { NavLink } from 'react-router-dom';
 import GenericButtonComponent from '../button/button.component';
 
-const Logo = () => {
+type LogoProps = ButtonProps<any, { component?: any }>;
+
+const Logo: FC<LogoProps> = props => {
   return (
     <GenericButtonComponent
       to={'/'}
       component={NavLink}
       focusRipple
       variant='logo-btn'
+      {...props}
     >
       <LogoSVG />
       <Stack>

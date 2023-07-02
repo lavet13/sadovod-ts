@@ -1,7 +1,6 @@
 import {
   ClipPathGreenBackground,
   GridContainer,
-  HeroBackground,
   HeroDivider,
   Image,
 } from './hero.styles';
@@ -9,23 +8,18 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { Button, Container, Stack, Typography } from '@mui/material';
 import WomanWithBaggages from '../../assets/images/womanWithBaggages.png';
 
-const defaultMaxWidthContainer = 1024;
-
 const Hero = () => {
   return (
     <>
-      <HeroBackground />
       <ClipPathGreenBackground sx={{ display: { md: 'block', xs: 'none' } }} />
-      <Container
-        sx={{ maxWidth: { md: '100%', lg: `${defaultMaxWidthContainer}px` } }}
-      >
+      <Container>
         <GridContainer container columns={24}>
           <Grid xs={0} md={12} lg={12} container sx={{ position: 'relative' }}>
             <Image src={WomanWithBaggages} alt={'Woman'} />
           </Grid>
           <Grid xs={2} md />
           <Grid xs={20} md={10} lg={12} sx={{ mt: { xs: 4, md: 12 } }}>
-            <Stack sx={{ height: '100%' }}>
+            <Stack sx={{ height: '100%' }} spacing={{ xs: 2, md: 0 }}>
               <Stack
                 alignItems={{ xs: 'center', md: 'flex-end' }}
                 justifyContent={{ md: 'flex-start', xs: 'flex-end' }}
@@ -58,7 +52,7 @@ const Hero = () => {
               <Stack
                 alignItems={{ xs: 'center', md: 'flex-end' }}
                 justifyContent={{ xs: 'flex-start', md: 'center' }}
-                spacing={2}
+                spacing={{ xs: 1, sm: 2 }}
                 flexBasis={'50%'}
               >
                 <Button href='tel:+7 (949) 516-25-12' variant='tel-btn'>
