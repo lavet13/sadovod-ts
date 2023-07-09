@@ -1,10 +1,14 @@
 import { Box, Container, Stack, Typography } from '@mui/material';
-import { Link, useRouteError } from 'react-router-dom';
-import GenericButtonComponent from '../components/button/button.component';
+import { useNavigate } from 'react-router-dom';
+import { useRouteError } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 const ErrorPage = () => {
+  const navigate = useNavigate();
   const error: any = useRouteError();
-  console.error({ error });
+  console.log({ error });
+
+  const handleNavigateBackTo = () => navigate(-1);
 
   return (
     <Box
@@ -26,9 +30,13 @@ const ErrorPage = () => {
           <Typography variant='h5'>
             {error.statusText || error.message}
           </Typography>
-          <GenericButtonComponent to='/' component={Link} variant='contained'>
+          <Button
+            onClick={handleNavigateBackTo}
+            variant='contained'
+            color='primary'
+          >
             Вернуться назад
-          </GenericButtonComponent>
+          </Button>
         </Stack>
       </Container>
     </Box>

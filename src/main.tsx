@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import App from './app/App';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -29,15 +29,33 @@ import ErrorPage from './pages/error-page.component';
 
 import { PAGES, PAGES_COMPONENTS } from './pages';
 
+import { Provider } from 'react-redux';
+import { store } from './app/store';
+import MyAdminPage from './pages/my-admin/my-admin-page.component';
+import MyAdminNav from './pages/my-admin/my-admin-nav.component';
+import MyAdminGoodsList from './pages/my-admin/my-admin-goods-list.component';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App />} errorElement={<ErrorPage />}>
-      <Route errorElement={<ErrorPage />}>
-        {PAGES.map(({ path }) => (
-          <Route key={path} path={path} element={PAGES_COMPONENTS[path]} />
-        ))}
+    <>
+      <Route path='/' element={<App />} errorElement={<ErrorPage />}>
+        <Route errorElement={<ErrorPage />}>
+          {PAGES.map(({ path }) => (
+            <Route key={path} path={path} element={PAGES_COMPONENTS[path]} />
+          ))}
+        </Route>
       </Route>
-    </Route>
+      <Route
+        path='my-admin'
+        element={<MyAdminPage />}
+        errorElement={<ErrorPage />}
+      >
+        <Route errorElement={<ErrorPage />}>
+          <Route index element={<MyAdminNav />} />
+          <Route path='/my-admin/goods' element={<MyAdminGoodsList />} />
+        </Route>
+      </Route>
+    </>
   )
 );
 
@@ -514,11 +532,13 @@ const theme = createTheme({
 
 root.render(
   <React.StrictMode>
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </StyledEngineProvider>
+    <Provider store={store}>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </StyledEngineProvider>
+    </Provider>
   </React.StrictMode>
 );
