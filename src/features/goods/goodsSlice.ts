@@ -21,11 +21,9 @@ export type ErrorResponse = {
   message: string;
 };
 
-export type Goods = { [id: string]: Good };
-
 export type GoodsState = {
   readonly error: ErrorResponse | null;
-  readonly status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  readonly status: 'idle' | 'loading' | 'failed';
 };
 
 const additionalState: GoodsState = {
@@ -85,6 +83,7 @@ const goodsSlice = createSlice({
       .addCase(fetchGoods.fulfilled, (state, action) => {
         state.status = 'idle';
         goodsAdapter.setAll(state, action.payload);
+        state.error = null;
       })
       .addCase(fetchGoods.rejected, (state, action) => {
         if (action.payload) {
@@ -98,13 +97,38 @@ const goodsSlice = createSlice({
 export default goodsSlice.reducer;
 
 // pre-built-in selectors
-export const { selectAll: selectGoods, selectById: selectGoodById } =
-  goodsAdapter.getSelectors((state: RootState) => state.goods);
+export const { selectAll: selectGoods } = goodsAdapter.getSelectors(
+  (state: RootState) => state.goods
+);
 
 // selectors
-export const selectGoodsStatus = (state: RootState) => state.goods.status;
-export const selectGoodsError = (state: RootState) => state.goods.error;
+export const selectGoodsReducer = (state: RootState) => state.goods;
+
+export const selectGoodsStatus = createSelector(
+  [selectGoodsReducer],
+  goodsSlice => goodsSlice.status
+);
+
+export const selectGoodsError = createSelector(
+  [selectGoodsReducer],
+  goodsSlice => goodsSlice.error
+);
+
+export const selectGoodsEntities = createSelector(
+  [selectGoodsReducer],
+  goodsSlice => goodsSlice.entities
+);
 
 export const selectGoodIds = createSelector([selectGoods], goods =>
   goods.map(good => good.id)
 );
+
+// selector factory
+export const makeSelectGoodById = () => {
+  const selectGoodById = createSelector(
+    [selectGoodsEntities, (_, goodId: string) => goodId],
+    (entities, goodId) => entities[goodId]
+  );
+
+  return selectGoodById;
+};

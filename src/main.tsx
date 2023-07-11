@@ -34,6 +34,7 @@ import { store } from './app/store';
 import MyAdminPage from './pages/my-admin/my-admin-page.component';
 import MyAdminNav from './pages/my-admin/my-admin-nav.component';
 import MyAdminGoodsList from './pages/my-admin/my-admin-goods-list.component';
+import MyAdminEditGoodItem from './pages/my-admin/my-admin-goods-edit-item.component';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -46,13 +47,14 @@ const router = createBrowserRouter(
         </Route>
       </Route>
       <Route
-        path='my-admin'
+        path='/my-admin'
         element={<MyAdminPage />}
         errorElement={<ErrorPage />}
       >
         <Route errorElement={<ErrorPage />}>
           <Route index element={<MyAdminNav />} />
-          <Route path='/my-admin/goods' element={<MyAdminGoodsList />} />
+          <Route path='goods' element={<MyAdminGoodsList />} />
+          <Route path='goods/:goodId' element={<MyAdminEditGoodItem />} />
         </Route>
       </Route>
     </>

@@ -1,14 +1,15 @@
 import { Box, Container, Stack, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { isRouteErrorResponse, useNavigate } from 'react-router-dom';
 import { useRouteError } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { useCallback } from 'react';
 
 const ErrorPage = () => {
   const navigate = useNavigate();
   const error: any = useRouteError();
   console.log({ error });
 
-  const handleNavigateBackTo = () => navigate(-1);
+  const handleNavigateBackTo = useCallback(() => navigate(-1), [navigate]);
 
   return (
     <Box
