@@ -1,10 +1,11 @@
 import { Divider } from '@mui/material';
 import Hero from '../components/hero/hero.component';
+import Catalogues from '../components/catalogues/catalogues.component';
 
 const HomePage = () => {
   return (
     <>
-      <Hero></Hero>
+      <Hero />
       <Divider
         variant='fullWidth'
         color='secondary'
@@ -14,6 +15,7 @@ const HomePage = () => {
           boxShadow: theme.shadows[1],
         })}
       />
+      <Catalogues />
     </>
   );
 };

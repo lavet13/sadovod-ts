@@ -158,7 +158,7 @@ const defaultTheme = createTheme({
       lg: 1024,
       xl: 1280,
       '2xl': 1536,
-      '3xl': 1920,
+      '3xl': 1919,
       '4xl': 2560,
       '5xl': 3200,
     },

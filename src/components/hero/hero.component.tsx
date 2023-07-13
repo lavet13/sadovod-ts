@@ -55,7 +55,7 @@ const Hero = () => {
                 spacing={{ xs: 1, sm: 2 }}
                 flexBasis={'50%'}
               >
-                <Button href='tel:+7 (949) 516-25-12' variant='tel-btn'>
+                <Button href='tel:+79495162512' variant='tel-btn'>
                   +7 (949) 516-25-12
                 </Button>
                 <Button variant='order-btn' color='yellow'>

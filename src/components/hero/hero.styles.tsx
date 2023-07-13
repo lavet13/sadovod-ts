@@ -4,8 +4,8 @@ import Grid from '@mui/material/Unstable_Grid2';
 import BackgroundImage from '../../assets/images/back-min.png';
 
 const navigationOffset = 50;
-const minHeight = 800;
-const maxHeight = 850;
+export const minHeight = 800;
+export const maxHeight = 850;
 
 export const ClipPathGreenBackground = styled('div')(({ theme }) => ({
   position: 'absolute',
@@ -132,7 +132,8 @@ export const HeroBackground = styled('div')(({ theme }) => ({
   zIndex: -100,
 
   width: '100%',
-  height: `100vh`,
+  minHeight: '150%',
+  maxHeight: `4000px`,
 
   [`@media (max-height: ${minHeight}px)`]: {
     height: `4000px`,
