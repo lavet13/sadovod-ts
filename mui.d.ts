@@ -1,5 +1,4 @@
 import '@material-ui/core/styles/createPalette';
-import { ButtonBaseProps } from '@mui/material';
 
 declare module '@mui/material/styles/createPalette' {
   interface Palette {
@@ -42,12 +41,16 @@ declare module '@mui/material/styles' {
   interface TypographyVariants {
     logoText1: React.CSSProperties;
     logoText2: React.CSSProperties;
+    swiperText: React.CSSProperties;
+    swiperTitle: React.CSSProperties;
   }
 
   // allow configuration using `createTheme`
   interface TypographyVariantsOptions {
     logoText1?: React.CSSProperties;
     logoText2?: React.CSSProperties;
+    swiperText?: React.CSSProperties;
+    swiperTitle?: React.CSSProperties;
   }
 }
 
@@ -56,6 +59,8 @@ declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
     logoText1: true;
     logoText2: true;
+    swiperText: true;
+    swiperTitle: true;
   }
 }
 

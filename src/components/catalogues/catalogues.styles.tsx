@@ -3,11 +3,12 @@ import { Swiper } from 'swiper/react';
 import { maxHeight, minHeight } from '../hero/hero.styles';
 
 export const SwiperStyled = styled(Swiper)(({ theme }) => ({
-  height: '35rem',
+  height: theme.typography.pxToRem(450),
+  borderRadius: theme.shape.md,
 
   '--swiper-theme-color': theme.palette.primary.main,
   boxShadow: theme.shadows[2],
-  backgroundColor: alpha(theme.palette.common.white, 0.8),
+  backgroundColor: theme.palette.common.white,
 }));
 
 export const CataloguesWrapper = styled(Box)(({ theme }) => ({
@@ -15,7 +16,6 @@ export const CataloguesWrapper = styled(Box)(({ theme }) => ({
   flexWrap: 'wrap',
   alignContent: 'center',
   background: 'transparent',
-  borderRadius: theme.shape.sm,
 
   [`@media screen and (max-height: ${minHeight}px)`]: {
     height: `${minHeight}px`,
@@ -35,6 +35,7 @@ export const SwiperPagination = styled(Box)(({ theme }) => ({
   '--swiper-pagination-bullet-horizontal-gap': '6px',
 
   display: 'flex',
+  paddingLeft: 45,
   alignItems: 'flex-end',
 
   left: 0,

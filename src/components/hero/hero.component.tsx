@@ -1,4 +1,5 @@
 import {
+  ClipPathBlackStroke,
   ClipPathGreenBackground,
   GridContainer,
   HeroDivider,
@@ -11,6 +12,7 @@ import WomanWithBaggages from '../../assets/images/womanWithBaggages.png';
 const Hero = () => {
   return (
     <>
+      <ClipPathBlackStroke sx={{ display: { md: 'block', xs: 'none' } }} />
       <ClipPathGreenBackground sx={{ display: { md: 'block', xs: 'none' } }} />
       <Container>
         <GridContainer container columns={24}>

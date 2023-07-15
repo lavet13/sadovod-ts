@@ -36,6 +36,12 @@ import MyAdminNav from './pages/my-admin/my-admin-nav.component';
 import MyAdminGoodsList from './pages/my-admin/my-admin-goods-list.component';
 import MyAdminEditGoodItem from './pages/my-admin/my-admin-goods-edit-item.component';
 
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/parallax';
+import 'swiper/css/virtual';
+import 'swiper/css/effect-coverflow';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -145,9 +151,6 @@ const defaultTheme = createTheme({
       main: '#FFAD1D',
       contrastText: '#fff',
     },
-    white: {
-      main: '#FFF',
-    },
     contrastThreshold: 4.5,
   },
   breakpoints: {
@@ -192,6 +195,16 @@ const theme = createTheme({
       [breakpoints.down('md')]: {
         fontSize: 'clamp(0.4rem, 0.8vw + 0.4rem, 0.8rem)',
       },
+    },
+    swiperText: {
+      fontSize: pxToRem(23),
+      fontWeight: 700,
+      lineHeight: 1.2,
+    },
+    swiperTitle: {
+      fontSize: pxToRem(50),
+      fontWeight: 700,
+      lineHeight: 1.1,
     },
     body1: {
       fontWeight: 400,
@@ -483,6 +496,7 @@ const theme = createTheme({
         variantMapping: {
           logoText1: 'span',
           logoText2: 'span',
+          swiperTitle: 'p',
         },
       },
     },

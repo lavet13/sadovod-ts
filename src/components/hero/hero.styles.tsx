@@ -7,6 +7,24 @@ const navigationOffset = 50;
 export const minHeight = 800;
 export const maxHeight = 850;
 
+export const ClipPathBlackStroke = styled('div')(({ theme }) => ({
+  position: 'absolute',
+  width: '100%',
+  height: `calc(100vh - ${navigationOffset}px)`,
+  backgroundColor: alpha(theme.palette.secondary.main, 0.9),
+  clipPath: 'polygon(0 60%, 100% 50%, 100% 50.55%, 0 60.55%)',
+  zIndex: -95,
+
+  [`@media screen and (max-height: ${minHeight}px)`]: {
+    clipPath: `polygon(0 420px, 100% 320px, 100% 321px, 0 421px)`,
+    height: `${minHeight}px`,
+  },
+  [`@media screen and (min-height: ${maxHeight}px)`]: {
+    height: `${maxHeight}px`,
+    clipPath: `polygon(0 420px, 100% 320px, 100% 321px, 0 421px)`,
+  },
+}));
+
 export const ClipPathGreenBackground = styled('div')(({ theme }) => ({
   position: 'absolute',
   width: '100%',
@@ -132,8 +150,8 @@ export const HeroBackground = styled('div')(({ theme }) => ({
   zIndex: -100,
 
   width: '100%',
-  minHeight: '150%',
-  maxHeight: `4000px`,
+  objectFit: 'cover',
+  minHeight: '4000px',
 
   [`@media (max-height: ${minHeight}px)`]: {
     height: `4000px`,

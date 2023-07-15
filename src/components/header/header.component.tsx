@@ -88,7 +88,7 @@ const Header = () => {
           <HideOnScroll>
             <AppBar
               position='fixed'
-              sx={{ backgroundColor: theme.palette.white.main }}
+              sx={{ backgroundColor: theme.palette.common.white }}
             >
               <Stack
                 direction='row'

@@ -1,6 +1,7 @@
 import { Divider } from '@mui/material';
 import Hero from '../components/hero/hero.component';
 import Catalogues from '../components/catalogues/catalogues.component';
+import InterestingGoods from '../components/interesting-goods/interesting-goods.component';
 
 const HomePage = () => {
   return (
@@ -16,6 +17,7 @@ const HomePage = () => {
         })}
       />
       <Catalogues />
+      <InterestingGoods />
     </>
   );
 };
