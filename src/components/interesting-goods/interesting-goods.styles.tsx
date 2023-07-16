@@ -1,8 +1,8 @@
-import { Box, alpha, styled } from '@mui/material';
+import { Box, IconButton, alpha, styled } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Swiper } from 'swiper/react';
 
-const minHeight = 1700;
+export const minHeight = 1700;
 
 export const WaveClipPathBackground = styled(Box)(({ theme }) => ({
   backgroundColor: alpha(theme.palette.primary.main, 0.85),
@@ -21,9 +21,14 @@ export const GridContainer = styled(Grid)(({ theme }) => ({
 }));
 
 export const SwiperStyled = styled(Swiper)(({ theme }) => ({
+  maxWidth: '1220px',
   height: theme.typography.pxToRem(400),
 
   '--swiper-theme-color': theme.palette.secondary.main,
+
+  [theme.breakpoints.down('xl')]: {
+    maxWidth: 'calc(100vw - 68px)',
+  },
 }));
 
 export const SwiperPagination = styled(Box)(({ theme }) => ({
@@ -33,23 +38,6 @@ export const SwiperPagination = styled(Box)(({ theme }) => ({
   '--swiper-pagination-bullet-horizontal-gap': '6px',
   '--swiper-pagination-bullet-width': '1.5rem',
   '--swiper-pagination-bullet-height': '1.5rem',
-
-  // --swiper-pagination-color: var(--swiper-theme-color);
-  // --swiper-pagination-left: auto;
-  // --swiper-pagination-right: 8px;
-  // --swiper-pagination-bottom: 8px;
-  // --swiper-pagination-top: auto;
-  // --swiper-pagination-fraction-color: inherit;
-  // --swiper-pagination-progressbar-bg-color: rgba(0, 0, 0, 0.25);
-  // --swiper-pagination-progressbar-size: 4px;
-  // --swiper-pagination-bullet-size: 8px;
-  // --swiper-pagination-bullet-width: 8px;
-  // --swiper-pagination-bullet-height: 8px;
-  // --swiper-pagination-bullet-inactive-color: #000;
-  // --swiper-pagination-bullet-inactive-opacity: 0.2;
-  // --swiper-pagination-bullet-opacity: 1;
-  // --swiper-pagination-bullet-horizontal-gap: 4px;
-  // --swiper-pagination-bullet-vertical-gap: 6px;
 
   width: '100%!important',
 
@@ -72,6 +60,11 @@ export const SwiperPagination = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const SwiperButtonNext = styled('button')(({ theme }) => ({}));
+export const SwiperButton = styled(IconButton)(({ theme }) => ({
+  alignSelf: 'center',
 
-export const SwiperButtonPrev = styled('button')(({ theme }) => ({}));
+  '& svg': {
+    width: '16px',
+    height: '15px',
+  },
+}));

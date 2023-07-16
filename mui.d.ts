@@ -24,6 +24,14 @@ declare module '@mui/material/Button' {
     'order-btn': true;
     'tel-btn': true;
     'logo-btn': true;
+    'md-btn': true;
+    'long-btn': true;
+  }
+}
+
+declare module '@mui/material/IconButton' {
+  interface IconButtonPropsColorOverrides {
+    white: true;
   }
 }
 

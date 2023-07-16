@@ -135,7 +135,7 @@ const defaultTheme = createTheme({
   },
   shape: {
     borderRadius: 0,
-    sm: 3,
+    sm: 2,
   },
   palette: {
     mode: 'light',
@@ -160,7 +160,7 @@ const defaultTheme = createTheme({
       md: 769,
       lg: 1024,
       xl: 1280,
-      '2xl': 1536,
+      '2xl': 1630,
       '3xl': 1919,
       '4xl': 2560,
       '5xl': 3200,
@@ -259,9 +259,32 @@ const theme = createTheme({
       fontSize: pxToRem(23),
       lineHeight: 2,
       textTransform: 'unset',
+      whiteSpace: 'nowrap',
     },
   },
   components: {
+    MuiIconButton: {
+      variants: [
+        {
+          props: { color: 'white' },
+          style: ({ theme }) => ({
+            color: theme.palette.common.white,
+            ':hover': {
+              backgroundColor: alpha(
+                palette.common.white,
+                palette.action.hoverOpacity
+              ),
+            },
+            ':active': {
+              backgroundColor: alpha(
+                palette.common.white,
+                palette.action.activatedOpacity
+              ),
+            },
+          }),
+        },
+      ],
+    },
     MuiButton: {
       variants: [
         {
@@ -269,7 +292,7 @@ const theme = createTheme({
           style: ({ theme }) => ({
             paddingBottom: 0,
             paddingTop: 0,
-            paddingLeft: theme.spacing(3),
+            paddingLeft: theme.spacing(3), // 8px * 3
             paddingRight: theme.spacing(3),
             ':hover': {
               backgroundColor: alpha(
@@ -444,6 +467,88 @@ const theme = createTheme({
               [theme.breakpoints.down('md')]: {
                 fontSize: 'clamp(1.1rem, 0.4vw + 1.1rem, 1.3rem)',
                 color: theme.palette.secondary.main,
+              },
+            }),
+        },
+        {
+          props: { variant: 'md-btn' },
+          style: ({ theme }) =>
+            theme.unstable_sx({
+              py: pxToRem(13),
+              px: pxToRem(28),
+              lineHeight: 1.4,
+
+              color: palette.secondary.main,
+              backgroundColor: palette.common.white,
+              borderRadius: theme.shape.sm,
+              boxShadow: theme.shadows[1],
+
+              ':active': {
+                boxShadow: theme.shadows[8],
+              },
+            }),
+        },
+        {
+          props: { variant: 'md-btn', color: 'primary' },
+          style: ({ theme }) =>
+            theme.unstable_sx({
+              ':hover,:active': {
+                backgroundColor: palette.primary.main,
+                color: palette.common.white,
+              },
+            }),
+        },
+        {
+          props: { variant: 'md-btn', color: 'secondary' },
+          style: ({ theme }) =>
+            theme.unstable_sx({
+              ':hover,:active': {
+                backgroundColor: lighten(palette.secondary.dark, 0.05),
+                color: palette.common.white,
+              },
+            }),
+        },
+        {
+          props: { variant: 'long-btn' },
+          style: ({ theme }) =>
+            theme.unstable_sx({
+              fontSize: pxToRem(22),
+              fontWeight: 700,
+              lineHeight: 1.4,
+              py: pxToRem(13),
+              px: pxToRem(40),
+              borderRadius: theme.shape.sm,
+
+              color: palette.common.white,
+              backgroundColor: palette.primary.main,
+
+              ':hover': {
+                backgroundColor: lighten(palette.secondary.dark, 0.05),
+              },
+            }),
+        },
+        {
+          props: { variant: 'long-btn', color: 'primary' },
+          style: ({ theme }) =>
+            theme.unstable_sx({
+              color: palette.common.white,
+              backgroundColor: palette.primary.main,
+
+              ':hover': {
+                backgroundColor: lighten(palette.secondary.dark, 0.05),
+              },
+            }),
+        },
+        {
+          props: { variant: 'long-btn', color: 'white' },
+          style: ({ theme }) =>
+            theme.unstable_sx({
+              color: palette.secondary.main,
+              backgroundColor: palette.common.white,
+
+              ':hover': {
+                backgroundColor: lighten(palette.secondary.dark, 0.05),
+                color: palette.common.white,
               },
             }),
         },

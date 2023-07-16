@@ -26,7 +26,6 @@ import { NavLink } from 'react-router-dom';
 import GenericButtonComponent, {
   GenericListItemButton,
 } from '../button/button.component';
-import { HeroBackground } from '../hero/hero.styles';
 import { PAGES, PATHS } from '../../pages';
 
 const PAGES_UNAUTH: Record<string, PATHS> = {
@@ -77,7 +76,6 @@ const Header = () => {
 
   return (
     <>
-      <HeroBackground />
       {isSmall ? (
         <Paper elevation={3}>
           <Navigation></Navigation>

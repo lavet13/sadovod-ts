@@ -1,4 +1,4 @@
-import { Box, Container, Stack, Typography } from '@mui/material';
+import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { Pagination, Virtual, Navigation, Autoplay } from 'swiper/modules';
@@ -6,8 +6,7 @@ import { SwiperSlide } from 'swiper/react';
 
 import {
   GridContainer,
-  SwiperButtonNext,
-  SwiperButtonPrev,
+  SwiperButton,
   SwiperPagination,
   SwiperStyled,
   WaveClipPathBackground,
@@ -17,6 +16,9 @@ import ProductImage from '../../assets/images/product.png';
 import ProductImage2 from '../../assets/images/product2.png';
 import ProductImage3 from '../../assets/images/product3.png';
 import ProductImage4 from '../../assets/images/product4.png';
+
+import { ReactComponent as NextArrowSVG } from '../../assets/icons/next-arrow.svg';
+import { ReactComponent as PrevArrowSVG } from '../../assets/icons/prev-arrow.svg';
 
 const goods = [
   {
@@ -73,9 +75,13 @@ const InterestingGoods = () => {
   return (
     <>
       <WaveClipPathBackground />
-      <Container sx={{ height: '1700px' }}>
-        <Stack minHeight={'1700px'} alignContent={'center'}>
-          <Box height={400} />
+      <Container sx={{ height: `1700px` }}>
+        <Stack
+          direction='row'
+          flexWrap={'wrap'}
+          minHeight={'1700px'}
+          alignContent={'space-evenly'}
+        >
           <GridContainer container>
             <Grid xs />
             <Grid xs={3}>
@@ -95,7 +101,6 @@ const InterestingGoods = () => {
             <Grid xs={4}></Grid>
             <Grid xs />
           </GridContainer>
-          <Box height={400} />
           <Stack direction={'row'} flexWrap={'wrap'} alignContent={'center'}>
             <Stack
               direction={'row'}
@@ -104,16 +109,20 @@ const InterestingGoods = () => {
               flexBasis={'100%'}
               marginBottom={2}
             >
-              <Typography variant='swiperTitle' color='white'>
+              <Typography sx={{ pl: 0.6 }} variant='swiperTitle' color='white'>
                 Интересные товары
               </Typography>
               <Stack direction='row'>
-                <SwiperButtonPrev className='swiper-button-prev'></SwiperButtonPrev>
+                <SwiperButton color='white' className='swiper-button-prev'>
+                  <PrevArrowSVG />
+                </SwiperButton>
                 <SwiperPagination
                   sx={{ position: 'initial!important' }}
                   className='swiper-pagination2'
                 />
-                <SwiperButtonNext className='swiper-button-next'></SwiperButtonNext>
+                <SwiperButton color='white' className='swiper-button-next'>
+                  <NextArrowSVG />
+                </SwiperButton>
               </Stack>
             </Stack>
             <SwiperStyled
@@ -161,6 +170,16 @@ const InterestingGoods = () => {
                 </SwiperSlide>
               ))}
             </SwiperStyled>
+            <Stack
+              alignItems={'center'}
+              justifyContent={'space-between'}
+              flexBasis={'100%'}
+              marginTop={5}
+            >
+              <Button variant='long-btn' color='white'>
+                Перейти в каталог
+              </Button>
+            </Stack>
           </Stack>
         </Stack>
       </Container>

@@ -2,7 +2,7 @@ import CalculatorPage from './calculator-page.component';
 import CatalogsPage from './catalogs-page.component';
 import DeliveryPage from './delivery-page.component';
 import DiscountPage from './discount-page.component';
-import HomePage from './home-page.component';
+import HomePage from './home-page/home-page.component';
 import MobilePage from './mobile-page.component';
 import SignInPage from './sign-in-page.component';
 

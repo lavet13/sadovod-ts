@@ -1,7 +1,6 @@
 import { Divider } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import Grid from '@mui/material/Unstable_Grid2';
-import BackgroundImage from '../../assets/images/back-min.png';
 
 const navigationOffset = 50;
 export const minHeight = 800;
@@ -16,12 +15,12 @@ export const ClipPathBlackStroke = styled('div')(({ theme }) => ({
   zIndex: -95,
 
   [`@media screen and (max-height: ${minHeight}px)`]: {
-    clipPath: `polygon(0 420px, 100% 320px, 100% 321px, 0 421px)`,
+    clipPath: `polygon(0 420px, 100% 360px, 100% 361px, 0 421px)`,
     height: `${minHeight}px`,
   },
   [`@media screen and (min-height: ${maxHeight}px)`]: {
     height: `${maxHeight}px`,
-    clipPath: `polygon(0 420px, 100% 320px, 100% 321px, 0 421px)`,
+    clipPath: `polygon(0 420px, 100% 360px, 100% 361px, 0 421px)`,
   },
 }));
 
@@ -34,12 +33,12 @@ export const ClipPathGreenBackground = styled('div')(({ theme }) => ({
   zIndex: -100,
 
   [`@media screen and (max-height: ${minHeight}px)`]: {
-    clipPath: `polygon(0 420px, 100% 320px, 100% ${minHeight}px, 0 ${minHeight}px)`,
+    clipPath: `polygon(0 420px, 100% 360px, 100% ${minHeight}px, 0 ${minHeight}px)`,
     height: `${minHeight}px`,
   },
   [`@media screen and (min-height: ${maxHeight}px)`]: {
     height: `${maxHeight}px`,
-    clipPath: `polygon(0 420px, 100% 320px, 100% ${maxHeight}px, 0 ${maxHeight}px)`,
+    clipPath: `polygon(0 420px, 100% 360px, 100% ${maxHeight}px, 0 ${maxHeight}px)`,
   },
 }));
 
@@ -135,25 +134,3 @@ export const HeroDivider = styled(Divider)(({ theme }) =>
     },
   })
 );
-
-export const HeroBackground = styled('div')(({ theme }) => ({
-  background: `linear-gradient(to right bottom, ${alpha(
-    theme.palette.common.white,
-    0.9
-  )}, ${alpha(
-    theme.palette.common.white,
-    0.9
-  )}), url(${BackgroundImage}) top center/cover no-repeat`,
-
-  position: 'absolute',
-  top: 0,
-  zIndex: -100,
-
-  width: '100%',
-  objectFit: 'cover',
-  minHeight: '4000px',
-
-  [`@media (max-height: ${minHeight}px)`]: {
-    height: `4000px`,
-  },
-}));

@@ -67,9 +67,7 @@ const Catalogues = () => {
             sx={{ position: 'initial!important' }}
             className='swiper-pagination1'
           />
-          <Button variant='contained' sx={{ whiteSpace: 'nowrap' }}>
-            Перейти к каталогу
-          </Button>
+          <Button variant='long-btn'>Перейти в каталог</Button>
         </Stack>
         <SwiperStyled
           grabCursor
