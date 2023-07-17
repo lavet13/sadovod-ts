@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app/App';
 import {
@@ -24,7 +25,17 @@ import RalewaySemiBoldTTF from './assets/fonts/Raleway/Raleway-SemiBold.ttf';
 import RalewayBoldTTF from './assets/fonts/Raleway/Raleway-Bold.ttf';
 import RalewayExtraBoldTTF from './assets/fonts/Raleway/Raleway-ExtraBold.ttf';
 import RalewayBlackTTF from './assets/fonts/Raleway/Raleway-Black.ttf';
-import React from 'react';
+
+import EastmanRegularWOFF from './assets/fonts/Eastman/Eastman-Regular.woff';
+import EastmanRegularWOFF2 from './assets/fonts/Eastman/Eastman-Regular.woff2';
+import EastmanRegularTTF from './assets/fonts/Eastman/Eastman-Regular.ttf';
+import EastmanMediumWOFF from './assets/fonts/Eastman/Eastman-Medium.woff';
+import EastmanMediumWOFF2 from './assets/fonts/Eastman/Eastman-Medium.woff2';
+import EastmanMediumTTF from './assets/fonts/Eastman/Eastman-Medium.ttf';
+import EastmanExtraBoldWOFF from './assets/fonts/Eastman/Eastman-Extrabold.woff';
+import EastmanExtraBoldWOFF2 from './assets/fonts/Eastman/Eastman-Extrabold.woff2';
+import EastmanExtraBoldTTF from './assets/fonts/Eastman/Eastman-Extrabold.ttf';
+
 import ErrorPage from './pages/error-page.component';
 
 import { PAGES, PAGES_COMPONENTS } from './pages';
@@ -125,6 +136,27 @@ const RalewayBlack = {
   fontStyle: 'normal',
   fontWeight: '900',
   src: `url(${RalewayBlackTTF}) format('truetype')`,
+};
+
+const EastmanRegular = {
+  fontFamily: 'Eastman',
+  fontStyle: 'normal',
+  fontWeight: '400',
+  src: `url(${EastmanRegularWOFF2}) format('woff2'), url(${EastmanRegularWOFF}) format('woff'), url(${EastmanRegularTTF}) format('truetype')`,
+};
+
+const EastmanMedium = {
+  fontFamily: 'Eastman',
+  fontStyle: 'normal',
+  fontWeight: '500',
+  src: `url(${EastmanMediumWOFF2}) format('woff2'), url(${EastmanMediumWOFF}) format('woff'), url(${EastmanMediumTTF}) format('truetype')`,
+};
+
+const EastmanExtraBold = {
+  fontFamily: 'Eastman',
+  fontStyle: 'normal',
+  fontWeight: '800',
+  src: `url(${EastmanExtraBoldWOFF2}) format('woff2'), url(${EastmanExtraBoldWOFF}) format('woff'), url(${EastmanExtraBoldTTF}) format('truetype')`,
 };
 
 const defaultTheme = createTheme({
@@ -605,24 +637,24 @@ const theme = createTheme({
         },
       },
     },
-    MuiAccordionSummary: {
-      styleOverrides: {
-        content: {
-          flexGrow: 0,
-        },
+    // MuiAccordionSummary: {
+    //   styleOverrides: {
+    //     content: {
+    //       flexGrow: 0,
+    //     },
 
-        root: {
-          justifyContent: 'flex-start',
-        },
-      },
-    },
-    MuiAccordion: {
-      styleOverrides: {
-        root: {
-          boxShadow: 'unset',
-        },
-      },
-    },
+    //     root: {
+    //       justifyContent: 'flex-start',
+    //     },
+    //   },
+    // },
+    // MuiAccordion: {
+    //   styleOverrides: {
+    //     root: {
+    //       boxShadow: 'unset',
+    //     },
+    //   },
+    // },
     MuiContainer: {
       styleOverrides: {
         root: {
@@ -660,6 +692,9 @@ const theme = createTheme({
           { '@font-face': RalewayBold },
           { '@font-face': RalewayExtraBold },
           { '@font-face': RalewayBlack },
+          { '@font-face': EastmanRegular },
+          { '@font-face': EastmanMedium },
+          { '@font-face': EastmanExtraBold },
         ],
         'html, body': {
           padding: 0,

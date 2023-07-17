@@ -1,3 +1,4 @@
+import parse from 'html-react-parser';
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
@@ -20,56 +21,61 @@ import ProductImage4 from '../../assets/images/product4.png';
 import { ReactComponent as NextArrowSVG } from '../../assets/icons/next-arrow.svg';
 import { ReactComponent as PrevArrowSVG } from '../../assets/icons/prev-arrow.svg';
 
-const goods = [
-  {
+const goods = {
+  1: {
     id: 1,
+    price: 300,
+    sizes: [46, 48, 50, 52, 54],
+    description: `Так как продавец сам покупает это место, он может накатать сюда все что хочет в пределах определенного количества символов.<br/><br/>
+    У меня в фигме вышло место под 418 символов. (если без абзацев)<br/><br/><br/>
+    Послденяя строчка доступная для использования) вот тут :)`,
     imgUrl: ProductImage,
   },
-  {
+  2: {
     id: 2,
     imgUrl: ProductImage2,
   },
-  {
+  3: {
     id: 3,
     imgUrl: ProductImage3,
   },
-  {
+  4: {
     id: 4,
     imgUrl: ProductImage4,
   },
-  {
+  5: {
     id: 5,
     imgUrl: ProductImage,
   },
-  {
+  6: {
     id: 6,
     imgUrl: ProductImage2,
   },
-  {
+  7: {
     id: 7,
     imgUrl: ProductImage3,
   },
-  {
+  8: {
     id: 8,
     imgUrl: ProductImage4,
   },
-  {
+  9: {
     id: 9,
     imgUrl: ProductImage,
   },
-  {
+  10: {
     id: 10,
     imgUrl: ProductImage2,
   },
-  {
+  11: {
     id: 11,
     imgUrl: ProductImage3,
   },
-  {
+  12: {
     id: 12,
     imgUrl: ProductImage4,
   },
-];
+};
 
 const InterestingGoods = () => {
   return (
@@ -98,7 +104,15 @@ const InterestingGoods = () => {
               />
             </Grid>
             <Grid xs />
-            <Grid xs={4}></Grid>
+            <Grid xs={4}>
+              <Typography>Товар недели</Typography>
+              <Typography>Цена:</Typography>
+              <Typography>{goods[1].price}</Typography>
+              <Typography>Размеры:</Typography>
+              <Typography>{goods[1].sizes?.join(';')}</Typography>
+              <Typography>Описание:</Typography>
+              <Typography>{parse(goods[1].description)}</Typography>
+            </Grid>
             <Grid xs />
           </GridContainer>
           <Stack direction={'row'} flexWrap={'wrap'} alignContent={'center'}>
@@ -151,7 +165,7 @@ const InterestingGoods = () => {
               }}
               virtual
             >
-              {goods.map(good => (
+              {Object.values(goods).map(good => (
                 <SwiperSlide key={good.id} virtualIndex={good.id}>
                   <Box
                     loading='lazy'

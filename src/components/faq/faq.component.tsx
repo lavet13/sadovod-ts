@@ -2,18 +2,16 @@ import { useState } from 'react';
 
 import parse from 'html-react-parser';
 
+import { Container, Stack, Typography } from '@mui/material';
+
 import {
+  FAQWrapper,
   Accordion,
-  AccordionDetails,
   AccordionSummary,
-  Container,
-  Stack,
-  Typography,
-} from '@mui/material';
-
-import { ExpandMore } from '@mui/icons-material';
-
-import { FAQWrapper } from './faq.styles';
+  AccordionDetails,
+  AccordionTitle,
+  AccordionText,
+} from './faq.styles';
 
 type QuestionsAndAnswers = {
   [id: string]: {
@@ -109,13 +107,13 @@ const FAQ = () => {
   const [expanded, setExpanded] = useState<string | false>(false);
 
   const handleChange =
-    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+    (panel: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
 
   return (
     <FAQWrapper>
-      <Container sx={{ height: '700px' }}>
+      <Container>
         <Stack>
           <Typography>FAQ</Typography>
           <Typography>Часто задаваемые вопросы:</Typography>
@@ -125,17 +123,14 @@ const FAQ = () => {
               expanded={expanded === `question${QA.id}`}
               onChange={handleChange(`question${QA.id}`)}
             >
-              <AccordionSummary
-                expandIcon={<ExpandMore color='primary' />}
-                aria-controls={`question${QA.id}-content`}
-              >
-                <Typography>
+              <AccordionSummary aria-controls={`question${QA.id}-content`}>
+                <AccordionTitle>
                   <span>{QA.number}</span>
-                  {QA.question}
-                </Typography>
+                  <span>{QA.question}</span>
+                </AccordionTitle>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>{parse(QA.answer)}</Typography>
+                <AccordionText>{parse(QA.answer)}</AccordionText>
               </AccordionDetails>
             </Accordion>
           ))}

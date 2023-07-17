@@ -1,6 +1,6 @@
-import { Box, alpha, styled } from '@mui/material';
+import { Box, styled } from '@mui/material';
 import { Swiper } from 'swiper/react';
-import { maxHeight, minHeight } from '../hero/hero.styles';
+import { maxHeight } from '../hero/hero.styles';
 
 export const SwiperStyled = styled(Swiper)(({ theme }) => ({
   height: theme.typography.pxToRem(450),
