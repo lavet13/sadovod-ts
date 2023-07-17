@@ -15,15 +15,10 @@ export const CataloguesWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
   alignContent: 'center',
+
   background: 'transparent',
 
-  [`@media screen and (max-height: ${minHeight}px)`]: {
-    height: `${minHeight}px`,
-  },
-
-  [`@media screen and (min-height: ${maxHeight}px)`]: {
-    height: `${maxHeight}px`,
-  },
+  height: `${maxHeight}px`,
 }));
 
 export const SwiperPagination = styled(Box)(({ theme }) => ({

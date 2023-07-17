@@ -605,6 +605,24 @@ const theme = createTheme({
         },
       },
     },
+    MuiAccordionSummary: {
+      styleOverrides: {
+        content: {
+          flexGrow: 0,
+        },
+
+        root: {
+          justifyContent: 'flex-start',
+        },
+      },
+    },
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'unset',
+        },
+      },
+    },
     MuiContainer: {
       styleOverrides: {
         root: {
