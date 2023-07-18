@@ -17,15 +17,6 @@ import {
 
 import { ThemeProvider, createTheme, lighten } from '@mui/material/styles';
 
-import RalewayExtraLightTTF from './assets/fonts/Raleway/Raleway-ExtraLight.ttf';
-import RalewayLightTTF from './assets/fonts/Raleway/Raleway-Light.ttf';
-import RalewayRegularTTF from './assets/fonts/Raleway/Raleway-Regular.ttf';
-import RalewayMediumTTF from './assets/fonts/Raleway/Raleway-Medium.ttf';
-import RalewaySemiBoldTTF from './assets/fonts/Raleway/Raleway-SemiBold.ttf';
-import RalewayBoldTTF from './assets/fonts/Raleway/Raleway-Bold.ttf';
-import RalewayExtraBoldTTF from './assets/fonts/Raleway/Raleway-ExtraBold.ttf';
-import RalewayBlackTTF from './assets/fonts/Raleway/Raleway-Black.ttf';
-
 import EastmanRegularWOFF from './assets/fonts/Eastman/Eastman-Regular.woff';
 import EastmanRegularWOFF2 from './assets/fonts/Eastman/Eastman-Regular.woff2';
 import EastmanRegularTTF from './assets/fonts/Eastman/Eastman-Regular.ttf';
@@ -52,6 +43,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/parallax';
 import 'swiper/css/virtual';
 import 'swiper/css/effect-coverflow';
+import { ShapeLine } from '@mui/icons-material';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -81,62 +73,6 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
-const RalewayExtraLight = {
-  fontFamily: 'Raleway',
-  fontStyle: 'normal',
-  fontWeight: '200',
-  src: `url(${RalewayExtraLightTTF}) format('truetype')`,
-};
-
-const RalewayLight = {
-  fontFamily: 'Raleway',
-  fontStyle: 'normal',
-  fontWeight: '300',
-  src: `url(${RalewayLightTTF}) format('truetype')`,
-};
-
-const RalewayRegular = {
-  fontFamily: 'Raleway',
-  fontStyle: 'normal',
-  fontWeight: '400',
-  src: `url(${RalewayRegularTTF}) format('truetype')`,
-};
-
-const RalewayMedium = {
-  fontFamily: 'Raleway',
-  fontStyle: 'normal',
-  fontWeight: '500',
-  src: `url(${RalewayMediumTTF}) format('truetype')`,
-};
-
-const RalewaySemiBold = {
-  fontFamily: 'Raleway',
-  fontStyle: 'normal',
-  fontWeight: '600',
-  src: `url(${RalewaySemiBoldTTF}) format('truetype')`,
-};
-
-const RalewayBold = {
-  fontFamily: 'Raleway',
-  fontStyle: 'normal',
-  fontWeight: '700',
-  src: `url(${RalewayBoldTTF}) format('truetype')`,
-};
-
-const RalewayExtraBold = {
-  fontFamily: 'Raleway',
-  fontStyle: 'normal',
-  fontWeight: '800',
-  src: `url(${RalewayExtraBoldTTF}) format('truetype')`,
-};
-
-const RalewayBlack = {
-  fontFamily: 'Raleway',
-  fontStyle: 'normal',
-  fontWeight: '900',
-  src: `url(${RalewayBlackTTF}) format('truetype')`,
-};
 
 const EastmanRegular = {
   fontFamily: 'Eastman',
@@ -168,6 +104,7 @@ const defaultTheme = createTheme({
   shape: {
     borderRadius: 0,
     sm: 2,
+    md: 8,
   },
   palette: {
     mode: 'light',
@@ -239,7 +176,7 @@ const theme = createTheme({
       lineHeight: 1.1,
     },
     body1: {
-      fontWeight: 400,
+      fontWeight: 500,
       fontSize: pxToRem(22),
       color: '#3D3D3D',
       [breakpoints.down('md')]: {
@@ -278,6 +215,50 @@ const theme = createTheme({
       fontSize: pxToRem(28),
       lineHeight: 1,
     },
+
+    productTitle: {
+      fontSize: pxToRem(70),
+      fontWeight: 700,
+      lineHeight: 'normal',
+    },
+    productSubtitle: {
+      fontSize: pxToRem(28),
+      fontWeight: 600,
+      fontFamily: 'Montserrat',
+    },
+    productText: {
+      fontSize: pxToRem(21),
+      fontWeight: 400,
+      fontFamily: 'Montserrat',
+    },
+
+    socialTitle: {
+      fontSize: pxToRem(38),
+      fontWeight: 700,
+    },
+    socialSubtitle: {
+      fontSize: pxToRem(32),
+      fontWeight: 400,
+    },
+
+    FAQ: {
+      color: alpha(palette.primary.main, 0.25),
+      fontSize: pxToRem(226),
+      fontWeight: 700,
+      fontFamily: 'Montserrat',
+      lineHeight: 'normal',
+
+      position: 'relative',
+      transform: `translate(${pxToRem(-15)}, ${pxToRem(65)})`,
+      zIndex: -100,
+    },
+
+    FAQTitle: {
+      fontFamily: 'Montserrat',
+      fontWeight: 700,
+      fontSize: pxToRem(48),
+    },
+
     subtitle1: {
       fontSize: pxToRem(39),
       fontWeight: 500,
@@ -486,6 +467,7 @@ const theme = createTheme({
           style: ({ theme }) =>
             theme.unstable_sx({
               fontSize: pxToRem(54),
+              fontFamily: 'Montserrat',
               color: palette.common.white,
               ':hover': {
                 backgroundColor: alpha(
@@ -584,6 +566,17 @@ const theme = createTheme({
               },
             }),
         },
+        {
+          props: { variant: 'footer-link' },
+          style: ({ theme }) =>
+            theme.unstable_sx({
+              fontFamily: 'Montserrat',
+              color: palette.common.white,
+              fontSize: pxToRem(20),
+              fontWeight: 400,
+              borderRadius: 'sm',
+            }),
+        },
       ],
     },
     MuiListItemButton: {
@@ -629,11 +622,16 @@ const theme = createTheme({
     },
     MuiTypography: {
       defaultProps: {
-        fontFamily: 'Raleway',
         variantMapping: {
           logoText1: 'span',
           logoText2: 'span',
           swiperTitle: 'p',
+          swiperText: 'span',
+          productTitle: 'h3',
+          productSubtitle: 'h4',
+          productText: 'p',
+          socialTitle: 'h3',
+          socialSubtitle: 'h4',
         },
       },
     },
@@ -684,14 +682,6 @@ const theme = createTheme({
           },
         },
         html: [
-          { '@font-face': RalewayExtraLight },
-          { '@font-face': RalewayLight },
-          { '@font-face': RalewayRegular },
-          { '@font-face': RalewayMedium },
-          { '@font-face': RalewaySemiBold },
-          { '@font-face': RalewayBold },
-          { '@font-face': RalewayExtraBold },
-          { '@font-face': RalewayBlack },
           { '@font-face': EastmanRegular },
           { '@font-face': EastmanMedium },
           { '@font-face': EastmanExtraBold },

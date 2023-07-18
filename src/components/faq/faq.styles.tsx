@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 
 export const FAQWrapper = styled('div')({
-  minHeight: '1000px',
+  minHeight: '1600px',
 });
 
 export const Accordion = styled((props: AccordionProps) => (

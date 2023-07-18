@@ -12,8 +12,8 @@ import WomanWithBaggages from '../../assets/images/womanWithBaggages.png';
 const Hero = () => {
   return (
     <>
-      <ClipPathBlackStroke sx={{ display: { md: 'block', xs: 'none' } }} />
       <ClipPathGreenBackground sx={{ display: { md: 'block', xs: 'none' } }} />
+      <ClipPathBlackStroke sx={{ display: { md: 'block', xs: 'none' } }} />
       <Container>
         <GridContainer container columns={24}>
           <Grid xs={0} md={12} lg={12} container sx={{ position: 'relative' }}>

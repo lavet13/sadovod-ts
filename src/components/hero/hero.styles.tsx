@@ -8,11 +8,12 @@ export const maxHeight = 850;
 
 export const ClipPathBlackStroke = styled('div')(({ theme }) => ({
   position: 'absolute',
+  top: 0,
   width: '100%',
   height: `calc(100vh - ${navigationOffset}px)`,
   backgroundColor: alpha(theme.palette.secondary.main, 0.9),
   clipPath: 'polygon(0 60%, 100% 50%, 100% 50.55%, 0 60.55%)',
-  zIndex: -95,
+  zIndex: 1000,
 
   [`@media screen and (max-height: ${minHeight}px)`]: {
     clipPath: `polygon(0 420px, 100% 360px, 100% 361px, 0 421px)`,
@@ -26,11 +27,12 @@ export const ClipPathBlackStroke = styled('div')(({ theme }) => ({
 
 export const ClipPathGreenBackground = styled('div')(({ theme }) => ({
   position: 'absolute',
+  top: 0,
   width: '100%',
   height: `calc(100vh - ${navigationOffset}px)`,
   backgroundColor: alpha(theme.palette.primary.main, 0.9),
   clipPath: 'polygon(0 60%, 100% 50%, 100% 100%, 0 100%)',
-  zIndex: -100,
+  zIndex: 1000,
 
   [`@media screen and (max-height: ${minHeight}px)`]: {
     clipPath: `polygon(0 420px, 100% 360px, 100% ${minHeight}px, 0 ${minHeight}px)`,
@@ -91,6 +93,8 @@ export const Image = styled('img')(({ theme }) => {
 });
 
 export const GridContainer = styled(Grid)(({ theme }) => ({
+  position: 'relative',
+  zIndex: 100000,
   height: `calc(100vh - ${navigationOffset}px)`,
 
   [`@media screen and (max-height: ${minHeight}px)`]: {

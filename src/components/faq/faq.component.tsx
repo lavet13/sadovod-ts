@@ -1,8 +1,13 @@
 import { useState } from 'react';
 
-import parse from 'html-react-parser';
+import parse, {
+  HTMLReactParserOptions,
+  Element,
+  attributesToProps,
+  domToReact,
+} from 'html-react-parser';
 
-import { Container, Stack, Typography } from '@mui/material';
+import { Container, Stack, Typography, Link } from '@mui/material';
 
 import {
   FAQWrapper,
@@ -12,6 +17,7 @@ import {
   AccordionTitle,
   AccordionText,
 } from './faq.styles';
+import Grid from '@mui/material/Unstable_Grid2';
 
 type QuestionsAndAnswers = {
   [id: string]: {
@@ -103,6 +109,15 @@ const questionsAndAnswers: QuestionsAndAnswers = {
   },
 };
 
+const options: HTMLReactParserOptions = {
+  replace: domNode => {
+    if (domNode instanceof Element && domNode.attribs.href) {
+      const { href } = attributesToProps(domNode.attribs);
+      return <Link href={href}>{domToReact(domNode.children, options)}</Link>;
+    }
+  },
+};
+
 const FAQ = () => {
   const [expanded, setExpanded] = useState<string | false>(false);
 
@@ -113,28 +128,36 @@ const FAQ = () => {
 
   return (
     <FAQWrapper>
-      <Container>
-        <Stack>
-          <Typography>FAQ</Typography>
-          <Typography>Часто задаваемые вопросы:</Typography>
-          {Object.values(questionsAndAnswers).map(QA => (
-            <Accordion
-              key={QA.id}
-              expanded={expanded === `question${QA.id}`}
-              onChange={handleChange(`question${QA.id}`)}
-            >
-              <AccordionSummary aria-controls={`question${QA.id}-content`}>
-                <AccordionTitle>
-                  <span>{QA.number}</span>
-                  <span>{QA.question}</span>
-                </AccordionTitle>
-              </AccordionSummary>
-              <AccordionDetails>
-                <AccordionText>{parse(QA.answer)}</AccordionText>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </Stack>
+      <Container sx={{ paddingLeft: 10 }}>
+        <Grid container>
+          <Grid xs />
+          <Grid xs={6}>
+            <Stack>
+              <Typography variant='FAQ'>FAQ</Typography>
+              <Typography variant='FAQTitle' color='secondary' noWrap>
+                Часто задаваемые вопросы:
+              </Typography>
+              {Object.values(questionsAndAnswers).map(QA => (
+                <Accordion
+                  key={QA.id}
+                  expanded={expanded === `question${QA.id}`}
+                  onChange={handleChange(`question${QA.id}`)}
+                >
+                  <AccordionSummary aria-controls={`question${QA.id}-content`}>
+                    <AccordionTitle>
+                      <span>{QA.number}</span>
+                      <span>{QA.question}</span>
+                    </AccordionTitle>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <AccordionText>{parse(QA.answer, options)}</AccordionText>
+                  </AccordionDetails>
+                </Accordion>
+              ))}
+            </Stack>
+          </Grid>
+          <Grid xs={4} />
+        </Grid>
       </Container>
     </FAQWrapper>
   );

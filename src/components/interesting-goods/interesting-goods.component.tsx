@@ -80,123 +80,151 @@ const goods = {
 const InterestingGoods = () => {
   return (
     <>
-      <WaveClipPathBackground />
-      <Container sx={{ height: `1700px` }}>
-        <Stack
-          direction='row'
-          flexWrap={'wrap'}
-          minHeight={'1700px'}
-          alignContent={'space-evenly'}
-        >
-          <GridContainer container>
-            <Grid xs />
-            <Grid xs={3}>
-              <Box
-                component='img'
-                sx={{
-                  display: 'block',
-                  width: '100%',
-                  height: 'auto',
-                  objectFit: 'cover',
-                }}
-                src={ProductImage}
-                alt={''}
-              />
-            </Grid>
-            <Grid xs />
-            <Grid xs={4}>
-              <Typography>Товар недели</Typography>
-              <Typography>Цена:</Typography>
-              <Typography>{goods[1].price}</Typography>
-              <Typography>Размеры:</Typography>
-              <Typography>{goods[1].sizes?.join(';')}</Typography>
-              <Typography>Описание:</Typography>
-              <Typography>{parse(goods[1].description)}</Typography>
-            </Grid>
-            <Grid xs />
-          </GridContainer>
-          <Stack direction={'row'} flexWrap={'wrap'} alignContent={'center'}>
-            <Stack
-              direction={'row'}
-              alignSelf={'center'}
-              justifyContent={'space-between'}
-              flexBasis={'100%'}
-              marginBottom={2}
-            >
-              <Typography sx={{ pl: 0.6 }} variant='swiperTitle' color='white'>
-                Интересные товары
-              </Typography>
-              <Stack direction='row'>
-                <SwiperButton color='white' className='swiper-button-prev'>
-                  <PrevArrowSVG />
-                </SwiperButton>
-                <SwiperPagination
-                  sx={{ position: 'initial!important' }}
-                  className='swiper-pagination2'
+      <WaveClipPathBackground>
+        <Container sx={{ height: `1700px` }}>
+          <Stack
+            direction='row'
+            flexWrap={'wrap'}
+            minHeight={'1700px'}
+            alignContent={'space-evenly'}
+          >
+            <GridContainer container columns={24}>
+              <Grid xs />
+              <Grid xs={8}>
+                <Box
+                  component='img'
+                  sx={{
+                    display: 'block',
+                    width: '100%',
+                    height: 'auto',
+                    objectFit: 'cover',
+                    borderRadius: 'md',
+                  }}
+                  src={ProductImage}
+                  alt={''}
                 />
-                <SwiperButton color='white' className='swiper-button-next'>
-                  <NextArrowSVG />
-                </SwiperButton>
+              </Grid>
+              <Grid xs />
+              <Grid xs={10}>
+                <Typography variant='productTitle' color='white' noWrap>
+                  Товар недели
+                </Typography>
+                <Typography variant='productSubtitle' color='white'>
+                  Цена:
+                </Typography>
+                <Typography
+                  variant='productSubtitle'
+                  color='white'
+                  sx={{ fontWeight: 400 }}
+                >
+                  {goods[1].price}
+                </Typography>
+                <Typography variant='productSubtitle' color='white'>
+                  Размеры:
+                </Typography>
+                <Typography
+                  variant='productSubtitle'
+                  color='white'
+                  sx={{ fontWeight: 400 }}
+                >
+                  {goods[1].sizes?.join(';')}
+                </Typography>
+                <Typography variant='productSubtitle' color='white'>
+                  Описание:
+                </Typography>
+                <Typography variant='productText' color='white'>
+                  {parse(goods[1].description)}
+                </Typography>
+              </Grid>
+              <Grid xs />
+            </GridContainer>
+            <Stack direction={'row'} flexWrap={'wrap'} alignContent={'center'}>
+              <Stack
+                direction={'row'}
+                alignSelf={'center'}
+                justifyContent={'space-between'}
+                flexBasis={'100%'}
+                marginBottom={2}
+              >
+                <Typography
+                  sx={{ pl: 0.6 }}
+                  variant='swiperTitle'
+                  color='white'
+                >
+                  Интересные товары
+                </Typography>
+                <Stack direction='row'>
+                  <SwiperButton color='white' className='swiper-button-prev'>
+                    <PrevArrowSVG />
+                  </SwiperButton>
+                  <SwiperPagination
+                    sx={{ position: 'initial!important' }}
+                    className='swiper-pagination2'
+                  />
+                  <SwiperButton color='white' className='swiper-button-next'>
+                    <NextArrowSVG />
+                  </SwiperButton>
+                </Stack>
+              </Stack>
+              <SwiperStyled
+                grabCursor
+                speed={400}
+                slidesPerView={4}
+                spaceBetween={30}
+                threshold={1}
+                mousewheel
+                modules={[Pagination, Virtual, Navigation, Autoplay]}
+                pagination={{
+                  el: '.swiper-pagination2',
+                  type: 'bullets',
+                  dynamicBullets: true,
+                  dynamicMainBullets: 2,
+                  clickable: true,
+                }}
+                autoplay={{
+                  delay: 5000,
+                  disableOnInteraction: false,
+                  pauseOnMouseEnter: true,
+                }}
+                navigation={{
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+                }}
+                virtual
+              >
+                {Object.values(goods).map(good => (
+                  <SwiperSlide key={good.id} virtualIndex={good.id}>
+                    <Box
+                      loading='lazy'
+                      component='img'
+                      sx={theme => ({
+                        display: 'block',
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        borderRadius: theme.shape.sm,
+                      })}
+                      src={good.imgUrl}
+                      alt={''}
+                    />
+                    <div className='swiper-lazy-preloader' />
+                  </SwiperSlide>
+                ))}
+              </SwiperStyled>
+              <Stack
+                alignItems={'center'}
+                justifyContent={'space-between'}
+                flexBasis={'100%'}
+                marginTop={5}
+              >
+                <Button variant='long-btn' color='white'>
+                  Перейти в каталог
+                </Button>
               </Stack>
             </Stack>
-            <SwiperStyled
-              grabCursor
-              speed={400}
-              slidesPerView={4}
-              spaceBetween={30}
-              threshold={1}
-              mousewheel
-              modules={[Pagination, Virtual, Navigation, Autoplay]}
-              pagination={{
-                el: '.swiper-pagination2',
-                type: 'bullets',
-                dynamicBullets: true,
-                dynamicMainBullets: 2,
-                clickable: true,
-              }}
-              autoplay={{
-                delay: 5000,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true,
-              }}
-              navigation={{
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-              }}
-              virtual
-            >
-              {Object.values(goods).map(good => (
-                <SwiperSlide key={good.id} virtualIndex={good.id}>
-                  <Box
-                    loading='lazy'
-                    component='img'
-                    sx={theme => ({
-                      display: 'block',
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      borderRadius: theme.shape.sm,
-                    })}
-                    src={good.imgUrl}
-                    alt={''}
-                  />
-                  <div className='swiper-lazy-preloader' />
-                </SwiperSlide>
-              ))}
-            </SwiperStyled>
-            <Stack
-              alignItems={'center'}
-              justifyContent={'space-between'}
-              flexBasis={'100%'}
-              marginTop={5}
-            >
-              <Button variant='long-btn' color='white'>
-                Перейти в каталог
-              </Button>
-            </Stack>
           </Stack>
-        </Stack>
-      </Container>
+        </Container>
+      </WaveClipPathBackground>
     </>
   );
 };

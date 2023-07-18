@@ -23,8 +23,12 @@ const SocialMedia = () => {
         <Grid container height={300}>
           <Grid xs />
           <Grid xs={4} alignSelf={'center'}>
-            <Typography>Войди/Зарегистрируйся</Typography>
-            <Typography>Чтобы оформить заказ</Typography>
+            <Typography variant='socialTitle' color='white'>
+              Войди/Зарегистрируйся
+            </Typography>
+            <Typography variant='socialSubtitle' color='white'>
+              Чтобы оформить заказ
+            </Typography>
             <Button
               variant='md-btn'
               color='secondary'
@@ -42,20 +46,26 @@ const SocialMedia = () => {
                 width: theme.typography.pxToRem(410),
                 borderRadius: 5,
                 position: 'relative',
+                minHeight: theme.typography.pxToRem(445),
                 top: 50,
               })}
             >
-              <Stack spacing={2}>
-                <CardContent>
-                  <Typography>Мы в соц. сетях</Typography>
+              <Stack>
+                <CardContent
+                  sx={({ typography: { pxToRem } }) => ({
+                    padding: `${pxToRem(23)} ${pxToRem(30)}`,
+                  })}
+                >
+                  <Typography variant='socialTitle' color='secondary'>
+                    Мы в соц. сетях
+                  </Typography>
                 </CardContent>
                 <CardActions
-                  sx={{
+                  sx={({ typography: { pxToRem } }) => ({
                     flexWrap: 'wrap',
-                    minHeight: '200px',
                     alignContent: 'flex-start',
-                    paddingRight: '18px',
-                  }}
+                    padding: pxToRem(30),
+                  })}
                   disableSpacing
                 >
                   <Stack

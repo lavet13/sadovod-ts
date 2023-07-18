@@ -26,6 +26,7 @@ declare module '@mui/material/Button' {
     'logo-btn': true;
     'md-btn': true;
     'long-btn': true;
+    'footer-link': true;
   }
 }
 
@@ -51,6 +52,13 @@ declare module '@mui/material/styles' {
     logoText2: React.CSSProperties;
     swiperText: React.CSSProperties;
     swiperTitle: React.CSSProperties;
+    productTitle: React.CSSProperties;
+    productSubtitle: React.CSSProperties;
+    productText: React.CSSProperties;
+    socialTitle: React.CSSProperties;
+    socialSubtitle: React.CSSProperties;
+    FAQ: React.CSSProperties;
+    FAQTitle: React.CSSProperties;
   }
 
   // allow configuration using `createTheme`
@@ -59,6 +67,13 @@ declare module '@mui/material/styles' {
     logoText2?: React.CSSProperties;
     swiperText?: React.CSSProperties;
     swiperTitle?: React.CSSProperties;
+    productTitle?: React.CSSProperties;
+    productSubtitle?: React.CSSProperties;
+    productText?: React.CSSProperties;
+    socialTitle?: React.CSSProperties;
+    socialSubtitle?: React.CSSProperties;
+    FAQ?: React.CSSProperties;
+    FAQTitle?: React.CSSProperties;
   }
 }
 
@@ -69,6 +84,13 @@ declare module '@mui/material/Typography' {
     logoText2: true;
     swiperText: true;
     swiperTitle: true;
+    productTitle: true;
+    productSubtitle: true;
+    productText: true;
+    socialTitle: true;
+    socialSubtitle: true;
+    FAQ: true;
+    FAQTitle: true;
   }
 }
 
