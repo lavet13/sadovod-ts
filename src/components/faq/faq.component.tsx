@@ -129,9 +129,9 @@ const FAQ = () => {
   return (
     <FAQWrapper>
       <Container sx={{ paddingLeft: 10 }}>
-        <Grid container>
-          <Grid xs />
-          <Grid xs={6}>
+        <Grid container columns={24}>
+          <Grid md />
+          <Grid md={18}>
             <Stack>
               <Typography variant='FAQ'>FAQ</Typography>
               <Typography variant='FAQTitle' color='secondary' noWrap>
@@ -156,7 +156,7 @@ const FAQ = () => {
               ))}
             </Stack>
           </Grid>
-          <Grid xs={4} />
+          <Grid md lg={7} />
         </Grid>
       </Container>
     </FAQWrapper>

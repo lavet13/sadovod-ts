@@ -1,5 +1,13 @@
 import parse from 'html-react-parser';
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 
 import BackgroundImage1 from '../../assets/images/bg1.png';
 import BackgroundImage2 from '../../assets/images/bg2.png';
@@ -15,6 +23,9 @@ import {
 
 import {
   CataloguesWrapper,
+  SwiperContent,
+  SwiperImg,
+  SwiperLinearGradient,
   SwiperPagination,
   SwiperStyled,
 } from './catalogues.styles';
@@ -53,93 +64,73 @@ const images = [
 ];
 
 const Catalogues = () => {
+  const theme = useTheme();
+  const isPhone = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
-    <Container>
-      <CataloguesWrapper>
-        <Stack
-          direction={'row'}
-          alignSelf={'center'}
-          justifyContent='space-between'
-          width='100%'
-          spacing={2}
-          marginBottom={2}
-        >
-          <SwiperPagination
-            sx={{ position: 'initial!important' }}
-            className='swiper-pagination1'
-          />
-          <Button variant='long-btn'>Перейти в каталог</Button>
-        </Stack>
-        <SwiperStyled
-          grabCursor
-          parallax
-          centeredSlides
-          slidesPerView={1}
-          speed={400}
-          resistance={false}
-          threshold={1}
-          // effect='slide' // 'slide' | 'fade' | 'cube' | 'coverflow' | 'flip' | 'creative' | 'cards'
-          // coverflowEffect={{ rotate: 90, slideShadows: false, scale: 0.7 }}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          modules={[Pagination, Virtual, Autoplay, Parallax]} // EffectCoverflow,
-          pagination={{
-            el: '.swiper-pagination1',
-            type: 'bullets',
-            dynamicBullets: true,
-            dynamicMainBullets: 3,
-            clickable: true,
-          }}
-          virtual
-        >
-          {images.map(step => (
-            <SwiperSlide key={step.id} virtualIndex={step.id}>
-              <Box
-                loading='lazy'
-                component='img'
-                sx={{
-                  display: 'block',
-                  width: '100%',
-                  height: 'auto',
-                  objectFit: 'cover',
-                  aspectRatio: '16 / 5',
-                }}
-                src={step.url}
-                alt={''}
+    <>
+      {!isPhone && (
+        <Container>
+          <CataloguesWrapper>
+            <Stack
+              direction={'row'}
+              alignSelf={'center'}
+              justifyContent='space-between'
+              width='100%'
+              spacing={2}
+              marginBottom={2}
+            >
+              <SwiperPagination
+                sx={{ position: 'initial!important' }}
+                className='swiper-pagination1'
               />
+              <Button variant='long-btn'>Перейти в каталог</Button>
+            </Stack>
+            <SwiperStyled
+              grabCursor
+              parallax
+              centeredSlides
+              slidesPerView={1}
+              speed={400}
+              resistance={false}
+              threshold={1}
+              // effect='slide' // 'slide' | 'fade' | 'cube' | 'coverflow' | 'flip' | 'creative' | 'cards'
+              // coverflowEffect={{ rotate: 90, slideShadows: false, scale: 0.7 }}
+              autoplay={{
+                delay: 5000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              modules={[Pagination, Virtual, Autoplay, Parallax]} // EffectCoverflow,
+              pagination={{
+                el: '.swiper-pagination1',
+                type: 'bullets',
+                // dynamicBullets: true,
+                // dynamicMainBullets: 3,
+                clickable: true,
+              }}
+              virtual
+            >
+              {images.map(step => (
+                <SwiperSlide key={step.id} virtualIndex={step.id}>
+                  <SwiperImg src={step.url} alt={''} />
 
-              <div className='swiper-lazy-preloader' />
+                  <div className='swiper-lazy-preloader' />
 
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: 0,
-                  height: '100%',
-                  width: '100%',
-                  background: `linear-gradient(90deg, #fff 25.92%, transparent 50% 100%)`,
-                }}
-              >
-                <Stack
-                  sx={{
-                    pl: 5,
-                    justifyContent: 'center',
-                    height: '100%',
-                    maxWidth: '27%',
-                  }}
-                >
-                  <Typography variant='swiperText'>
-                    {parse(step.title)}
-                  </Typography>
-                </Stack>
-              </Box>
-            </SwiperSlide>
-          ))}
-        </SwiperStyled>
-      </CataloguesWrapper>
-    </Container>
+                  <SwiperLinearGradient>
+                    <SwiperContent>
+                      <Typography variant='swiperText'>
+                        {parse(step.title)}
+                      </Typography>
+                    </SwiperContent>
+                  </SwiperLinearGradient>
+                </SwiperSlide>
+              ))}
+            </SwiperStyled>
+          </CataloguesWrapper>
+        </Container>
+      )}
+    </>
   );
 };
 

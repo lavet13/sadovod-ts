@@ -28,6 +28,10 @@ export const SwiperStyled = styled(Swiper)(({ theme }) => ({
   [theme.breakpoints.down('xl')]: {
     maxWidth: 'calc(100vw - 68px)',
   },
+
+  [theme.breakpoints.down('md')]: {
+    height: theme.typography.pxToRem(200),
+  },
 }));
 
 export const SwiperPagination = styled(Box)(({ theme }) => ({

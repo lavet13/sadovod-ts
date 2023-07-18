@@ -11,7 +11,7 @@ import WomanWithBaggages from '../../assets/images/womanWithBaggages.png';
 
 const Hero = () => {
   return (
-    <Box position={'relative'}>
+    <Box>
       <ClipPathGreenBackground sx={{ display: { md: 'block', xs: 'none' } }} />
       <ClipPathBlackStroke sx={{ display: { md: 'block', xs: 'none' } }} />
       <Container>

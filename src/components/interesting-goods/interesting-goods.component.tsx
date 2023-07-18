@@ -1,5 +1,13 @@
 import parse from 'html-react-parser';
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { Pagination, Virtual, Navigation, Autoplay } from 'swiper/modules';
@@ -78,6 +86,9 @@ const goods = {
 };
 
 const InterestingGoods = () => {
+  const theme = useTheme();
+  const isPhone = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <>
       <WaveClipPathBackground>
@@ -153,7 +164,8 @@ const InterestingGoods = () => {
                 >
                   Интересные товары
                 </Typography>
-                <Stack direction='row'>
+
+                <Stack direction='row' display={{ xs: 'none', md: 'flex' }}>
                   <SwiperButton color='white' className='swiper-button-prev'>
                     <PrevArrowSVG />
                   </SwiperButton>

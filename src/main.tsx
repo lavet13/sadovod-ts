@@ -174,6 +174,9 @@ const theme = createTheme({
       fontSize: pxToRem(50),
       fontWeight: 700,
       lineHeight: 1.1,
+      [breakpoints.down('md')]: {
+        fontSize: 'clamp(0.9rem, 2.3vw + 0.9rem, 2rem)',
+      },
     },
     body1: {
       fontWeight: 500,
@@ -220,21 +223,33 @@ const theme = createTheme({
       fontSize: pxToRem(70),
       fontWeight: 700,
       lineHeight: 'normal',
+      [breakpoints.down('md')]: {
+        fontSize: 'clamp(0.9rem, 2.3vw + 0.9rem, 2rem)',
+      },
     },
     productSubtitle: {
       fontSize: pxToRem(28),
       fontWeight: 600,
       fontFamily: 'Montserrat',
+      [breakpoints.down('md')]: {
+        fontSize: 'clamp(0.8rem, 1.5vw + 0.8rem, 1.5rem)',
+      },
     },
     productText: {
       fontSize: pxToRem(21),
       fontWeight: 400,
       fontFamily: 'Montserrat',
+      [breakpoints.down('md')]: {
+        fontSize: 'clamp(0.6rem, 1.2vw + 0.6rem, 1.2rem)',
+      },
     },
 
     socialTitle: {
       fontSize: pxToRem(38),
       fontWeight: 700,
+      [breakpoints.down('md')]: {
+        fontSize: 'clamp(0.9rem, 2.3vw + 0.9rem, 2rem)',
+      },
     },
     socialSubtitle: {
       fontSize: pxToRem(32),
@@ -251,12 +266,21 @@ const theme = createTheme({
       position: 'relative',
       transform: `translate(${pxToRem(-15)}, ${pxToRem(65)})`,
       zIndex: -100,
+
+      [breakpoints.down('md')]: {
+        fontSize: 'clamp(1.2rem, 12.1vw + 1.2rem, 7rem)',
+        transform: `translate(${pxToRem(-7)}, ${pxToRem(25)})`,
+      },
     },
 
     FAQTitle: {
       fontFamily: 'Montserrat',
       fontWeight: 700,
       fontSize: pxToRem(48),
+
+      [breakpoints.down('md')]: {
+        fontSize: 'clamp(0.8rem, 1.9vw + 0.8rem, 1.7rem)',
+      },
     },
 
     subtitle1: {
@@ -500,6 +524,10 @@ const theme = createTheme({
               ':active': {
                 boxShadow: theme.shadows[8],
               },
+
+              [breakpoints.down('md')]: {
+                fontSize: 'clamp(1rem, 0.4vw + 1rem, 1.2rem)',
+              },
             }),
         },
         {
@@ -539,6 +567,9 @@ const theme = createTheme({
               ':hover': {
                 backgroundColor: lighten(palette.secondary.dark, 0.05),
               },
+              [breakpoints.down('md')]: {
+                fontSize: 'clamp(1rem, 0.4vw + 1rem, 1.2rem)',
+              },
             }),
         },
         {
@@ -575,6 +606,10 @@ const theme = createTheme({
               fontSize: pxToRem(20),
               fontWeight: 400,
               borderRadius: 'sm',
+
+              [theme.breakpoints.down('md')]: {
+                fontSize: 'clamp(0.6rem, 0.6vw + 0.6rem, 0.9rem)',
+              },
             }),
         },
       ],

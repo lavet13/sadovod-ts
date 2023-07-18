@@ -86,7 +86,10 @@ const Header = () => {
           <HideOnScroll>
             <AppBar
               position='fixed'
-              sx={{ backgroundColor: theme.palette.common.white }}
+              sx={{
+                backgroundColor: theme.palette.common.white,
+                zIndex: 13000000,
+              }}
             >
               <Stack
                 direction='row'
@@ -124,6 +127,7 @@ const Header = () => {
             open={drawerIsOpen}
             onOpen={toggleDrawer(true)}
             onClose={toggleDrawer(false)}
+            sx={{ zIndex: 130000000 }}
           >
             <Stack
               sx={{

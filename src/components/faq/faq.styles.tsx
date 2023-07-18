@@ -45,7 +45,7 @@ export const AccordionSummary = styled((props: AccordionSummaryProps) => (
 export const AccordionDetails = styled((props: AccordionDetailsProps) => (
   <MuiAccordionDetails {...props} />
 ))(({ theme }) => ({
-  width: theme.typography.pxToRem(800),
+  maxWidth: theme.typography.pxToRem(800),
 }));
 
 export const AccordionTitle = styled((props: TypographyProps) => (
@@ -61,12 +61,20 @@ export const AccordionTitle = styled((props: TypographyProps) => (
     fontWeight: 800,
     fontSize: theme.typography.pxToRem(50),
     marginRight: theme.typography.pxToRem(10),
+
+    [theme.breakpoints.down('md')]: {
+      fontSize: 'clamp(0.8rem, 2.5vw + 0.8rem, 2rem)',
+    },
   },
 
   '& > span:nth-of-type(2)': {
     fontWeight: 500,
     fontSize: theme.typography.pxToRem(26),
     marginRight: theme.typography.pxToRem(10),
+
+    [theme.breakpoints.down('md')]: {
+      fontSize: 'clamp(0.6rem, 1.7vw + 0.6rem, 1.4rem)',
+    },
   },
 }));
 
@@ -76,4 +84,8 @@ export const AccordionText = styled((props: TypographyProps) => (
   fontFamily: 'Eastman',
   fontWeight: 400,
   fontSize: theme.typography.pxToRem(25),
+
+  [theme.breakpoints.down('md')]: {
+    fontSize: 'clamp(0.5rem, 1.2vw + 0.5rem, 1.1rem)',
+  },
 }));

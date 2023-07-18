@@ -1,10 +1,11 @@
-import { Button, Container, Stack } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 
 import {
   BucketIcon,
   CalcIcon,
   DiscountCardIcon,
   FooterBackground,
+  FooterContainer,
   GooglePlayIcon,
   OKIcon,
   TelIcon,
@@ -15,17 +16,10 @@ import Grid from '@mui/material/Unstable_Grid2';
 const Footer = () => {
   return (
     <FooterBackground>
-      <Container
-        sx={({ typography: { pxToRem } }) => ({
-          height: pxToRem(250),
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-        })}
-      >
+      <FooterContainer>
         <Grid container width='100%'>
-          <Grid xs />
-          <Grid xs={5}>
+          <Grid md />
+          <Grid xs={12} md={5}>
             <Stack alignItems='flex-start'>
               <Button
                 variant='footer-link'
@@ -41,18 +35,22 @@ const Footer = () => {
               >
                 Доставка с рынков Ростова-на-Дону
               </Button>
+
               <Button
                 variant='footer-link'
                 color='white'
                 startIcon={<CalcIcon />}
-                sx={{ marginTop: 1.5 }}
+                sx={{ marginTop: { xs: 0, md: 1.5 } }}
               >
                 Калькулятор доставки
               </Button>
             </Stack>
           </Grid>
-          <Grid xs={3}>
-            <Stack alignItems='flex-start'>
+          <Grid xs={6} md={3}>
+            <Stack
+              alignItems='flex-start'
+              direction={{ xs: 'column-reverse', md: 'column' }}
+            >
               <Button
                 variant='footer-link'
                 color='white'
@@ -64,6 +62,7 @@ const Footer = () => {
                 variant='footer-link'
                 color='white'
                 startIcon={<TelIcon />}
+                sx={{ marginTop: { xs: 6, md: 'initial' } }}
               >
                 +7(928)214-88-82
               </Button>
@@ -71,13 +70,13 @@ const Footer = () => {
                 variant='footer-link'
                 color='white'
                 startIcon={<DiscountCardIcon />}
-                sx={{ marginTop: 1.5 }}
+                sx={{ marginTop: { xs: 0, md: 1.5 } }}
               >
                 Скидочные карты
               </Button>
             </Stack>
           </Grid>
-          <Grid xs={2}>
+          <Grid xs={6} md={2} marginTop={{ xs: 'auto', md: 'initial' }}>
             <Stack alignItems='flex-start'>
               <Button
                 variant='footer-link'
@@ -95,9 +94,9 @@ const Footer = () => {
               </Button>
             </Stack>
           </Grid>
-          <Grid xs />
+          <Grid md />
         </Grid>
-      </Container>
+      </FooterContainer>
     </FooterBackground>
   );
 };

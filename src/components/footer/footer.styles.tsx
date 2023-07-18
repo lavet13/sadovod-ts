@@ -1,4 +1,4 @@
-import { alpha, styled } from '@mui/material';
+import { Container, ContainerProps, alpha, styled } from '@mui/material';
 
 import { ReactComponent as GooglePlayIconSVG } from '../../assets/icons/google-play-icon.svg';
 import { ReactComponent as BucketIconSVG } from '../../assets/icons/bucket.svg';
@@ -24,6 +24,23 @@ export const FooterBackground = styled('div')(({ theme }) => ({
   width: '100%',
   minHeight: theme.typography.pxToRem(250),
   zIndex: 100,
+
+  [theme.breakpoints.down('md')]: {
+    minHeight: theme.typography.pxToRem(370),
+  },
+}));
+
+export const FooterContainer = styled((props: ContainerProps) => (
+  <Container {...props} />
+))(({ theme }) => ({
+  height: theme.typography.pxToRem(250),
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+
+  [theme.breakpoints.down('md')]: {
+    minHeight: theme.typography.pxToRem(370),
+  },
 }));
 
 export const GooglePlayIcon = styled(GooglePlayIconSVG)(({ theme }) => ({
