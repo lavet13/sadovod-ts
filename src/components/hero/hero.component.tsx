@@ -6,12 +6,12 @@ import {
   Image,
 } from './hero.styles';
 import Grid from '@mui/material/Unstable_Grid2';
-import { Button, Container, Stack, Typography } from '@mui/material';
+import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import WomanWithBaggages from '../../assets/images/womanWithBaggages.png';
 
 const Hero = () => {
   return (
-    <>
+    <Box position={'relative'}>
       <ClipPathGreenBackground sx={{ display: { md: 'block', xs: 'none' } }} />
       <ClipPathBlackStroke sx={{ display: { md: 'block', xs: 'none' } }} />
       <Container>
@@ -69,7 +69,7 @@ const Hero = () => {
           <Grid xs={2} md />
         </GridContainer>
       </Container>
-    </>
+    </Box>
   );
 };
 

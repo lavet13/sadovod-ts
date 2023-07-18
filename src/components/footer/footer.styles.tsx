@@ -22,7 +22,7 @@ export const FooterBackground = styled('div')(({ theme }) => ({
   position: 'relative',
   marginTop: 'auto',
   width: '100%',
-  minHeight: theme.typography.pxToRem(300),
+  minHeight: theme.typography.pxToRem(250),
   zIndex: 100,
 }));
 

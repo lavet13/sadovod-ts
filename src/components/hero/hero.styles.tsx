@@ -8,7 +8,6 @@ export const maxHeight = 850;
 
 export const ClipPathBlackStroke = styled('div')(({ theme }) => ({
   position: 'absolute',
-  top: 0,
   width: '100%',
   height: `calc(100vh - ${navigationOffset}px)`,
   backgroundColor: alpha(theme.palette.secondary.main, 0.9),
@@ -27,7 +26,6 @@ export const ClipPathBlackStroke = styled('div')(({ theme }) => ({
 
 export const ClipPathGreenBackground = styled('div')(({ theme }) => ({
   position: 'absolute',
-  top: 0,
   width: '100%',
   height: `calc(100vh - ${navigationOffset}px)`,
   backgroundColor: alpha(theme.palette.primary.main, 0.9),

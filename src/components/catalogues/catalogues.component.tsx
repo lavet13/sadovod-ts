@@ -110,6 +110,7 @@ const Catalogues = () => {
                 src={step.url}
                 alt={''}
               />
+
               <div className='swiper-lazy-preloader' />
 
               <Box
