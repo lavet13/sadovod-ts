@@ -71,7 +71,7 @@ export const Image = styled('img')(({ theme }) => {
       theme.breakpoints.values.lg - 200
     }px) and (max-height: ${maxHeight - 1}px)`]: {
       width: '115%',
-      left: '90%',
+      left: '70%',
       transform: `translateX(-90%)`,
       objectFit: 'cover',
       aspectRatio: '2 / 3',

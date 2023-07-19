@@ -102,7 +102,7 @@ const InterestingGoods = () => {
             <Stack>
               <GridContainer container columns={24}>
                 <Grid xs md />
-                <Grid xs={12} md={8}>
+                <Grid xs={12} md={11} lg={8}>
                   <Box
                     component='img'
                     sx={{
@@ -117,7 +117,7 @@ const InterestingGoods = () => {
                   />
                 </Grid>
                 <Grid xs={1} sm={1} md />
-                <Grid xs={11} md={10}>
+                <Grid xs={11} md={11}>
                   <Stack
                     spacing={{ xs: 1.5, md: 2 }}
                     height={'100%'}

@@ -724,12 +724,9 @@ const theme = createTheme({
       styleOverrides: {
         ':root': {
           [breakpoints.up('md')]: {
-            fontSize: pxToRem(10),
-          },
-          [breakpoints.up('lg')]: {
             fontSize: pxToRem(11),
           },
-          [breakpoints.up('xl')]: {
+          [breakpoints.up('lg')]: {
             fontSize: pxToRem(12),
           },
           [breakpoints.up('3xl')]: {

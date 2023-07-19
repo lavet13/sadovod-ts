@@ -39,9 +39,9 @@ const images = [
   },
   {
     id: 2,
-    url: BackgroundImage2,
+    url: BackgroundImage1,
     title:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vivamus at augue eget arcu dictum varius duis at. Aliquet enim tortor at auctor. Molestie at elementum eu facilisis. Morbi tincidunt augue interdum velit euismod in pellentesque massa. Vitae semper quis lectus nulla at volutpat diam ut venenatis. Felis eget velit aliquet sagittis id consectetur purus. Diam vulputate ut pharetra sit amet. Consequat semper viverra nam libero justo. Congue nisi vitae suscipit tellus mauris a diam maecenas sed. Pharetra magna ac placerat vestibulum lectus mauris ultrices eros in. Magna fringilla urna porttitor rhoncus dolor purus. In massa tempor nec feugiat.',
+      'Поможем купить и доставить за 7-14 дней с оптово-розничных рынков Москвы в ЛДНР и Крым, а также по всей РФ. <br/><br/>Возможна доставка до двери<br/> (только в ЛДНР)',
   },
   {
     id: 3,
@@ -51,12 +51,6 @@ const images = [
   },
   {
     id: 4,
-    url: BackgroundImage2,
-    title:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vivamus at augue eget arcu dictum varius duis at. Aliquet enim tortor at auctor. Molestie at elementum eu facilisis. Morbi tincidunt augue interdum velit euismod in pellentesque massa. Vitae semper quis lectus nulla at volutpat diam ut venenatis. Felis eget velit aliquet sagittis id consectetur purus. Diam vulputate ut pharetra sit amet. Consequat semper viverra nam libero justo. Congue nisi vitae suscipit tellus mauris a diam maecenas sed. Pharetra magna ac placerat vestibulum lectus mauris ultrices eros in. Magna fringilla urna porttitor rhoncus dolor purus. In massa tempor nec feugiat.',
-  },
-  {
-    id: 5,
     url: BackgroundImage1,
     title:
       'Поможем купить и доставить за 7-14 дней с оптово-розничных рынков Москвы в ЛДНР и Крым, а также по всей РФ. <br/><br/>Возможна доставка до двери<br/> (только в ЛДНР)',
