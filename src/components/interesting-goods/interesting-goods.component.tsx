@@ -1,4 +1,5 @@
 import parse from 'html-react-parser';
+
 import {
   Box,
   Button,
@@ -8,6 +9,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { Pagination, Virtual, Navigation, Autoplay } from 'swiper/modules';
@@ -28,6 +30,7 @@ import ProductImage4 from '../../assets/images/product4.png';
 
 import { ReactComponent as NextArrowSVG } from '../../assets/icons/next-arrow.svg';
 import { ReactComponent as PrevArrowSVG } from '../../assets/icons/prev-arrow.svg';
+import SocialMediaCard from '../social-media-card/social-media-card.component';
 
 const goods = {
   1: {
@@ -252,15 +255,19 @@ const InterestingGoods = () => {
                 breakpoints={{
                   [theme.breakpoints.values.lg]: {
                     spaceBetween: 20,
+                    slidesPerView: 4,
                   },
+
                   [theme.breakpoints.values.md]: {
                     spaceBetween: 15,
                     slidesPerView: 4,
                   },
+
                   [theme.breakpoints.values.sm]: {
                     spaceBetween: 7,
                     slidesPerView: 3,
                   },
+
                   [theme.breakpoints.values.xs]: {
                     spaceBetween: 6,
                     slidesPerView: 2,
@@ -301,6 +308,9 @@ const InterestingGoods = () => {
           </Stack>
         </Container>
       </WaveClipPathBackground>
+      {isPhone && (
+        <SocialMediaCard sx={{ position: 'relative', top: '-120px' }} />
+      )}
     </>
   );
 };

@@ -63,8 +63,16 @@ export const SwiperPagination = styled(Box)(({ theme }) => ({
   '& .swiper-pagination-bullet': {
     border: `1px solid ${theme.palette.common.white}`,
   },
+
   '& .swiper-pagination-bullet-active': {
     border: `1px solid ${theme.palette.secondary.main}`,
+  },
+
+  [theme.breakpoints.down('lg')]: {
+    '& .swiper-pagination-bullet': {
+      width: '14px',
+      height: '14px',
+    },
   },
 }));
 

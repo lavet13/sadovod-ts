@@ -1,7 +1,4 @@
-import { CardProps, alpha, styled, Card as MuiCard } from '@mui/material';
-
-import { ReactComponent as VKSVG } from '../../assets/icons/vk.svg';
-import { ReactComponent as OKSVG } from '../../assets/icons/ok.svg';
+import { alpha, styled } from '@mui/material';
 
 const minHeight = 350;
 
@@ -21,65 +18,4 @@ export const ClipPathGreenBackground = styled('div')(({ theme }) => ({
   width: '100%',
   minHeight: `${minHeight}px`,
   zIndex: -100,
-}));
-
-export const Card = styled((props: CardProps) => <MuiCard {...props} />)(
-  ({ theme }) =>
-    theme.unstable_sx({
-      background: '#f4f4f4',
-      maxWidth: theme.typography.pxToRem(410),
-      borderRadius: 5,
-      position: 'relative',
-      minHeight: theme.typography.pxToRem(445),
-      top: 50,
-      mx: 'auto',
-      [theme.breakpoints.down('md')]: {
-        maxWidth: theme.typography.pxToRem(310),
-        minHeight: theme.typography.pxToRem(345),
-      },
-      [theme.breakpoints.down('sm')]: {
-        maxWidth: theme.typography.pxToRem(280),
-        minHeight: theme.typography.pxToRem(300),
-      },
-    })
-);
-
-export const VKIcon = styled(VKSVG)(({ theme }) => ({
-  flexBasis: theme.typography.pxToRem(88),
-  flexShrink: 0,
-  alignSelf: 'center',
-
-  width: theme.typography.pxToRem(88),
-  height: theme.typography.pxToRem(50),
-  fill: theme.palette.primary.main,
-  [theme.breakpoints.down('md')]: {
-    width: theme.typography.pxToRem(58),
-    height: theme.typography.pxToRem(32),
-    flexBasis: theme.typography.pxToRem(58),
-  },
-  [theme.breakpoints.down('sm')]: {
-    width: theme.typography.pxToRem(45),
-    height: theme.typography.pxToRem(24),
-    flexBasis: theme.typography.pxToRem(45),
-  },
-}));
-
-export const OKIcon = styled(OKSVG)(({ theme }) => ({
-  flexBasis: theme.typography.pxToRem(88),
-  flexShrink: 0,
-  alignSelf: 'center',
-
-  width: theme.typography.pxToRem(44),
-  height: theme.typography.pxToRem(77),
-  fill: theme.palette.primary.main,
-  [theme.breakpoints.down('md')]: {
-    width: theme.typography.pxToRem(26),
-    height: theme.typography.pxToRem(47),
-    flexBasis: theme.typography.pxToRem(58),
-  },
-  [theme.breakpoints.down('sm')]: {
-    width: theme.typography.pxToRem(19),
-    height: theme.typography.pxToRem(35),
-    flexBasis: theme.typography.pxToRem(45),
-  },
 }));

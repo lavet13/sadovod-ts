@@ -82,8 +82,8 @@ export const SwiperPagination = styled(Box)(({ theme }) => ({
 
   [theme.breakpoints.down('lg')]: {
     '& .swiper-pagination-bullet': {
-      width: '12px',
-      height: '12px',
+      width: '14px',
+      height: '14px',
     },
   },
 }));

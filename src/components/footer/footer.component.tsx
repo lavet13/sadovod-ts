@@ -1,97 +1,103 @@
-import { Button, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 
 import {
   BucketIcon,
   CalcIcon,
   DiscountCardIcon,
   FooterBackground,
+  FooterButton,
   FooterContainer,
   GooglePlayIcon,
   OKIcon,
   TelIcon,
   VKIcon,
 } from './footer.styles';
-import Grid from '@mui/material/Unstable_Grid2';
 
 const Footer = () => {
   return (
     <FooterBackground>
       <FooterContainer>
-        <Grid container width='100%'>
+        <Grid container width='100%' columns={24}>
           <Grid md />
-          <Grid xs={12} md={5}>
+          <Grid xs={24} md={11}>
             <Stack alignItems='flex-start'>
-              <Button
+              <FooterButton
                 variant='footer-link'
                 color='white'
                 startIcon={<GooglePlayIcon />}
               >
                 Наше мобильное приложение
-              </Button>
-              <Button
+              </FooterButton>
+              <FooterButton
                 variant='footer-link'
                 color='white'
                 startIcon={<BucketIcon />}
               >
                 Доставка с рынков Ростова-на-Дону
-              </Button>
+              </FooterButton>
 
-              <Button
+              <FooterButton
                 variant='footer-link'
                 color='white'
                 startIcon={<CalcIcon />}
                 sx={{ marginTop: { xs: 0, md: 1.5 } }}
               >
                 Калькулятор доставки
-              </Button>
+              </FooterButton>
             </Stack>
           </Grid>
-          <Grid xs={12} sm={6} md={3}>
+          <Grid xs={24} sm={12} md={6}>
             <Stack
               alignItems='flex-start'
               direction={{ xs: 'column-reverse', md: 'column' }}
             >
-              <Button
+              <FooterButton
                 variant='footer-link'
                 color='white'
                 startIcon={<TelIcon />}
               >
                 +38(071)516-25-12
-              </Button>
-              <Button
+              </FooterButton>
+              <FooterButton
                 variant='footer-link'
                 color='white'
                 startIcon={<TelIcon />}
                 sx={{ marginTop: { xs: 6, md: 'initial' } }}
               >
                 +7(928)214-88-82
-              </Button>
-              <Button
+              </FooterButton>
+              <FooterButton
                 variant='footer-link'
                 color='white'
                 startIcon={<DiscountCardIcon />}
                 sx={{ marginTop: { xs: 0, md: 1.5 } }}
               >
                 Скидочные карты
-              </Button>
+              </FooterButton>
             </Stack>
           </Grid>
-          <Grid xs={12} sm={6} md={2} marginTop={{ xs: 'auto', md: 'initial' }}>
+          <Grid
+            xs={24}
+            sm={12}
+            md={6}
+            marginTop={{ xs: 'auto', md: 'initial' }}
+          >
             <Stack alignItems='flex-start'>
-              <Button
+              <FooterButton
                 variant='footer-link'
                 color='white'
                 startIcon={<VKIcon />}
               >
                 ВКонтаке
-              </Button>
-              <Button
+              </FooterButton>
+              <FooterButton
                 variant='footer-link'
                 color='white'
                 startIcon={<OKIcon />}
               >
                 Однокласники
-              </Button>
+              </FooterButton>
             </Stack>
           </Grid>
           <Grid md />

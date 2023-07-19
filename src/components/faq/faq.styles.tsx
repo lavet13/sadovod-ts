@@ -11,9 +11,14 @@ import {
   Typography,
 } from '@mui/material';
 
-export const FAQWrapper = styled('div')({
+export const FAQWrapper = styled('div')(({ theme }) => ({
   minHeight: '1600px',
-});
+
+  [theme.breakpoints.down('md')]: {
+    minHeight: '1300px',
+    paddingBottom: theme.typography.pxToRem(100),
+  },
+}));
 
 export const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} {...props} />
@@ -39,12 +44,17 @@ export const AccordionSummary = styled((props: AccordionSummaryProps) => (
     margin: 0,
   },
 
+  '& .MuiAccordionSummary-expandIconWrapper': {},
+
   '& .MuiSvgIcon-root': {
     [theme.breakpoints.down('md')]: {
       width: '20px',
       lineHeight: 1,
-      transform: `translateY(5px)`,
     },
+  },
+
+  [theme.breakpoints.down('md')]: {
+    alignItems: 'center',
   },
 }));
 
@@ -74,7 +84,11 @@ export const AccordionTitle = styled((props: TypographyProps) => (
 
     [theme.breakpoints.down('md')]: {
       fontSize: 'clamp(1.7rem, 2.3vw + 1.1rem, 2.2rem)',
+      alignSelf: 'center',
+      position: 'relative',
+      bottom: '3px',
     },
+
     [theme.breakpoints.down('sm')]: {
       fontSize: 'clamp(1rem, 1.9vw + 1rem, 1.5rem)',
     },
@@ -87,6 +101,7 @@ export const AccordionTitle = styled((props: TypographyProps) => (
 
     [theme.breakpoints.down('md')]: {
       fontSize: 'clamp(1rem, 1.4vw + 0.6rem, 1.3rem)',
+      alignSelf: 'center',
     },
 
     [theme.breakpoints.down('sm')]: {

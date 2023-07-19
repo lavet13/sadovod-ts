@@ -111,7 +111,11 @@ const questionsAndAnswers: QuestionsAndAnswers = {
 
 const options: HTMLReactParserOptions = {
   replace: domNode => {
-    if (domNode instanceof Element && domNode.attribs.href) {
+    if (
+      domNode instanceof Element &&
+      domNode.name === 'a' &&
+      domNode.attribs.href
+    ) {
       const { href } = attributesToProps(domNode.attribs);
       return <Link href={href}>{domToReact(domNode.children, options)}</Link>;
     }
