@@ -29,7 +29,7 @@ export const Accordion = styled((props: AccordionProps) => (
 
 export const AccordionSummary = styled((props: AccordionSummaryProps) => (
   <MuiAccordionSummary expandIcon={<ExpandMore color='primary' />} {...props} />
-))({
+))(({ theme }) => ({
   justifyContent: 'flex-start',
   alignItems: 'flex-end',
   margin: '12px 0',
@@ -39,13 +39,23 @@ export const AccordionSummary = styled((props: AccordionSummaryProps) => (
     margin: 0,
   },
 
-  '& .MuiAccordionSummary-expandIconWrapper': {},
-});
+  '& .MuiSvgIcon-root': {
+    [theme.breakpoints.down('md')]: {
+      width: '20px',
+      lineHeight: 1,
+      transform: `translateY(5px)`,
+    },
+  },
+}));
 
 export const AccordionDetails = styled((props: AccordionDetailsProps) => (
   <MuiAccordionDetails {...props} />
 ))(({ theme }) => ({
   maxWidth: theme.typography.pxToRem(800),
+
+  [theme.breakpoints.down('md')]: {
+    maxWidth: theme.typography.pxToRem(520),
+  },
 }));
 
 export const AccordionTitle = styled((props: TypographyProps) => (
@@ -63,7 +73,10 @@ export const AccordionTitle = styled((props: TypographyProps) => (
     marginRight: theme.typography.pxToRem(10),
 
     [theme.breakpoints.down('md')]: {
-      fontSize: 'clamp(0.8rem, 2.5vw + 0.8rem, 2rem)',
+      fontSize: 'clamp(1.7rem, 2.3vw + 1.1rem, 2.2rem)',
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 'clamp(1rem, 1.9vw + 1rem, 1.5rem)',
     },
   },
 
@@ -73,7 +86,11 @@ export const AccordionTitle = styled((props: TypographyProps) => (
     marginRight: theme.typography.pxToRem(10),
 
     [theme.breakpoints.down('md')]: {
-      fontSize: 'clamp(0.6rem, 1.7vw + 0.6rem, 1.4rem)',
+      fontSize: 'clamp(1rem, 1.4vw + 0.6rem, 1.3rem)',
+    },
+
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 'clamp(0.1rem, 3.4vw + 0.1rem, 1rem)',
     },
   },
 }));

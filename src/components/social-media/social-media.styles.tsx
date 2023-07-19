@@ -37,6 +37,10 @@ export const Card = styled((props: CardProps) => <MuiCard {...props} />)(
         maxWidth: theme.typography.pxToRem(310),
         minHeight: theme.typography.pxToRem(345),
       },
+      [theme.breakpoints.down('sm')]: {
+        maxWidth: theme.typography.pxToRem(280),
+        minHeight: theme.typography.pxToRem(300),
+      },
     })
 );
 
@@ -53,6 +57,11 @@ export const VKIcon = styled(VKSVG)(({ theme }) => ({
     height: theme.typography.pxToRem(32),
     flexBasis: theme.typography.pxToRem(58),
   },
+  [theme.breakpoints.down('sm')]: {
+    width: theme.typography.pxToRem(45),
+    height: theme.typography.pxToRem(24),
+    flexBasis: theme.typography.pxToRem(45),
+  },
 }));
 
 export const OKIcon = styled(OKSVG)(({ theme }) => ({
@@ -67,5 +76,10 @@ export const OKIcon = styled(OKSVG)(({ theme }) => ({
     width: theme.typography.pxToRem(26),
     height: theme.typography.pxToRem(47),
     flexBasis: theme.typography.pxToRem(58),
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: theme.typography.pxToRem(19),
+    height: theme.typography.pxToRem(35),
+    flexBasis: theme.typography.pxToRem(45),
   },
 }));

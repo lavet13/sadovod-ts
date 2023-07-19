@@ -46,38 +46,72 @@ export const FooterContainer = styled((props: ContainerProps) => (
 export const GooglePlayIcon = styled(GooglePlayIconSVG)(({ theme }) => ({
   width: theme.typography.pxToRem(23),
   height: theme.typography.pxToRem(25),
+  [theme.breakpoints.down('md')]: {
+    width: theme.typography.pxToRem(20),
+    height: theme.typography.pxToRem(20),
+  },
 }));
 
 export const BucketIcon = styled(BucketIconSVG)(({ theme }) => ({
   width: theme.typography.pxToRem(23),
   height: theme.typography.pxToRem(23),
+
+  [theme.breakpoints.down('md')]: {
+    width: theme.typography.pxToRem(20),
+    height: theme.typography.pxToRem(20),
+  },
 }));
 
 export const TelIcon = styled(TelIconSVG)(({ theme }) => ({
   width: theme.typography.pxToRem(24),
   height: theme.typography.pxToRem(24),
+
+  [theme.breakpoints.down('md')]: {
+    width: theme.typography.pxToRem(21),
+    height: theme.typography.pxToRem(21),
+  },
 }));
 
 export const VKIcon = styled(VKIconSVG)(({ theme }) => ({
   width: theme.typography.pxToRem(28),
   height: theme.typography.pxToRem(15),
   fill: theme.palette.common.white,
+
+  [theme.breakpoints.down('md')]: {
+    width: theme.typography.pxToRem(25),
+    height: theme.typography.pxToRem(13),
+  },
 }));
 
 export const OKIcon = styled(OKIconSVG)(({ theme }) => ({
   width: theme.typography.pxToRem(14),
   height: theme.typography.pxToRem(24),
   fill: theme.palette.common.white,
+
+  [theme.breakpoints.down('md')]: {
+    width: theme.typography.pxToRem(12),
+    height: theme.typography.pxToRem(21),
+  },
 }));
 
 export const CalcIcon = styled(CalcIconSVG)(({ theme }) => ({
   width: theme.typography.pxToRem(19),
   height: theme.typography.pxToRem(24),
   fill: theme.palette.common.white,
+
+  [theme.breakpoints.down('md')]: {
+    width: theme.typography.pxToRem(16),
+    height: theme.typography.pxToRem(21),
+  },
 }));
 
 export const DiscountCardIcon = styled(DiscountCardSVG)(({ theme }) => ({
   width: theme.typography.pxToRem(26),
   height: theme.typography.pxToRem(21),
   fill: theme.palette.common.white,
+
+  [theme.breakpoints.down('md')]: {
+    width: theme.typography.pxToRem(23),
+    height: theme.typography.pxToRem(18),
+  },
 }));

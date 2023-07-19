@@ -99,56 +99,103 @@ const InterestingGoods = () => {
             minHeight={'1700px'}
             alignContent={'space-evenly'}
           >
-            <GridContainer container columns={24}>
-              <Grid xs />
-              <Grid xs={8}>
-                <Box
-                  component='img'
-                  sx={{
-                    display: 'block',
-                    width: '100%',
-                    height: 'auto',
-                    objectFit: 'cover',
-                    borderRadius: 'md',
-                  }}
-                  src={ProductImage}
-                  alt={''}
-                />
-              </Grid>
-              <Grid xs />
-              <Grid xs={10}>
-                <Typography variant='productTitle' color='white' noWrap>
-                  Товар недели
-                </Typography>
-                <Typography variant='productSubtitle' color='white'>
-                  Цена:
-                </Typography>
-                <Typography
-                  variant='productSubtitle'
-                  color='white'
-                  sx={{ fontWeight: 400 }}
-                >
-                  {goods[1].price}
-                </Typography>
-                <Typography variant='productSubtitle' color='white'>
-                  Размеры:
-                </Typography>
-                <Typography
-                  variant='productSubtitle'
-                  color='white'
-                  sx={{ fontWeight: 400 }}
-                >
-                  {goods[1].sizes?.join(';')}
-                </Typography>
-                <Typography variant='productSubtitle' color='white'>
-                  Описание:
-                </Typography>
-                <Typography variant='productText' color='white'>
-                  {parse(goods[1].description)}
-                </Typography>
-              </Grid>
-              <Grid xs />
-            </GridContainer>
+            <Stack>
+              <GridContainer container columns={24}>
+                <Grid xs md />
+                <Grid xs={12} md={8}>
+                  <Box
+                    component='img'
+                    sx={{
+                      display: 'block',
+                      width: '100%',
+                      height: 'auto',
+                      objectFit: 'cover',
+                      borderRadius: 'md',
+                    }}
+                    src={ProductImage}
+                    alt={''}
+                  />
+                </Grid>
+                <Grid xs={1} sm={1} md />
+                <Grid xs={11} md={10}>
+                  <Stack
+                    spacing={{ xs: 1.5, md: 2 }}
+                    height={'100%'}
+                    justifyContent={'center'}
+                  >
+                    <Typography
+                      variant='productTitle'
+                      color='white'
+                      noWrap
+                      marginBottom={{ xs: 2, md: 'initial' }}
+                    >
+                      Товар недели
+                    </Typography>
+                    <Box>
+                      <Typography variant='productSubtitle' color='white'>
+                        Цена:
+                      </Typography>
+                      <Typography
+                        variant='productSubtitle'
+                        color='white'
+                        sx={{ fontWeight: 400 }}
+                      >
+                        {goods[1].price}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography variant='productSubtitle' color='white'>
+                        Размеры:
+                      </Typography>
+                      <Typography
+                        variant='productSubtitle'
+                        color='white'
+                        sx={{ fontWeight: 400 }}
+                      >
+                        {goods[1].sizes?.join(';')}
+                      </Typography>
+                    </Box>
+                    {!isPhone && (
+                      <Grid container columns={24}>
+                        <Grid md>
+                          <Typography variant='productSubtitle' color='white'>
+                            Описание:
+                          </Typography>
+                          <Typography variant='productText' color='white'>
+                            {parse(goods[1].description)}
+                          </Typography>
+                        </Grid>
+                        <Grid md={4} />
+                      </Grid>
+                    )}
+                  </Stack>
+                </Grid>
+                <Grid xs md />
+              </GridContainer>
+
+              {isPhone && (
+                <GridContainer container columns={24}>
+                  <Grid xs md />
+                  <Grid md={8}></Grid>
+                  <Grid xs md />
+                  <Grid
+                    xs={24}
+                    sm={18}
+                    md={10}
+                    marginTop={{ xs: 3, md: 'initial' }}
+                  >
+                    <Typography variant='productSubtitle' color='white'>
+                      Описание:
+                    </Typography>
+                    <Typography variant='productText' color='white'>
+                      {parse(goods[1].description)}
+                    </Typography>
+                  </Grid>
+                  <Grid sm={6} md />
+                </GridContainer>
+              )}
+            </Stack>
+
             <Stack direction={'row'} flexWrap={'wrap'} alignContent={'center'}>
               <Stack
                 direction={'row'}
@@ -201,6 +248,23 @@ const InterestingGoods = () => {
                 navigation={{
                   nextEl: '.swiper-button-next',
                   prevEl: '.swiper-button-prev',
+                }}
+                breakpoints={{
+                  [theme.breakpoints.values.lg]: {
+                    spaceBetween: 20,
+                  },
+                  [theme.breakpoints.values.md]: {
+                    spaceBetween: 15,
+                    slidesPerView: 4,
+                  },
+                  [theme.breakpoints.values.sm]: {
+                    spaceBetween: 7,
+                    slidesPerView: 3,
+                  },
+                  [theme.breakpoints.values.xs]: {
+                    spaceBetween: 6,
+                    slidesPerView: 2,
+                  },
                 }}
                 virtual
               >

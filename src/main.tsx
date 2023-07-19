@@ -224,7 +224,10 @@ const theme = createTheme({
       fontWeight: 700,
       lineHeight: 'normal',
       [breakpoints.down('md')]: {
-        fontSize: 'clamp(0.9rem, 2.3vw + 0.9rem, 2rem)',
+        fontSize: 'clamp(1.4rem, 4.7vw + 0.2rem, 2.4rem)',
+      },
+      [breakpoints.down('sm')]: {
+        fontSize: 'clamp(0.2rem, 4.5vw + 0.2rem, 1.4rem)',
       },
     },
     productSubtitle: {
@@ -232,7 +235,10 @@ const theme = createTheme({
       fontWeight: 600,
       fontFamily: 'Montserrat',
       [breakpoints.down('md')]: {
-        fontSize: 'clamp(0.8rem, 1.5vw + 0.8rem, 1.5rem)',
+        fontSize: 'clamp(1rem, 2.3vw + 0.4rem, 1.5rem)',
+      },
+      [breakpoints.down('sm')]: {
+        fontSize: 'clamp(0.7rem, 1.1vw + 0.7rem, 1rem)',
       },
     },
     productText: {
@@ -240,15 +246,19 @@ const theme = createTheme({
       fontWeight: 400,
       fontFamily: 'Montserrat',
       [breakpoints.down('md')]: {
-        fontSize: 'clamp(0.6rem, 1.2vw + 0.6rem, 1.2rem)',
+        fontSize: 'clamp(0.9rem, 1.4vw + 0.5rem, 1.2rem)',
       },
     },
 
     socialTitle: {
       fontSize: pxToRem(38),
       fontWeight: 700,
+
       [breakpoints.down('md')]: {
-        fontSize: 'clamp(0.9rem, 2.3vw + 0.9rem, 2rem)',
+        fontSize: 'clamp(1.4rem, 2.8vw + 0.7rem, 2rem)',
+      },
+      [breakpoints.down('sm')]: {
+        fontSize: 'clamp(1rem, 1.5vw + 1rem, 1.4rem)',
       },
     },
     socialSubtitle: {
@@ -268,8 +278,11 @@ const theme = createTheme({
       zIndex: -100,
 
       [breakpoints.down('md')]: {
-        fontSize: 'clamp(1.2rem, 12.1vw + 1.2rem, 7rem)',
+        fontSize: 'clamp(7.5rem, 7vw + 5.6rem, 9rem)',
         transform: `translate(${pxToRem(-7)}, ${pxToRem(25)})`,
+      },
+      [breakpoints.down('sm')]: {
+        fontSize: 'clamp(3rem, 16.9vw + 3rem, 7.5rem)',
       },
     },
 
@@ -279,7 +292,11 @@ const theme = createTheme({
       fontSize: pxToRem(48),
 
       [breakpoints.down('md')]: {
-        fontSize: 'clamp(0.8rem, 1.9vw + 0.8rem, 1.7rem)',
+        fontSize: 'clamp(1.5rem, 2.3vw + 0.9rem, 2rem)',
+      },
+
+      [breakpoints.down('sm')]: {
+        fontSize: 'clamp(0.1rem, 4.5vw + 0.1rem, 1.3rem)',
       },
     },
 
@@ -526,7 +543,7 @@ const theme = createTheme({
               },
 
               [breakpoints.down('md')]: {
-                fontSize: 'clamp(1rem, 0.4vw + 1rem, 1.2rem)',
+                fontSize: 'clamp(0.8rem, 1.6vw + 0.4rem, 1.15rem)',
               },
             }),
         },
@@ -568,7 +585,7 @@ const theme = createTheme({
                 backgroundColor: lighten(palette.secondary.dark, 0.05),
               },
               [breakpoints.down('md')]: {
-                fontSize: 'clamp(1rem, 0.4vw + 1rem, 1.2rem)',
+                fontSize: 'clamp(0.9rem, 1.4vw + 0.5rem, 1.2rem)',
               },
             }),
         },
@@ -608,7 +625,10 @@ const theme = createTheme({
               borderRadius: 'sm',
 
               [theme.breakpoints.down('md')]: {
-                fontSize: 'clamp(0.6rem, 0.6vw + 0.6rem, 0.9rem)',
+                fontSize: 'clamp(0.7rem, 0.9vw + 0.5rem, 0.9rem)',
+              },
+              [theme.breakpoints.down('sm')]: {
+                fontSize: 'clamp(0.6rem, 0.4vw + 0.6rem, 0.7rem)',
               },
             }),
         },
@@ -704,13 +724,13 @@ const theme = createTheme({
       styleOverrides: {
         ':root': {
           [breakpoints.up('md')]: {
-            fontSize: pxToRem(9),
-          },
-          [breakpoints.up('lg')]: {
             fontSize: pxToRem(10),
           },
-          [breakpoints.up('xl')]: {
+          [breakpoints.up('lg')]: {
             fontSize: pxToRem(11),
+          },
+          [breakpoints.up('xl')]: {
+            fontSize: pxToRem(12),
           },
           [breakpoints.up('3xl')]: {
             fontSize: pxToRem(13),

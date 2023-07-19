@@ -50,7 +50,11 @@ const SocialMedia = () => {
               <Stack>
                 <CardContent
                   sx={({ typography: { pxToRem } }) => ({
-                    padding: `${pxToRem(23)} ${pxToRem(30)}`,
+                    padding: {
+                      xs: `${pxToRem(20)} ${pxToRem(40)}`,
+                      sm: `${pxToRem(23)} ${pxToRem(30)}`,
+                      md: `${pxToRem(23)} ${pxToRem(30)}`,
+                    },
                   })}
                 >
                   <Typography variant='socialTitle' color='secondary'>
@@ -61,7 +65,11 @@ const SocialMedia = () => {
                   sx={({ typography: { pxToRem } }) => ({
                     flexWrap: 'wrap',
                     alignContent: 'flex-start',
-                    padding: pxToRem(30),
+                    padding: {
+                      xs: `${pxToRem(10)} ${pxToRem(40)}`,
+                      sm: pxToRem(30),
+                      md: pxToRem(30),
+                    },
                   })}
                   disableSpacing
                 >

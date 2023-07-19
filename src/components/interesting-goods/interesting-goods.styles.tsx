@@ -31,6 +31,11 @@ export const SwiperStyled = styled(Swiper)(({ theme }) => ({
 
   [theme.breakpoints.down('md')]: {
     height: theme.typography.pxToRem(200),
+    maxWidth: 'calc(100vw - 38px)',
+  },
+  [theme.breakpoints.down('sm')]: {
+    height: theme.typography.pxToRem(200),
+    maxWidth: 'calc(100vw - 38px)',
   },
 }));
 

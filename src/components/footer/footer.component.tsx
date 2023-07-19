@@ -46,7 +46,7 @@ const Footer = () => {
               </Button>
             </Stack>
           </Grid>
-          <Grid xs={6} md={3}>
+          <Grid xs={12} sm={6} md={3}>
             <Stack
               alignItems='flex-start'
               direction={{ xs: 'column-reverse', md: 'column' }}
@@ -76,7 +76,7 @@ const Footer = () => {
               </Button>
             </Stack>
           </Grid>
-          <Grid xs={6} md={2} marginTop={{ xs: 'auto', md: 'initial' }}>
+          <Grid xs={12} sm={6} md={2} marginTop={{ xs: 'auto', md: 'initial' }}>
             <Stack alignItems='flex-start'>
               <Button
                 variant='footer-link'

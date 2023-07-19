@@ -128,10 +128,10 @@ const FAQ = () => {
 
   return (
     <FAQWrapper>
-      <Container sx={{ paddingLeft: 10 }}>
+      <Container sx={{ paddingLeft: { xs: 2, md: 10 } }}>
         <Grid container columns={24}>
           <Grid md />
-          <Grid md={18}>
+          <Grid md={22}>
             <Stack>
               <Typography variant='FAQ'>FAQ</Typography>
               <Typography variant='FAQTitle' color='secondary' noWrap>
