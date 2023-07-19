@@ -22,23 +22,14 @@ const Footer = () => {
           <Grid md />
           <Grid xs={24} md={11}>
             <Stack alignItems='flex-start'>
-              <FooterButton
-                variant='footer-link'
-                color='white'
-                startIcon={<GooglePlayIcon />}
-              >
+              <FooterButton color='white' startIcon={<GooglePlayIcon />}>
                 Наше мобильное приложение
               </FooterButton>
-              <FooterButton
-                variant='footer-link'
-                color='white'
-                startIcon={<BucketIcon />}
-              >
+              <FooterButton color='white' startIcon={<BucketIcon />}>
                 Доставка с рынков Ростова-на-Дону
               </FooterButton>
 
               <FooterButton
-                variant='footer-link'
                 color='white'
                 startIcon={<CalcIcon />}
                 sx={{ marginTop: { xs: 0, md: 1.5 } }}
@@ -52,15 +43,10 @@ const Footer = () => {
               alignItems='flex-start'
               direction={{ xs: 'column-reverse', md: 'column' }}
             >
-              <FooterButton
-                variant='footer-link'
-                color='white'
-                startIcon={<TelIcon />}
-              >
+              <FooterButton color='white' startIcon={<TelIcon />}>
                 +38(071)516-25-12
               </FooterButton>
               <FooterButton
-                variant='footer-link'
                 color='white'
                 startIcon={<TelIcon />}
                 sx={{ marginTop: { xs: 6, md: 'initial' } }}
@@ -68,7 +54,6 @@ const Footer = () => {
                 +7(928)214-88-82
               </FooterButton>
               <FooterButton
-                variant='footer-link'
                 color='white'
                 startIcon={<DiscountCardIcon />}
                 sx={{ marginTop: { xs: 0, md: 1.5 } }}
@@ -84,19 +69,11 @@ const Footer = () => {
             marginTop={{ xs: 'auto', md: 'initial' }}
           >
             <Stack alignItems='flex-start'>
-              <FooterButton
-                variant='footer-link'
-                color='white'
-                startIcon={<VKIcon />}
-              >
+              <FooterButton color='white' startIcon={<VKIcon />}>
                 ВКонтаке
               </FooterButton>
-              <FooterButton
-                variant='footer-link'
-                color='white'
-                startIcon={<OKIcon />}
-              >
-                Однокласники
+              <FooterButton color='white' startIcon={<OKIcon />}>
+                Одноклассники
               </FooterButton>
             </Stack>
           </Grid>

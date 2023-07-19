@@ -51,7 +51,7 @@ export const FooterContainer = styled((props: ContainerProps) => (
 }));
 
 export const FooterButton = styled((props: ButtonProps) => (
-  <Button {...props} />
+  <Button variant='footer-link' {...props} />
 ))(({ theme }) => ({
   '& > .MuiButton-startIcon': {
     flexBasis: '25px',
