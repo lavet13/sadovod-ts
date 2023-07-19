@@ -1,25 +1,17 @@
+import { Button, CardProps, Stack, Typography } from '@mui/material';
 import {
-  Button,
+  OKIcon,
+  VKIcon,
+  Card,
+  CardActions,
   CardContent,
-  CardProps,
-  Stack,
-  Typography,
-} from '@mui/material';
-import { OKIcon, VKIcon, Card, CardActions } from './social-media-card.styles';
+} from './social-media-card.styles';
 
 const SocialMediaCard = (props: CardProps) => {
   return (
     <Card elevation={2} {...props}>
       <Stack>
-        <CardContent
-          sx={({ typography: { pxToRem } }) => ({
-            padding: {
-              xs: `${pxToRem(20)} ${pxToRem(40)}`,
-              sm: `${pxToRem(23)} ${pxToRem(30)}`,
-              md: `${pxToRem(23)} ${pxToRem(30)}`,
-            },
-          })}
-        >
+        <CardContent>
           <Typography variant='socialTitle' color='secondary'>
             Мы в соц. сетях
           </Typography>

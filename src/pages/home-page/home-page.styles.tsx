@@ -18,6 +18,6 @@ export const HomeBackground = styled('div')(({ theme }) => ({
   minHeight: '3700px',
 
   [theme.breakpoints.down('md')]: {
-    minHeight: '2500px',
+    minHeight: '2000px',
   },
 }));

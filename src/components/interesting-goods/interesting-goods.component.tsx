@@ -3,7 +3,6 @@ import parse from 'html-react-parser';
 import {
   Box,
   Button,
-  Container,
   Stack,
   Typography,
   useMediaQuery,
@@ -21,6 +20,8 @@ import {
   SwiperPagination,
   SwiperStyled,
   WaveClipPathBackground,
+  Container,
+  InterestingGoodsWrapper,
 } from './interesting-goods.styles';
 
 import ProductImage from '../../assets/images/product.png';
@@ -30,6 +31,7 @@ import ProductImage4 from '../../assets/images/product4.png';
 
 import { ReactComponent as NextArrowSVG } from '../../assets/icons/next-arrow.svg';
 import { ReactComponent as PrevArrowSVG } from '../../assets/icons/prev-arrow.svg';
+
 import SocialMediaCard from '../social-media-card/social-media-card.component';
 
 const goods = {
@@ -95,13 +97,8 @@ const InterestingGoods = () => {
   return (
     <>
       <WaveClipPathBackground>
-        <Container sx={{ height: `1700px` }}>
-          <Stack
-            direction='row'
-            flexWrap={'wrap'}
-            minHeight={'1700px'}
-            alignContent={'space-evenly'}
-          >
+        <Container>
+          <InterestingGoodsWrapper>
             <Stack>
               <GridContainer container columns={24}>
                 <Grid xs md />
@@ -305,7 +302,7 @@ const InterestingGoods = () => {
                 </Button>
               </Stack>
             </Stack>
-          </Stack>
+          </InterestingGoodsWrapper>
         </Container>
       </WaveClipPathBackground>
       {isPhone && (
