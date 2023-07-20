@@ -252,7 +252,7 @@ const InterestingGoods = () => {
                   el: '.swiper-pagination2',
                   type: 'bullets',
                   dynamicBullets: true,
-                  dynamicMainBullets: 2,
+                  dynamicMainBullets: 3,
                   clickable: true,
                 }}
                 autoplay={{

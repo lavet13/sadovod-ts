@@ -260,9 +260,10 @@ const theme = createTheme({
       fontSize: pxToRem(20),
       fontWeight: 400,
       color: palette.common.white,
+      textAlign: 'center',
 
       [breakpoints.down('md')]: {
-        fontSize: 'clamp(1rem, 2.3vw + 0.4rem, 1.5rem)',
+        fontSize: 'clamp(0.8rem, 2vw + 0.2rem, 1.2rem)',
       },
 
       [breakpoints.down('sm')]: {
