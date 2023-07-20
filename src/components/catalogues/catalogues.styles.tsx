@@ -44,7 +44,8 @@ export const SwiperContent = styled((props: StackProps) => (
     pl: 5,
     justifyContent: 'center',
     height: '100%',
-    maxWidth: '27%',
+    maxWidth: '30%',
+    wordBreak: 'break-word',
   })
 );
 

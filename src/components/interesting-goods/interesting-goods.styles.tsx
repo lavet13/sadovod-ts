@@ -7,12 +7,17 @@ import {
   styled,
   StackProps,
   Stack as MuiStack,
+  CardContent,
+  CardContentProps,
 } from '@mui/material';
 
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { Swiper } from 'swiper/react';
-import { GenericButtonBaseComponent } from '../button/button.component';
+import {
+  GenericButtonBaseComponent,
+  GenericCardActionArea,
+} from '../button/button.component';
 import { isMobile } from 'react-device-detect';
 
 const minHeight = 1700;
@@ -135,7 +140,7 @@ export const SwiperButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-export const ImageButton = styled(GenericButtonBaseComponent)(({ theme }) => ({
+export const ImageButton = styled(GenericCardActionArea)(({ theme }) => ({
   width: '100%',
   height: '100%',
 
@@ -147,19 +152,21 @@ export const ImageButton = styled(GenericButtonBaseComponent)(({ theme }) => ({
     ? { backgroundColor: alpha(theme.palette.secondary.main, 0.3) }
     : {}),
 
-  '&:hover .MuiImageContent-root': {
+  '&:hover .MuiCardContent-root': {
     opacity: 1,
   },
 
   transition: theme.transitions.create('background-color'),
 }));
 
-export const ImageContent = styled('span')(({ theme }) => ({
+export const ImageContent = styled(CardContent)(({ theme }) => ({
   position: 'absolute',
   left: 0,
   right: 0,
   top: 0,
   bottom: 0,
+
+  padding: 0,
 
   display: 'flex',
   flexDirection: 'column',

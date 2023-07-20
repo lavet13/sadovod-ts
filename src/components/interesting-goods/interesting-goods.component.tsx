@@ -289,23 +289,7 @@ const InterestingGoods = () => {
               >
                 {Object.values(goods).map(good => (
                   <SwiperSlide key={good.id} virtualIndex={good.id}>
-                    <ImageButton component={Link}>
-                      <ImageContent className='MuiImageContent-root'>
-                        <Stack alignItems='center' spacing={2}>
-                          <Typography variant='productImageContent'>
-                            Название товара
-                          </Typography>
-                          <Typography
-                            variant='productImageContent'
-                            sx={{ fontWeight: 600 }}
-                          >
-                            Цена ₽
-                          </Typography>
-                        </Stack>
-                        <Typography variant='productImageContent'>
-                          Категория товара
-                        </Typography>
-                      </ImageContent>
+                    <ImageButton component={Link} to={'/'}>
                       <Box
                         loading='lazy'
                         component='img'
@@ -322,6 +306,23 @@ const InterestingGoods = () => {
                         alt={''}
                       />
                       <div className='swiper-lazy-preloader' />
+
+                      <ImageContent>
+                        <Stack alignItems='center' spacing={2}>
+                          <Typography variant='productImageContent'>
+                            Название товара
+                          </Typography>
+                          <Typography
+                            variant='productImageContent'
+                            sx={{ fontWeight: 600 }}
+                          >
+                            Цена ₽
+                          </Typography>
+                        </Stack>
+                        <Typography variant='productImageContent'>
+                          Категория товара
+                        </Typography>
+                      </ImageContent>
                     </ImageButton>
                   </SwiperSlide>
                 ))}

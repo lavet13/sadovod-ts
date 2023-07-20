@@ -125,7 +125,7 @@ const defaultTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
-      sm: 450,
+      sm: 500,
       md: 769,
       lg: 1024,
       xl: 1280,
@@ -738,6 +738,9 @@ const theme = createTheme({
           [breakpoints.up('lg')]: {
             maxWidth: `1280px`,
           },
+          // [breakpoints.up('2xl')]: {
+          //   maxWidth: `1380px`,
+          // },
         },
       },
     },
@@ -752,9 +755,6 @@ const theme = createTheme({
           },
           [breakpoints.up('3xl')]: {
             fontSize: pxToRem(13),
-          },
-          [breakpoints.up('5xl')]: {
-            fontSize: pxToRem(14),
           },
         },
         html: [
