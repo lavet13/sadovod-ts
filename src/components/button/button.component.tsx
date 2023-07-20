@@ -1,5 +1,7 @@
 import {
   Button,
+  ButtonBase,
+  ButtonBaseProps,
   ButtonProps,
   ListItemButton,
   ListItemButtonProps,
@@ -11,6 +13,12 @@ const GenericButtonComponent = <C extends React.ElementType>(
   props: ButtonProps<C, { component?: C }>
 ) => {
   return <Button {...props}>{props.children}</Button>;
+};
+
+export const GenericButtonBaseComponent = <C extends React.ElementType>(
+  props: ButtonBaseProps<C, { component?: C }>
+) => {
+  return <ButtonBase {...props}>{props.children}</ButtonBase>;
 };
 
 export const GenericListItemButton = <C extends React.ElementType>(

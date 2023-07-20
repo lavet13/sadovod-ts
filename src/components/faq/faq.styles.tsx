@@ -15,8 +15,15 @@ export const FAQWrapper = styled('div')(({ theme }) => ({
   minHeight: '1600px',
 
   [theme.breakpoints.down('md')]: {
-    minHeight: '1300px',
+    minHeight: '1250px',
     paddingBottom: theme.typography.pxToRem(100),
+    paddingTop: theme.typography.pxToRem(80),
+  },
+
+  [theme.breakpoints.down('sm')]: {
+    minHeight: '1150px',
+    paddingBottom: theme.typography.pxToRem(70),
+    paddingTop: theme.typography.pxToRem(40),
   },
 }));
 

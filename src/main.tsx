@@ -125,7 +125,7 @@ const defaultTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
-      sm: 425,
+      sm: 450,
       md: 769,
       lg: 1024,
       xl: 1280,
@@ -230,23 +230,43 @@ const theme = createTheme({
         fontSize: 'clamp(0.2rem, 4.5vw + 0.2rem, 1.4rem)',
       },
     },
+
     productSubtitle: {
       fontSize: pxToRem(28),
       fontWeight: 600,
       fontFamily: 'Montserrat',
+
       [breakpoints.down('md')]: {
         fontSize: 'clamp(1rem, 2.3vw + 0.4rem, 1.5rem)',
       },
+
       [breakpoints.down('sm')]: {
         fontSize: 'clamp(0.7rem, 1.1vw + 0.7rem, 1rem)',
       },
     },
+
     productText: {
       fontSize: pxToRem(21),
       fontWeight: 400,
       fontFamily: 'Montserrat',
+
       [breakpoints.down('md')]: {
         fontSize: 'clamp(0.9rem, 1.4vw + 0.5rem, 1.2rem)',
+      },
+    },
+
+    productImageContent: {
+      fontFamily: 'Montserrat',
+      fontSize: pxToRem(20),
+      fontWeight: 400,
+      color: palette.common.white,
+
+      [breakpoints.down('md')]: {
+        fontSize: 'clamp(1rem, 2.3vw + 0.4rem, 1.5rem)',
+      },
+
+      [breakpoints.down('sm')]: {
+        fontSize: 'clamp(0.7rem, 1.1vw + 0.7rem, 1rem)',
       },
     },
 
@@ -715,7 +735,7 @@ const theme = createTheme({
             maxWidth: '100%',
           },
           [breakpoints.up('lg')]: {
-            maxWidth: `${breakpoints.values.xl}px`,
+            maxWidth: `1280px`,
           },
         },
       },
@@ -731,6 +751,9 @@ const theme = createTheme({
           },
           [breakpoints.up('3xl')]: {
             fontSize: pxToRem(13),
+          },
+          [breakpoints.up('5xl')]: {
+            fontSize: pxToRem(14),
           },
         },
         html: [

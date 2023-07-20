@@ -59,6 +59,7 @@ declare module '@mui/material/styles' {
     socialSubtitle: React.CSSProperties;
     FAQ: React.CSSProperties;
     FAQTitle: React.CSSProperties;
+    productImageContent: React.CSSProperties;
   }
 
   // allow configuration using `createTheme`
@@ -74,6 +75,7 @@ declare module '@mui/material/styles' {
     socialSubtitle?: React.CSSProperties;
     FAQ?: React.CSSProperties;
     FAQTitle?: React.CSSProperties;
+    productImageContent?: React.CSSProperties;
   }
 }
 
@@ -91,6 +93,7 @@ declare module '@mui/material/Typography' {
     socialSubtitle: true;
     FAQ: true;
     FAQTitle: true;
+    productImageContent: true;
   }
 }
 

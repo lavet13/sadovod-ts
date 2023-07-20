@@ -7,9 +7,15 @@ import {
   styled,
   StackProps,
   Stack as MuiStack,
+  ButtonBaseProps,
+  BoxProps,
+  keyframes,
 } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Swiper } from 'swiper/react';
+import GenericButtonComponent, {
+  GenericButtonBaseComponent,
+} from '../button/button.component';
 
 export const minHeight = 1700;
 
@@ -34,7 +40,7 @@ export const Container = styled((props: ContainerProps) => (
   minHeight: `${minHeight}px`,
 
   [theme.breakpoints.down('md')]: {
-    minHeight: `${minHeight - 200}px`,
+    minHeight: `${minHeight - 120}px`,
   },
 
   [theme.breakpoints.down('sm')]: {
@@ -53,7 +59,7 @@ export const InterestingGoodsWrapper = styled((props: StackProps) => (
   minHeight: `${minHeight}px`,
 
   [theme.breakpoints.down('md')]: {
-    minHeight: `${minHeight - 300}px`,
+    minHeight: `${minHeight - 220}px`,
   },
 
   [theme.breakpoints.down('sm')]: {
@@ -77,11 +83,11 @@ export const SwiperStyled = styled(Swiper)(({ theme }) => ({
 
   [theme.breakpoints.down('md')]: {
     height: theme.typography.pxToRem(200),
-    maxWidth: 'calc(100vw - 38px)',
+    maxWidth: 'calc(100vw - 64px)',
   },
   [theme.breakpoints.down('sm')]: {
     height: theme.typography.pxToRem(200),
-    maxWidth: 'calc(100vw - 38px)',
+    maxWidth: 'calc(100vw - 58px)',
   },
 }));
 
@@ -89,18 +95,16 @@ export const SwiperPagination = styled(Box)(({ theme }) => ({
   '--swiper-pagination-color': theme.palette.secondary.main,
   '--swiper-pagination-bullet-inactive-color': 'transparent',
   '--swiper-pagination-bullet-inactive-opacity': '1',
-  '--swiper-pagination-bullet-horizontal-gap': '6px',
-  '--swiper-pagination-bullet-width': '1.5rem',
-  '--swiper-pagination-bullet-height': '1.5rem',
-
-  width: '100%!important',
+  '--swiper-pagination-bullet-horizontal-gap': '4px',
 
   display: 'flex',
   alignItems: 'center',
+  width: '200%!important',
 
-  left: 0,
-  transform: 'translate(0)!important',
-  bottom: 'initial!important',
+  bottom: '50%!important',
+  left: '120%!important',
+  transform: `translate(-65%, 50%)!important`,
+  zIndex: -1,
 
   '& .swiper-pagination-bullets-dynamic': {
     overflow: 'hidden',
@@ -108,6 +112,8 @@ export const SwiperPagination = styled(Box)(({ theme }) => ({
 
   '& .swiper-pagination-bullet': {
     border: `1px solid ${theme.palette.common.white}`,
+    width: '16px!important',
+    height: '16px!important',
   },
 
   '& .swiper-pagination-bullet-active': {
@@ -129,4 +135,35 @@ export const SwiperButton = styled(IconButton)(({ theme }) => ({
     width: '16px',
     height: '15px',
   },
+}));
+
+export const ImageButton = styled(GenericButtonBaseComponent)(({ theme }) => ({
+  width: '100%',
+  height: '100%',
+
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.secondary.main, 0.3),
+  },
+
+  '&:hover .MuiImageContent-root': {
+    opacity: 1,
+  },
+
+  transition: theme.transitions.create('background-color'),
+}));
+
+export const ImageContent = styled('span')(({ theme }) => ({
+  position: 'absolute',
+  left: 0,
+  right: 0,
+  top: 0,
+  bottom: 0,
+
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'space-evenly',
+
+  opacity: 0,
+  transition: theme.transitions.create('opacity'),
 }));

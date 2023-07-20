@@ -22,6 +22,8 @@ import {
   WaveClipPathBackground,
   Container,
   InterestingGoodsWrapper,
+  ImageButton,
+  ImageContent,
 } from './interesting-goods.styles';
 
 import ProductImage from '../../assets/images/product.png';
@@ -33,6 +35,7 @@ import { ReactComponent as NextArrowSVG } from '../../assets/icons/next-arrow.sv
 import { ReactComponent as PrevArrowSVG } from '../../assets/icons/prev-arrow.svg';
 
 import SocialMediaCard from '../social-media-card/social-media-card.component';
+import { Link } from 'react-router-dom';
 
 const goods = {
   1: {
@@ -102,7 +105,7 @@ const InterestingGoods = () => {
             <Stack>
               <GridContainer container columns={24}>
                 <Grid xs md />
-                <Grid xs={12} md={11} lg={8}>
+                <Grid xs={12} md={10} lg={8}>
                   <Box
                     component='img'
                     sx={{
@@ -116,8 +119,8 @@ const InterestingGoods = () => {
                     alt={''}
                   />
                 </Grid>
-                <Grid xs={1} sm={1} md />
-                <Grid xs={11} md={11}>
+                <Grid xs={1} sm={1} md={1} lg={2} />
+                <Grid xs={11} md={13} lg={12}>
                   <Stack
                     spacing={{ xs: 1.5, md: 2 }}
                     height={'100%'}
@@ -212,22 +215,34 @@ const InterestingGoods = () => {
                   Интересные товары
                 </Typography>
 
-                <Stack direction='row' display={{ xs: 'none', md: 'flex' }}>
+                <Stack
+                  direction='row'
+                  display={{ xs: 'none', md: 'flex' }}
+                  justifyContent={'flex-end'}
+                >
                   <SwiperButton color='white' className='swiper-button-prev'>
                     <PrevArrowSVG />
                   </SwiperButton>
-                  <SwiperPagination
-                    sx={{ position: 'initial!important' }}
-                    className='swiper-pagination2'
-                  />
+                  <Box
+                    position='relative'
+                    zIndex={1}
+                    width='150px'
+                    overflow={'hidden'}
+                  >
+                    <SwiperPagination
+                      sx={{ position: 'absolute!important' }}
+                      className='swiper-pagination2'
+                    />
+                  </Box>
                   <SwiperButton color='white' className='swiper-button-next'>
                     <NextArrowSVG />
                   </SwiperButton>
                 </Stack>
               </Stack>
               <SwiperStyled
-                grabCursor
-                speed={400}
+                loop
+                loopPreventsSliding={false}
+                speed={300}
                 slidesPerView={4}
                 spaceBetween={30}
                 threshold={1}
@@ -270,24 +285,44 @@ const InterestingGoods = () => {
                     slidesPerView: 2,
                   },
                 }}
-                virtual
+                // virtual
               >
                 {Object.values(goods).map(good => (
                   <SwiperSlide key={good.id} virtualIndex={good.id}>
-                    <Box
-                      loading='lazy'
-                      component='img'
-                      sx={theme => ({
-                        display: 'block',
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        borderRadius: theme.shape.sm,
-                      })}
-                      src={good.imgUrl}
-                      alt={''}
-                    />
-                    <div className='swiper-lazy-preloader' />
+                    <ImageButton component={Link}>
+                      <ImageContent className='MuiImageContent-root'>
+                        <Stack alignItems='center' spacing={2}>
+                          <Typography variant='productImageContent'>
+                            Название товара
+                          </Typography>
+                          <Typography
+                            variant='productImageContent'
+                            sx={{ fontWeight: 600 }}
+                          >
+                            Цена ₽
+                          </Typography>
+                        </Stack>
+                        <Typography variant='productImageContent'>
+                          Категория товара
+                        </Typography>
+                      </ImageContent>
+                      <Box
+                        loading='lazy'
+                        component='img'
+                        sx={theme => ({
+                          position: 'relative',
+                          zIndex: -10,
+                          display: 'block',
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          borderRadius: theme.shape.sm,
+                        })}
+                        src={good.imgUrl}
+                        alt={''}
+                      />
+                      <div className='swiper-lazy-preloader' />
+                    </ImageButton>
                   </SwiperSlide>
                 ))}
               </SwiperStyled>
