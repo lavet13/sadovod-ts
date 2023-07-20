@@ -7,17 +7,15 @@ import {
   styled,
   StackProps,
   Stack as MuiStack,
-  ButtonBaseProps,
-  BoxProps,
-  keyframes,
 } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
-import { Swiper } from 'swiper/react';
-import GenericButtonComponent, {
-  GenericButtonBaseComponent,
-} from '../button/button.component';
 
-export const minHeight = 1700;
+import Grid from '@mui/material/Unstable_Grid2';
+
+import { Swiper } from 'swiper/react';
+import { GenericButtonBaseComponent } from '../button/button.component';
+import { isMobile } from 'react-device-detect';
+
+const minHeight = 1700;
 
 export const WaveClipPathBackground = styled(Box)(({ theme }) => ({
   backgroundColor: alpha(theme.palette.primary.main, 0.85),
@@ -145,6 +143,10 @@ export const ImageButton = styled(GenericButtonBaseComponent)(({ theme }) => ({
     backgroundColor: alpha(theme.palette.secondary.main, 0.3),
   },
 
+  ...(isMobile
+    ? { backgroundColor: alpha(theme.palette.secondary.main, 0.3) }
+    : {}),
+
   '&:hover .MuiImageContent-root': {
     opacity: 1,
   },
@@ -164,6 +166,7 @@ export const ImageContent = styled('span')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'space-evenly',
 
-  opacity: 0,
+  ...(isMobile ? { opacity: 1 } : { opacity: 0 }),
+
   transition: theme.transitions.create('opacity'),
 }));
