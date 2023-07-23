@@ -3,7 +3,7 @@ import { useAppSelector } from '../../app/hooks';
 import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import GenericButtonComponent from '../../components/button/button.component';
-import { selectGoodById } from '../../features/goods/goodsSlice';
+import { selectGoodById } from './goods-slice';
 
 type MyAdminGoodItem = {
   id: string;

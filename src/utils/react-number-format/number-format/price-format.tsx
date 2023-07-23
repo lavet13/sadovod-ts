@@ -22,6 +22,7 @@ const PriceFormat = React.forwardRef<NumericFormatProps, Props>(
         valueIsNumericString
         allowNegative={false}
         decimalScale={DECIMAL_LIMIT}
+        suffix='₽'
         {...otherProps}
       />
     );

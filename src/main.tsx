@@ -299,6 +299,13 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Montserrat',
+        },
+      },
+    },
     MuiIconButton: {
       variants: [
         {

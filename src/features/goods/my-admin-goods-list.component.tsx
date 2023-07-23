@@ -7,7 +7,7 @@ import {
   selectGoodIds,
   selectGoodsError,
   selectGoodsStatus,
-} from '../../features/goods/goodsSlice';
+} from './goods-slice';
 import { createError } from '../../utils/error/error.utils';
 
 import MyAdminGoodItem from './my-admin-goods-item.component';

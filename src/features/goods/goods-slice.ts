@@ -46,7 +46,12 @@ export const fetchGoods = createAsyncThunk<
 >('goods/fetchGoods', async (_, thunkAPI) => {
   try {
     const response = await axios.get<Good[]>(
-      `${import.meta.env.VITE_JSON_SERVER_URL}/goods`
+      `${import.meta.env.VITE_JSON_SERVER_URL}/goods`,
+      {
+        headers: {
+          Accept: 'application/json',
+        },
+      }
     );
 
     return response.data;
@@ -60,20 +65,85 @@ export const fetchGoods = createAsyncThunk<
   }
 });
 
+export const addNewGood = createAsyncThunk<
+  Good,
+  Good,
+  { rejectValue: ErrorResponse }
+>('goods/addNewGood', async (good, thunkAPI) => {
+  try {
+    const response = await axios.post<Good>(
+      `${import.meta.env.VITE_JSON_SERVER_URL}/goods`,
+      good,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    );
+
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosError;
+
+    const responseData: ErrorResponse = {
+      statusCode: error.code,
+      message: error.message,
+    };
+
+    return thunkAPI.rejectWithValue(responseData);
+  }
+});
+
+export const editGood = createAsyncThunk<
+  Good,
+  Good,
+  { rejectValue: ErrorResponse }
+>('goods/editGood', async (good, thunkAPI) => {
+  try {
+    const response = await axios.put<Good>(
+      `${import.meta.env.VITE_JSON_SERVER_URL}/goods/${good.id}`,
+      good,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    );
+
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosError;
+
+    const responseData: ErrorResponse = {
+      statusCode: error.code,
+      message: error.message,
+    };
+
+    return thunkAPI.rejectWithValue(responseData);
+  }
+});
+
 const goodsSlice = createSlice({
   name: 'goods',
   initialState,
   reducers: {
     // goodDeleted: goodsAdapter.removeOne,
     // goodsUpdated: goodsAdapter.updateOne,
-    // goodsAdded: {
-    //   reducer(state, action: PayloadAction<Good>) {
-    //     goodsAdapter.addOne(state, action.payload);
-    //   },
-    //   prepare(price: number, sizes: number[], description: string) {
-    //     return { payload: { id: nanoid(), price, sizes, description } };
-    //   },
-    // },
+    goodsAdded: {
+      reducer(state, action: PayloadAction<Good>) {
+        goodsAdapter.addOne(state, action.payload);
+      },
+      prepare(
+        price: string,
+        sizes: number[],
+        description: string,
+        photo: string
+      ) {
+        return { payload: { id: nanoid(), price, sizes, description, photo } };
+      },
+    },
     // goodsFailed(state, action: PayloadAction<Error>) {
     //   state.error = action.payload;
     // },

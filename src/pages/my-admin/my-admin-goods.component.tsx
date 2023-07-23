@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import MyAdminGoodsList from './my-admin-goods-list.component';
-import MyAdminEditGoodItem from './my-admin-goods-edit-item.component';
+import MyAdminGoodsList from '../../features/goods/my-admin-goods-list.component';
+import MyAdminEditGoodItem from '../../features/goods/my-admin-goods-edit-item.component';
 
 const MyAdminGoods = () => {
   return (

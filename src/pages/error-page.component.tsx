@@ -4,7 +4,7 @@ import { useRouteError } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useCallback } from 'react';
 import { useAppDispatch } from '../app/hooks';
-import { goodsErrorsReset } from '../features/goods/goodsSlice';
+import { goodsErrorsReset } from '../features/goods/goods-slice';
 
 const ErrorPage = () => {
   const dispatch = useAppDispatch();
