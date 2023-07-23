@@ -5,7 +5,7 @@ import { reduxBatch } from '@manaflair/redux-batch';
 
 export const store = configureStore({
   reducer: rootReducer,
-  enhancers: enhancers => [...enhancers, reduxBatch],
+  enhancers: [reduxBatch],
 
   middleware: getDefaultMiddleware => {
     const middleware = getDefaultMiddleware();

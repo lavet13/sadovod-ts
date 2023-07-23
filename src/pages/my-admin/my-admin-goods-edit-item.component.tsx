@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
@@ -17,6 +17,7 @@ import { Save } from '@mui/icons-material';
 import PriceFormat from '../../utils/react-number-format/number-format/price-format';
 import { objectKeys } from '../../utils/object-keys/object-keys';
 import { createError } from '../../utils/error/error.utils';
+import { NumericFormatProps } from 'react-number-format';
 
 type EditGoodItemParams = {
   goodId: string;

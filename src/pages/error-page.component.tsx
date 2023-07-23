@@ -13,7 +13,7 @@ const ErrorPage = () => {
   console.log({ error });
 
   const handleNavigateBackTo = useCallback(() => {
-    dispatch(goodsErrorsReset());
+    dispatch([goodsErrorsReset()]); // batching actions
 
     navigate(-1);
   }, [navigate]);
