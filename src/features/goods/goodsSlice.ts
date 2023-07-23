@@ -8,17 +8,14 @@ import {
 } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import axios, { AxiosError } from 'axios';
+import { ErrorResponse } from '../../utils/error/error.utils';
 
 export type Good = {
   id: string;
-  price: number;
+  price: string;
   sizes: number[];
   description: string;
-};
-
-export type ErrorResponse = {
-  statusCode?: string;
-  message: string;
+  photo: string;
 };
 
 export type GoodsState = {
@@ -27,8 +24,14 @@ export type GoodsState = {
 };
 
 const additionalState: GoodsState = {
-  status: 'idle',
+  status: 'loading',
   error: null,
+};
+
+export const ifAsyncError = (
+  error: ErrorResponse | null
+): error is ErrorResponse => {
+  return error !== null;
 };
 
 const goodsAdapter = createEntityAdapter<Good>();
@@ -45,6 +48,7 @@ export const fetchGoods = createAsyncThunk<
     const response = await axios.get<Good[]>(
       `${import.meta.env.VITE_JSON_SERVER_URL}/goods`
     );
+
     return response.data;
   } catch (err) {
     const error = err as AxiosError;
@@ -74,6 +78,9 @@ const goodsSlice = createSlice({
     // goodsFailed(state, action: PayloadAction<Error>) {
     //   state.error = action.payload;
     // },
+    goodsErrorsReset(state) {
+      state.error = null;
+    },
   },
   extraReducers: builder => {
     builder
@@ -95,11 +102,11 @@ const goodsSlice = createSlice({
 });
 
 export default goodsSlice.reducer;
+export const { goodsErrorsReset } = goodsSlice.actions;
 
 // pre-built-in selectors
-export const { selectAll: selectGoods } = goodsAdapter.getSelectors(
-  (state: RootState) => state.goods
-);
+export const { selectAll: selectGoods, selectById: selectGoodById } =
+  goodsAdapter.getSelectors((state: RootState) => state.goods);
 
 // selectors
 export const selectGoodsReducer = (state: RootState) => state.goods;
@@ -124,13 +131,13 @@ export const selectGoodIds = createSelector([selectGoods], goods =>
 );
 
 // selector factory
-export const makeSelectGoodById = () => {
-  const selectGoodById = createSelector(
-    [selectGoodsEntities, (_, goodId: string) => goodId],
-    (entities, goodId) => entities[goodId]
-  );
+// export const makeSelectGoodById = () => {
+//   const selectGoodById = createSelector(
+//     [selectGoodsEntities, (_, goodId: string) => goodId],
+//     (entities, goodId) => entities[goodId]
+//   );
 
-  return selectGoodById;
-};
+//   return selectGoodById;
+// };
 
 // const selectTodoById = (state, todoId) => state.todos[todoId]

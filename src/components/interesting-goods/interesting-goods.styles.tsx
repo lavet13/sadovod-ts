@@ -8,16 +8,12 @@ import {
   StackProps,
   Stack as MuiStack,
   CardContent,
-  CardContentProps,
 } from '@mui/material';
 
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { Swiper } from 'swiper/react';
-import {
-  GenericButtonBaseComponent,
-  GenericCardActionArea,
-} from '../button/button.component';
+import { GenericCardActionArea } from '../button/button.component';
 import { isMobile } from 'react-device-detect';
 
 const minHeight = 1700;
@@ -70,9 +66,9 @@ export const InterestingGoodsWrapper = styled((props: StackProps) => (
   },
 }));
 
-export const GridContainer = styled(Grid)(({ theme }) => ({
+export const GridContainer = styled(Grid)({
   flexBasis: '100%',
-}));
+});
 
 export const SwiperStyled = styled(Swiper)(({ theme }) => ({
   maxWidth: '1220px',
@@ -131,14 +127,14 @@ export const SwiperPagination = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const SwiperButton = styled(IconButton)(({ theme }) => ({
+export const SwiperButton = styled(IconButton)({
   alignSelf: 'center',
 
   '& svg': {
     width: '16px',
     height: '15px',
   },
-}));
+});
 
 export const ImageButton = styled(GenericCardActionArea)(({ theme }) => ({
   width: '100%',
@@ -146,6 +142,10 @@ export const ImageButton = styled(GenericCardActionArea)(({ theme }) => ({
 
   '&:hover': {
     backgroundColor: alpha(theme.palette.secondary.main, 0.3),
+  },
+
+  '&& .MuiTouchRipple-child': {
+    backgroundColor: theme.palette.yellow.contrastText,
   },
 
   ...(isMobile

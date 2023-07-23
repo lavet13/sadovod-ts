@@ -1,16 +1,21 @@
 import { useEffect } from 'react';
+
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
   fetchGoods,
+  ifAsyncError,
   selectGoodIds,
   selectGoodsError,
   selectGoodsStatus,
 } from '../../features/goods/goodsSlice';
+import { createError } from '../../utils/error/error.utils';
+
 import MyAdminGoodItem from './my-admin-goods-item.component';
 import { Skeleton } from '@mui/material';
 
 const MyAdminGoodsList = () => {
   const dispatch = useAppDispatch();
+
   const goodIds = useAppSelector(selectGoodIds);
   const goodsStatus = useAppSelector(selectGoodsStatus);
   const error = useAppSelector(selectGoodsError);
@@ -19,19 +24,20 @@ const MyAdminGoodsList = () => {
     dispatch(fetchGoods());
   }, [dispatch]);
 
-  let content;
-
-  if (goodsStatus === 'loading') {
-    content = <Skeleton />;
-  } else if (goodsStatus === 'failed') {
-    throw { message: error?.message, statusText: error?.statusCode };
-  } else {
-    content = goodIds.map(goodId => (
-      <MyAdminGoodItem key={goodId} id={goodId} />
-    ));
+  if (goodsStatus === 'failed' && ifAsyncError(error)) {
+    throw createError(error.message, error?.statusCode);
   }
 
-  return content;
+  return (
+    <>
+      {goodsStatus === 'loading' ? (
+        <Skeleton />
+      ) : (
+        goodIds.map(goodId => <MyAdminGoodItem key={goodId} id={goodId} />)
+      )}
+    </>
+  );
 };
+//
 
 export default MyAdminGoodsList;

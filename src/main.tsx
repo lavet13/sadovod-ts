@@ -1,12 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './app/App';
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from 'react-router-dom';
 
 import {
   alpha,
@@ -27,48 +20,16 @@ import EastmanExtraBoldWOFF from './assets/fonts/Eastman/Eastman-Extrabold.woff'
 import EastmanExtraBoldWOFF2 from './assets/fonts/Eastman/Eastman-Extrabold.woff2';
 import EastmanExtraBoldTTF from './assets/fonts/Eastman/Eastman-Extrabold.ttf';
 
-import ErrorPage from './pages/error-page.component';
-
-import { PAGES, PAGES_COMPONENTS } from './pages';
-
 import { Provider } from 'react-redux';
 import { store } from './app/store';
-import MyAdminPage from './pages/my-admin/my-admin-page.component';
-import MyAdminNav from './pages/my-admin/my-admin-nav.component';
-import MyAdminGoodsList from './pages/my-admin/my-admin-goods-list.component';
-import MyAdminEditGoodItem from './pages/my-admin/my-admin-goods-edit-item.component';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/parallax';
 import 'swiper/css/virtual';
 import 'swiper/css/effect-coverflow';
-import { ShapeLine } from '@mui/icons-material';
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <>
-      <Route path='/' element={<App />} errorElement={<ErrorPage />}>
-        <Route errorElement={<ErrorPage />}>
-          {PAGES.map(({ path }) => (
-            <Route key={path} path={path} element={PAGES_COMPONENTS[path]} />
-          ))}
-        </Route>
-      </Route>
-      <Route
-        path='/my-admin'
-        element={<MyAdminPage />}
-        errorElement={<ErrorPage />}
-      >
-        <Route errorElement={<ErrorPage />}>
-          <Route index element={<MyAdminNav />} />
-          <Route path='goods' element={<MyAdminGoodsList />} />
-          <Route path='goods/:goodId' element={<MyAdminEditGoodItem />} />
-        </Route>
-      </Route>
-    </>
-  )
-);
+import { RouterProvider } from 'react-router-dom';
+import { router } from './app/root-router';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -3,13 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import { useRouteError } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useCallback } from 'react';
+import { useAppDispatch } from '../app/hooks';
+import { goodsErrorsReset } from '../features/goods/goodsSlice';
 
 const ErrorPage = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const error: any = useRouteError();
   console.log({ error });
 
-  const handleNavigateBackTo = useCallback(() => navigate(-1), [navigate]);
+  const handleNavigateBackTo = useCallback(() => {
+    dispatch(goodsErrorsReset());
+
+    navigate(-1);
+  }, [navigate]);
 
   return (
     <Box

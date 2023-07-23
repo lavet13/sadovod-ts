@@ -1,10 +1,34 @@
+import { useEffect } from 'react';
+
 import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../app/hooks';
-import { makeSelectGoodById } from '../../features/goods/goodsSlice';
-import { useMemo } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import {
+  fetchGoods,
+  selectGoodById,
+  selectGoodsStatus,
+} from '../../features/goods/goodsSlice';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { InputAdornment, Skeleton, TextField } from '@mui/material';
+import PriceFormat from '../../utils/react-number-format/number-format/price-format';
+import { LoadingButton } from '@mui/lab';
+import { Save } from '@mui/icons-material';
+import { objectKeys } from '../../utils/object-keys/object-keys';
+import { filterObject } from '../../utils/filter-object/filter-object';
 
 type EditGoodItemParams = {
   goodId: string;
+};
+
+export type GoodDefaultValues = {
+  price: string;
+  description: string;
+  photo: File | null;
+};
+
+const defaultValues: GoodDefaultValues = {
+  price: '',
+  description: '',
+  photo: null,
 };
 
 const MyAdminEditGoodItem = () => {
@@ -12,16 +36,98 @@ const MyAdminEditGoodItem = () => {
     keyof EditGoodItemParams
   >() as EditGoodItemParams;
 
-  const selectGoodById = useMemo(makeSelectGoodById, []);
+  const goodsStatus = useAppSelector(selectGoodsStatus);
+  const isLoading = goodsStatus === 'loading';
+  const isFailed = goodsStatus === 'failed';
+
   const good = useAppSelector(state => selectGoodById(state, goodId));
 
-  if (!good)
-    throw new Response('', {
-      status: 404,
-      statusText: 'Product not found',
-    });
+  const dispatch = useAppDispatch();
 
-  return null;
+  useEffect(() => {
+    dispatch(fetchGoods());
+  }, [dispatch]);
+
+  const { control, handleSubmit, reset, setValue } = useForm<GoodDefaultValues>(
+    {
+      defaultValues,
+    }
+  );
+
+  const onSubmit: SubmitHandler<GoodDefaultValues> = data => {
+    if (isLoading) return;
+
+    console.log(data);
+  };
+
+  useEffect(() => {
+    if (good) {
+      objectKeys(defaultValues).forEach(field => setValue(field, good[field]));
+    }
+  }, [good, setValue]);
+
+  return (
+    <>
+      {isLoading ? (
+        <Skeleton variant='rectangular' />
+      ) : (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            name='description'
+            control={control}
+            rules={{ required: 'Не заполнено!' }}
+            render={({ field, fieldState: { error, invalid } }) => {
+              console.log(field);
+              return (
+                <TextField
+                  {...field}
+                  label='Описание товара'
+                  error={invalid}
+                  helperText={error?.type === 'required' ? error.message : null}
+                  variant='standard'
+                />
+              );
+            }}
+          />
+
+          <Controller
+            name='price'
+            control={control}
+            rules={{
+              validate: value =>
+                !(+value <= 0) || 'Сумма должна быть больше нуля',
+            }}
+            render={({ field, fieldState: { invalid, error } }) => (
+              <TextField
+                {...field}
+                label='Цена'
+                error={invalid}
+                helperText={error?.type === 'validate' ? error.message : null}
+                variant='standard'
+                InputProps={{
+                  inputComponent: PriceFormat as any,
+                  startAdornment: (
+                    <InputAdornment position='start'>₽</InputAdornment>
+                  ),
+                }}
+              />
+            )}
+          />
+
+          <LoadingButton
+            type='submit'
+            endIcon={<Save />}
+            loading={isLoading}
+            loadingPosition='end'
+            variant='long-btn'
+            color='primary'
+          >
+            <span>Сохранить товар</span>
+          </LoadingButton>
+        </form>
+      )}
+    </>
+  );
 };
 
 export default MyAdminEditGoodItem;

@@ -4,6 +4,7 @@ import logger from 'redux-logger';
 
 export const store = configureStore({
   reducer: rootReducer,
+
   middleware: getDefaultMiddleware => {
     const middleware = getDefaultMiddleware();
 
@@ -13,6 +14,7 @@ export const store = configureStore({
 
     return middleware;
   },
+
   devTools: process.env.NODE_ENV !== 'production',
 });
 

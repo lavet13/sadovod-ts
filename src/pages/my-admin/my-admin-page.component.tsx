@@ -1,12 +1,13 @@
-import { Typography } from '@mui/material';
-import { Outlet } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import MyAdminNav from './my-admin-nav.component';
+import MyAdminGoods from './my-admin-goods.component';
 
 const MyAdminPage = () => {
   return (
-    <>
-      <Typography sx={{ textAlign: 'center' }}>Админ панель</Typography>
-      <Outlet />
-    </>
+    <Routes>
+      <Route index element={<MyAdminNav />} />
+      <Route path='goods/*' element={<MyAdminGoods />} />
+    </Routes>
   );
 };
 

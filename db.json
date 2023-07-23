@@ -4,13 +4,13 @@
       "id": 1,
       "price": "300",
       "sizes": [30, 40, 50, 60],
-      "description": "lorem ipsum"
+      "description": "Кросовки Nike"
     },
     {
       "id": 2,
       "price": "300",
       "sizes": [35, 45, 55, 65],
-      "description": "lorem ipsum_2"
+      "description": "Мужские шорты"
     }
   ]
 }

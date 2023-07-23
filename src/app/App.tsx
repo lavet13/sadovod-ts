@@ -3,7 +3,7 @@ import Footer from '../components/footer/footer.component';
 import Header from '../components/header/header.component';
 import { Outlet } from 'react-router-dom';
 
-function App() {
+const App = () => {
   return (
     <Box
       position={'relative'}
@@ -16,6 +16,6 @@ function App() {
       <Footer />
     </Box>
   );
-}
+};
 
 export default App;
