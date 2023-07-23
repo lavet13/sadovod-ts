@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from './root-reducer';
 import logger from 'redux-logger';
+import { reduxBatch } from '@manaflair/redux-batch';
 
 export const store = configureStore({
   reducer: rootReducer,
+  enhancers: enhancers => [...enhancers, reduxBatch],
 
   middleware: getDefaultMiddleware => {
     const middleware = getDefaultMiddleware();

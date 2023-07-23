@@ -1,19 +1,22 @@
 import { useEffect } from 'react';
-
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
+
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+
 import {
   fetchGoods,
   selectGoodById,
   selectGoodsStatus,
 } from '../../features/goods/goodsSlice';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+
 import { InputAdornment, Skeleton, TextField } from '@mui/material';
-import PriceFormat from '../../utils/react-number-format/number-format/price-format';
 import { LoadingButton } from '@mui/lab';
 import { Save } from '@mui/icons-material';
+
+import PriceFormat from '../../utils/react-number-format/number-format/price-format';
 import { objectKeys } from '../../utils/object-keys/object-keys';
-import { filterObject } from '../../utils/filter-object/filter-object';
+import { createError } from '../../utils/error/error.utils';
 
 type EditGoodItemParams = {
   goodId: string;
@@ -37,16 +40,13 @@ const MyAdminEditGoodItem = () => {
   >() as EditGoodItemParams;
 
   const goodsStatus = useAppSelector(selectGoodsStatus);
+  const isIdle = goodsStatus === 'idle';
   const isLoading = goodsStatus === 'loading';
   const isFailed = goodsStatus === 'failed';
 
   const good = useAppSelector(state => selectGoodById(state, goodId));
 
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchGoods());
-  }, [dispatch]);
 
   const { control, handleSubmit, reset, setValue } = useForm<GoodDefaultValues>(
     {
@@ -61,10 +61,16 @@ const MyAdminEditGoodItem = () => {
   };
 
   useEffect(() => {
+    if (!good) dispatch(fetchGoods());
+
+    if (isIdle && !good) {
+      throw createError('Товара не существует!', 'Product not found!');
+    }
+
     if (good) {
       objectKeys(defaultValues).forEach(field => setValue(field, good[field]));
     }
-  }, [good, setValue]);
+  }, [good, setValue, isIdle, dispatch]);
 
   return (
     <>
@@ -75,7 +81,7 @@ const MyAdminEditGoodItem = () => {
           <Controller
             name='description'
             control={control}
-            rules={{ required: 'Не заполнено!' }}
+            rules={{ required: 'Описание не заполнено!' }}
             render={({ field, fieldState: { error, invalid } }) => {
               console.log(field);
               return (

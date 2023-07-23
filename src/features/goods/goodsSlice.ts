@@ -56,7 +56,6 @@ export const fetchGoods = createAsyncThunk<
       statusCode: error.code,
       message: error.message,
     };
-    console.log(responseData);
     return thunkAPI.rejectWithValue(responseData);
   }
 });
