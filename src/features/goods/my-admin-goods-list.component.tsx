@@ -3,10 +3,11 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
   fetchGoods,
-  ifAsyncError,
+  ifErrorResponse,
   selectGoodIds,
   selectGoodsError,
   selectGoodsStatus,
+  ifErrorMessage,
 } from './goods-slice';
 import { createError } from '../../utils/error/error.utils';
 
@@ -24,8 +25,12 @@ const MyAdminGoodsList = () => {
     dispatch(fetchGoods());
   }, [dispatch]);
 
-  if (goodsStatus === 'failed' && ifAsyncError(error)) {
-    throw createError(error.message, error?.statusCode);
+  if (goodsStatus === 'failed') {
+    if (ifErrorResponse(error)) {
+      throw createError(error.errorMessage, error?.statusCode);
+    } else if (ifErrorMessage(error)) {
+      throw createError(error);
+    }
   }
 
   return (

@@ -29,6 +29,7 @@ import 'swiper/css/parallax';
 import 'swiper/css/virtual';
 import 'swiper/css/effect-coverflow';
 import { RouterProvider } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack';
 import { router } from './app/root-router';
 
 const root = ReactDOM.createRoot(
@@ -744,6 +745,7 @@ root.render(
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <CssBaseline />
+          <SnackbarProvider autoHideDuration={3000} />
           <RouterProvider router={router} />
         </ThemeProvider>
       </StyledEngineProvider>

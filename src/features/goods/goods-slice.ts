@@ -6,8 +6,10 @@ import {
   createEntityAdapter,
   nanoid,
 } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
 import axios, { AxiosError } from 'axios';
+
+import { RootState } from '../../app/store';
+
 import { ErrorResponse } from '../../utils/error/error.utils';
 
 export type Good = {
@@ -19,7 +21,7 @@ export type Good = {
 };
 
 export type GoodsState = {
-  readonly error: ErrorResponse | null;
+  readonly error?: ErrorResponse | string | null;
   readonly status: 'idle' | 'loading' | 'failed';
 };
 
@@ -28,10 +30,12 @@ const additionalState: GoodsState = {
   error: null,
 };
 
-export const ifAsyncError = (
-  error: ErrorResponse | null
-): error is ErrorResponse => {
-  return error !== null;
+export const ifErrorResponse = (error: any): error is ErrorResponse => {
+  return (error as ErrorResponse).errorMessage !== undefined;
+};
+
+export const ifErrorMessage = (error: any): error is string => {
+  return typeof error === 'string';
 };
 
 const goodsAdapter = createEntityAdapter<Good>();
@@ -56,18 +60,21 @@ export const fetchGoods = createAsyncThunk<
 
     return response.data;
   } catch (err) {
-    const error = err as AxiosError;
-    const responseData: ErrorResponse = {
-      statusCode: error.code,
-      message: error.message,
-    };
-    return thunkAPI.rejectWithValue(responseData);
+    const error = err as AxiosError<ErrorResponse>;
+
+    if (!error.response) {
+      throw err;
+    }
+
+    return thunkAPI.rejectWithValue(error.response.data);
   }
 });
 
+type GoodData = Omit<Good, 'id'>;
+
 export const addNewGood = createAsyncThunk<
   Good,
-  Good,
+  GoodData,
   { rejectValue: ErrorResponse }
 >('goods/addNewGood', async (good, thunkAPI) => {
   try {
@@ -84,14 +91,13 @@ export const addNewGood = createAsyncThunk<
 
     return response.data;
   } catch (err) {
-    const error = err as AxiosError;
+    const error = err as AxiosError<ErrorResponse>;
 
-    const responseData: ErrorResponse = {
-      statusCode: error.code,
-      message: error.message,
-    };
+    if (!error.response) {
+      throw err;
+    }
 
-    return thunkAPI.rejectWithValue(responseData);
+    return thunkAPI.rejectWithValue(error.response.data);
   }
 });
 
@@ -114,14 +120,13 @@ export const editGood = createAsyncThunk<
 
     return response.data;
   } catch (err) {
-    const error = err as AxiosError;
+    const error = err as AxiosError<ErrorResponse>;
 
-    const responseData: ErrorResponse = {
-      statusCode: error.code,
-      message: error.message,
-    };
+    if (!error.response) {
+      throw err;
+    }
 
-    return thunkAPI.rejectWithValue(responseData);
+    return thunkAPI.rejectWithValue(error.response.data);
   }
 });
 
@@ -129,8 +134,6 @@ const goodsSlice = createSlice({
   name: 'goods',
   initialState,
   reducers: {
-    // goodDeleted: goodsAdapter.removeOne,
-    // goodsUpdated: goodsAdapter.updateOne,
     goodsAdded: {
       reducer(state, action: PayloadAction<Good>) {
         goodsAdapter.addOne(state, action.payload);
@@ -144,11 +147,9 @@ const goodsSlice = createSlice({
         return { payload: { id: nanoid(), price, sizes, description, photo } };
       },
     },
-    // goodsFailed(state, action: PayloadAction<Error>) {
-    //   state.error = action.payload;
-    // },
     goodsErrorsReset(state) {
       state.error = null;
+      state.status = 'idle';
     },
   },
   extraReducers: builder => {
@@ -158,13 +159,42 @@ const goodsSlice = createSlice({
       })
       .addCase(fetchGoods.fulfilled, (state, action) => {
         state.status = 'idle';
-        goodsAdapter.setAll(state, action.payload);
         state.error = null;
+        goodsAdapter.setAll(state, action.payload);
       })
       .addCase(fetchGoods.rejected, (state, action) => {
         if (action.payload) {
           state.status = 'failed';
           state.error = action.payload;
+        } else {
+          state.status = 'failed';
+          state.error = action.error.message;
+        }
+      })
+
+      .addCase(addNewGood.fulfilled, (state, action) => {
+        state.error = null;
+        goodsAdapter.addOne(state, action.payload);
+      })
+      .addCase(addNewGood.rejected, (state, action) => {
+        if (action.payload) {
+          state.error = action.payload.errorMessage;
+        } else {
+          state.error = action.error.message;
+        }
+      })
+
+      .addCase(editGood.fulfilled, (state, action) => {
+        const { id, ...changes } = action.payload;
+
+        state.error = null;
+        goodsAdapter.updateOne(state, { id, changes });
+      })
+      .addCase(editGood.rejected, (state, action) => {
+        if (action.payload) {
+          state.error = action.payload.errorMessage;
+        } else {
+          state.error = action.error.message;
         }
       });
   },
@@ -173,7 +203,7 @@ const goodsSlice = createSlice({
 export default goodsSlice.reducer;
 export const { goodsErrorsReset } = goodsSlice.actions;
 
-// pre-built-in selectors
+// built-in selectors
 export const { selectAll: selectGoods, selectById: selectGoodById } =
   goodsAdapter.getSelectors((state: RootState) => state.goods);
 

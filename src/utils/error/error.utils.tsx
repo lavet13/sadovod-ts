@@ -1,9 +1,14 @@
 export type ErrorResponse = {
   statusCode?: string;
-  message: string;
+  errorMessage: string;
+};
+
+export type ValidationErrors = {
+  errorMessage: string;
+  fieldErrors: Record<string, string>;
 };
 
 export const createError = (
-  message: string,
+  errorMessage: string,
   statusCode?: string
-): ErrorResponse => ({ message, statusCode });
+): ErrorResponse => ({ errorMessage, statusCode });
