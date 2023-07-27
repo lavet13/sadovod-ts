@@ -2,8 +2,8 @@
   "goods": [
     {
       "id": 1,
-      "price": "303",
       "description": "Кросовки Nike",
+      "price": "3031",
       "photo": "",
       "sizes": [
         30,
@@ -14,8 +14,8 @@
     },
     {
       "id": 2,
-      "price": "380",
       "description": "Мужские шорты",
+      "price": "3813",
       "photo": "",
       "sizes": [
         35,

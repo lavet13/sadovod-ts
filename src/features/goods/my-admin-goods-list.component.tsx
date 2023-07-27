@@ -1,14 +1,16 @@
 import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+
 import {
   fetchGoods,
-  ifErrorResponse,
+  isErrorResponse,
   selectGoodIds,
   selectGoodsError,
   selectGoodsStatus,
-  ifErrorMessage,
+  isError,
 } from './goods-slice';
+
 import { createError } from '../../utils/error/error.utils';
 
 import MyAdminGoodItem from './my-admin-goods-item.component';
@@ -26,10 +28,10 @@ const MyAdminGoodsList = () => {
   }, [dispatch]);
 
   if (goodsStatus === 'failed') {
-    if (ifErrorResponse(error)) {
+    if (isErrorResponse(error)) {
       throw createError(error.errorMessage, error?.statusCode);
-    } else if (ifErrorMessage(error)) {
-      throw createError(error);
+    } else if (isError(error)) {
+      throw createError(error.message);
     }
   }
 
@@ -43,6 +45,5 @@ const MyAdminGoodsList = () => {
     </>
   );
 };
-//
 
 export default MyAdminGoodsList;

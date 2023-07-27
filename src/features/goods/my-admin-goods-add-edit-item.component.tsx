@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { useParams, useNavigate, json } from 'react-router-dom';
-import { enqueueSnackbar, useSnackbar } from 'notistack';
+import { useParams, useNavigate } from 'react-router-dom';
+import { enqueueSnackbar } from 'notistack';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
@@ -9,6 +9,8 @@ import {
   Good,
   editGood,
   fetchGoods,
+  isError,
+  isErrorResponse,
   selectGoodById,
   selectGoodsError,
   selectGoodsStatus,
@@ -22,7 +24,10 @@ import PriceFormat from '../../utils/react-number-format/number-format/price-for
 import { objectKeys } from '../../utils/object-keys/object-keys';
 import { createError } from '../../utils/error/error.utils';
 
-type EditGoodItemParams = {
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+
+type AddEditGoodItemParams = {
   goodId: string;
 };
 
@@ -35,29 +40,42 @@ const defaultValues: GoodDefaultValues = {
   sizes: [],
 };
 
-const MyAdminEditGoodItem = () => {
+const MyAdminAddEditGoodItem = () => {
   const { goodId } = useParams<
-    keyof EditGoodItemParams
-  >() as EditGoodItemParams;
+    keyof AddEditGoodItemParams
+  >() as AddEditGoodItemParams;
+
+  const isAddMode = !goodId;
+
+  const validationSchema = Yup.object().shape({
+    price: Yup.string().defined().required('Цена обязательна к заполнению'),
+    description: Yup.string()
+      .defined()
+      .required('Описание обязательно к заполнению'),
+    photo: Yup.string().defined().notRequired(),
+    sizes: Yup.array().defined().of(Yup.number().defined()).notRequired(),
+  });
 
   const [isLoading, setIsLoading] = useState(false);
 
   const goodsStatus = useAppSelector(selectGoodsStatus);
-  const goodsError = useAppSelector(selectGoodsError);
+  const error = useAppSelector(selectGoodsError);
   const good = useAppSelector(state => selectGoodById(state, goodId));
 
   const goodsIsIdle = goodsStatus === 'idle';
   const goodsIsLoading = goodsStatus === 'loading';
+
   const goodsIsFailed = goodsStatus === 'failed';
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const { control, handleSubmit, setValue } = useForm<GoodDefaultValues>({
-    defaultValues,
+    resolver: yupResolver(validationSchema),
   });
 
   const onSubmit: SubmitHandler<GoodDefaultValues> = async data => {
+    console.log('123');
     if (isLoading) return;
 
     setIsLoading(isLoading => !isLoading);
@@ -111,6 +129,14 @@ const MyAdminEditGoodItem = () => {
     }
   }, [good, setValue, goodsIsIdle, dispatch]);
 
+  if (goodsIsFailed) {
+    if (isErrorResponse(error)) {
+      throw createError(error.errorMessage, error?.statusCode);
+    } else if (isError(error)) {
+      throw createError(error.message);
+    }
+  }
+
   return (
     <>
       {goodsIsLoading ? (
@@ -122,15 +148,13 @@ const MyAdminEditGoodItem = () => {
               <Controller
                 name='description'
                 control={control}
-                rules={{ required: 'Описание не заполнено!' }}
+                // rules={{ required: 'Описание не заполнено!' }}
                 render={({ field, fieldState: { error, invalid } }) => (
                   <TextField
                     {...field}
                     label='Описание товара'
                     error={invalid}
-                    helperText={
-                      error?.type === 'required' ? error.message : null
-                    }
+                    helperText={error?.message || null}
                     variant='standard'
                   />
                 )}
@@ -139,12 +163,12 @@ const MyAdminEditGoodItem = () => {
               <Controller
                 name='price'
                 control={control}
-                rules={{
-                  validate: {
-                    greaterThanZero: value =>
-                      !(+value <= 0) || 'Сумма должна быть больше нуля',
-                  },
-                }}
+                // rules={{
+                //   validate: {
+                //     greaterThanZero: value =>
+                //       !(+value <= 0) || 'Сумма должна быть больше нуля',
+                //   },
+                // }}
                 render={({ field, fieldState: { invalid, error } }) => {
                   console.log(field.value);
                   return (
@@ -152,9 +176,7 @@ const MyAdminEditGoodItem = () => {
                       {...field}
                       label='Цена'
                       error={invalid}
-                      helperText={
-                        error?.type === 'greaterThanZero' ? error.message : null
-                      }
+                      helperText={error?.message || null}
                       variant='standard'
                       InputProps={{
                         inputComponent: PriceFormat as any,
@@ -182,4 +204,4 @@ const MyAdminEditGoodItem = () => {
   );
 };
 
-export default MyAdminEditGoodItem;
+export default MyAdminAddEditGoodItem;

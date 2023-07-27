@@ -5,6 +5,7 @@ import {
   createAsyncThunk,
   createEntityAdapter,
   nanoid,
+  SerializedError,
 } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 
@@ -21,7 +22,7 @@ export type Good = {
 };
 
 export type GoodsState = {
-  readonly error?: ErrorResponse | string | null;
+  readonly error?: ErrorResponse | Error | SerializedError | null;
   readonly status: 'idle' | 'loading' | 'failed';
 };
 
@@ -30,12 +31,12 @@ const additionalState: GoodsState = {
   error: null,
 };
 
-export const ifErrorResponse = (error: any): error is ErrorResponse => {
+export const isErrorResponse = (error: any): error is ErrorResponse => {
   return (error as ErrorResponse).errorMessage !== undefined;
 };
 
-export const ifErrorMessage = (error: any): error is string => {
-  return typeof error === 'string';
+export const isError = (error: any): error is Error => {
+  return (error as Error).message !== undefined;
 };
 
 const goodsAdapter = createEntityAdapter<Good>();
@@ -53,6 +54,7 @@ export const fetchGoods = createAsyncThunk<
       `${import.meta.env.VITE_JSON_SERVER_URL}/goods`,
       {
         headers: {
+          'Content-Type': 'application/json',
           Accept: 'application/json',
         },
       }
@@ -168,7 +170,7 @@ const goodsSlice = createSlice({
           state.error = action.payload;
         } else {
           state.status = 'failed';
-          state.error = action.error.message;
+          state.error = action.error;
         }
       })
 
@@ -178,9 +180,9 @@ const goodsSlice = createSlice({
       })
       .addCase(addNewGood.rejected, (state, action) => {
         if (action.payload) {
-          state.error = action.payload.errorMessage;
+          state.error = action.payload;
         } else {
-          state.error = action.error.message;
+          state.error = action.error;
         }
       })
 
@@ -192,9 +194,9 @@ const goodsSlice = createSlice({
       })
       .addCase(editGood.rejected, (state, action) => {
         if (action.payload) {
-          state.error = action.payload.errorMessage;
+          state.error = action.payload;
         } else {
-          state.error = action.error.message;
+          state.error = action.error;
         }
       });
   },
