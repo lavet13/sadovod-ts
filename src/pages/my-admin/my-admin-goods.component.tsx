@@ -6,7 +6,8 @@ const MyAdminGoods = () => {
   return (
     <Routes>
       <Route index element={<MyAdminGoodsList />} />
-      <Route path=':goodId' element={<MyAdminAddEditGoodItem />} />
+      <Route path='edit/:goodId' element={<MyAdminAddEditGoodItem />} />
+      <Route path='add' element={<MyAdminAddEditGoodItem />} />
     </Routes>
   );
 };

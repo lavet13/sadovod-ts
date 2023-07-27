@@ -78,8 +78,10 @@ export const addNewGood = createAsyncThunk<
   Good,
   GoodData,
   { rejectValue: ErrorResponse }
->('goods/addNewGood', async (good, thunkAPI) => {
+>('goods/addNewGood', async (goodData, thunkAPI) => {
   try {
+    const good: Good = { id: nanoid(), ...goodData };
+
     const response = await axios.post<Good>(
       `${import.meta.env.VITE_JSON_SERVER_URL}/goods`,
       good,

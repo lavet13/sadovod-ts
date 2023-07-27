@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 import {
   Good,
+  addNewGood,
   editGood,
   fetchGoods,
   isError,
@@ -48,12 +49,21 @@ const MyAdminAddEditGoodItem = () => {
   const isAddMode = !goodId;
 
   const validationSchema = Yup.object().shape({
-    price: Yup.string().defined().required('Цена обязательна к заполнению'),
+    price: Yup.string()
+      .defined()
+      .required('Цена обязательна к заполнению')
+      .test(
+        'priceIsNotZero',
+        'Цена должна быть больше нуля',
+        value => +value > 0
+      ),
+
     description: Yup.string()
       .defined()
       .required('Описание обязательно к заполнению'),
-    photo: Yup.string().defined().notRequired(),
-    sizes: Yup.array().defined().of(Yup.number().defined()).notRequired(),
+
+    photo: Yup.string().defined(),
+    sizes: Yup.array().defined().of(Yup.number().defined()),
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -74,15 +84,8 @@ const MyAdminAddEditGoodItem = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit: SubmitHandler<GoodDefaultValues> = async data => {
-    console.log('123');
-    if (isLoading) return;
-
-    setIsLoading(isLoading => !isLoading);
-
-    const good: Good = { id: goodId, ...data };
-
-    const resultAction = await dispatch(editGood(good));
+  const updateGood = async (id: string, data: GoodDefaultValues) => {
+    const resultAction = await dispatch(editGood({ id, ...data }));
 
     if (editGood.fulfilled.match(resultAction)) {
       enqueueSnackbar('Товар изменен успешно!', {
@@ -112,9 +115,50 @@ const MyAdminAddEditGoodItem = () => {
         );
       }
     }
+  };
+
+  const addGood = async (data: GoodDefaultValues) => {
+    const resultAction = await dispatch(addNewGood(data));
+
+    if (addNewGood.fulfilled.match(resultAction)) {
+      enqueueSnackbar('Товар успешно создан!', {
+        variant: 'success',
+        anchorOrigin: { vertical: 'bottom', horizontal: 'center' },
+        preventDuplicate: true,
+      });
+    } else {
+      if (resultAction.payload) {
+        // my error
+        enqueueSnackbar(resultAction.payload.errorMessage, {
+          variant: 'error',
+          anchorOrigin: { vertical: 'bottom', horizontal: 'center' },
+          preventDuplicate: true,
+        });
+      } else {
+        // some random error
+        enqueueSnackbar(
+          resultAction.error.message
+            ? resultAction.error.message
+            : 'unknown error',
+          {
+            variant: 'error',
+            anchorOrigin: { vertical: 'bottom', horizontal: 'center' },
+            preventDuplicate: true,
+          }
+        );
+      }
+    }
+  };
+
+  const onSubmit: SubmitHandler<GoodDefaultValues> = async data => {
+    if (isLoading) return;
 
     setIsLoading(isLoading => !isLoading);
-    navigate('/my-admin/goods');
+
+    isAddMode ? addGood(data) : updateGood(goodId, data);
+
+    setIsLoading(isLoading => !isLoading);
+    navigate('..');
   };
 
   useEffect(() => {
@@ -145,10 +189,18 @@ const MyAdminAddEditGoodItem = () => {
         <>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack marginX={'auto'} pt={5} maxWidth={350} spacing={3}>
+              {!isAddMode && (
+                <TextField
+                  variant='standard'
+                  disabled
+                  label='Id'
+                  defaultValue={goodId}
+                />
+              )}
+
               <Controller
                 name='description'
                 control={control}
-                // rules={{ required: 'Описание не заполнено!' }}
                 render={({ field, fieldState: { error, invalid } }) => (
                   <TextField
                     {...field}
@@ -156,6 +208,7 @@ const MyAdminAddEditGoodItem = () => {
                     error={invalid}
                     helperText={error?.message || null}
                     variant='standard'
+                    multiline
                   />
                 )}
               />
@@ -163,27 +216,18 @@ const MyAdminAddEditGoodItem = () => {
               <Controller
                 name='price'
                 control={control}
-                // rules={{
-                //   validate: {
-                //     greaterThanZero: value =>
-                //       !(+value <= 0) || 'Сумма должна быть больше нуля',
-                //   },
-                // }}
-                render={({ field, fieldState: { invalid, error } }) => {
-                  console.log(field.value);
-                  return (
-                    <TextField
-                      {...field}
-                      label='Цена'
-                      error={invalid}
-                      helperText={error?.message || null}
-                      variant='standard'
-                      InputProps={{
-                        inputComponent: PriceFormat as any,
-                      }}
-                    />
-                  );
-                }}
+                render={({ field, fieldState: { invalid, error } }) => (
+                  <TextField
+                    {...field}
+                    label='Цена'
+                    error={invalid}
+                    helperText={error?.message || null}
+                    variant='standard'
+                    InputProps={{
+                      inputComponent: PriceFormat as any,
+                    }}
+                  />
+                )}
               />
 
               <LoadingButton

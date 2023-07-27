@@ -14,7 +14,11 @@ const MyAdminGoodItem: FC<MyAdminGoodItem> = ({ id }) => {
   console.log(good);
 
   return (
-    <GenericButtonComponent to={`${id}`} component={Link} variant='nav-button'>
+    <GenericButtonComponent
+      to={`edit/${id}`}
+      component={Link}
+      variant='nav-button'
+    >
       <Typography>{good?.description}</Typography>
     </GenericButtonComponent>
   );
