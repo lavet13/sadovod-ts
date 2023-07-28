@@ -1,6 +1,6 @@
 export type ErrorResponse = {
   statusCode?: string;
-  errorMessage: string;
+  errorMessage?: string;
 };
 
 export type ValidationErrors = {
@@ -9,6 +9,6 @@ export type ValidationErrors = {
 };
 
 export const createError = (
-  errorMessage: string,
+  errorMessage?: string,
   statusCode?: string
 ): ErrorResponse => ({ errorMessage, statusCode });

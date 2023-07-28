@@ -62,8 +62,8 @@ const MyAdminAddEditGoodItem = () => {
       .defined()
       .required('Описание обязательно к заполнению'),
 
-    photo: Yup.string().defined(),
-    sizes: Yup.array().defined().of(Yup.number().defined()),
+    photo: Yup.string().defined().notRequired(),
+    sizes: Yup.array().defined().of(Yup.number().defined()).notRequired(),
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -74,7 +74,6 @@ const MyAdminAddEditGoodItem = () => {
 
   const goodsIsIdle = goodsStatus === 'idle';
   const goodsIsLoading = goodsStatus === 'loading';
-
   const goodsIsFailed = goodsStatus === 'failed';
 
   const dispatch = useAppDispatch();
@@ -151,6 +150,7 @@ const MyAdminAddEditGoodItem = () => {
   };
 
   const onSubmit: SubmitHandler<GoodDefaultValues> = async data => {
+    console.log(data);
     if (isLoading) return;
 
     setIsLoading(isLoading => !isLoading);
@@ -158,20 +158,20 @@ const MyAdminAddEditGoodItem = () => {
     isAddMode ? addGood(data) : updateGood(goodId, data);
 
     setIsLoading(isLoading => !isLoading);
-    navigate('..');
+    navigate('/my-admin/goods');
   };
 
   useEffect(() => {
     if (!good) dispatch(fetchGoods());
 
-    if (goodsIsIdle && !good) {
+    if (goodsIsIdle && !good && !isAddMode) {
       throw createError('Товара не существует!', 'Product not found!');
     }
 
     if (good) {
       objectKeys(defaultValues).forEach(field => setValue(field, good[field]));
     }
-  }, [good, setValue, goodsIsIdle, dispatch]);
+  }, [good]);
 
   if (goodsIsFailed) {
     if (isErrorResponse(error)) {
@@ -184,7 +184,12 @@ const MyAdminAddEditGoodItem = () => {
   return (
     <>
       {goodsIsLoading ? (
-        <Skeleton variant='rectangular' />
+        <Stack spacing={3} paddingTop={5} alignItems={'center'}>
+          <Skeleton variant='rounded' width={310} height={30} />
+          <Skeleton variant='rounded' width={310} height={30} />
+          <Skeleton variant='rounded' width={310} height={30} sx={{ mb: 1 }} />
+          <Skeleton variant='rounded' width={310} height={45} />
+        </Stack>
       ) : (
         <>
           <form onSubmit={handleSubmit(onSubmit)}>

@@ -4,43 +4,55 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 import {
   fetchGoods,
-  isErrorResponse,
-  selectGoodIds,
-  selectGoodsError,
   selectGoodsStatus,
-  isError,
+  goodsErrorsReset,
+  selectGoodsError,
+  selectGoods,
 } from './goods-slice';
 
-import { createError } from '../../utils/error/error.utils';
-
-import MyAdminGoodItem from './my-admin-goods-item.component';
-import { Skeleton } from '@mui/material';
+import { CircularProgress, Stack } from '@mui/material';
+import { GridRowsProp, GridColDef, DataGrid } from '@mui/x-data-grid';
 
 const MyAdminGoodsList = () => {
   const dispatch = useAppDispatch();
 
-  const goodIds = useAppSelector(selectGoodIds);
+  const goods = useAppSelector(selectGoods);
   const goodsStatus = useAppSelector(selectGoodsStatus);
   const error = useAppSelector(selectGoodsError);
 
+  const rows: GridRowsProp = goods.map(({ id, description, price }) => ({
+    id,
+    description,
+    price,
+  }));
+
+  const columns: GridColDef[] = [
+    { field: 'description', headerName: 'Описание', width: 150 },
+    { field: 'price', headerName: 'Цена', width: 150 },
+  ];
+
   useEffect(() => {
-    dispatch(fetchGoods());
+    (async () => {
+      const resultAction = await dispatch(fetchGoods());
+
+      if (fetchGoods.fulfilled.match(resultAction)) {
+        dispatch(goodsErrorsReset());
+      }
+    })();
   }, [dispatch]);
 
-  if (goodsStatus === 'failed') {
-    if (isErrorResponse(error)) {
-      throw createError(error.errorMessage, error?.statusCode);
-    } else if (isError(error)) {
-      throw createError(error.message);
-    }
-  }
+  useEffect(() => {
+    if (goodsStatus !== 'loading' && error) throw error;
+  }, [goodsStatus]);
 
   return (
     <>
       {goodsStatus === 'loading' ? (
-        <Skeleton />
+        <Stack paddingTop={5} alignItems='center'>
+          <CircularProgress color='primary' />
+        </Stack>
       ) : (
-        goodIds.map(goodId => <MyAdminGoodItem key={goodId} id={goodId} />)
+        <DataGrid rows={rows} columns={columns} />
       )}
     </>
   );

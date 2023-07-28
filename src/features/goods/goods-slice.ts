@@ -1,12 +1,12 @@
 import {
   createSlice,
   createSelector,
-  PayloadAction,
   createAsyncThunk,
   createEntityAdapter,
   nanoid,
   SerializedError,
 } from '@reduxjs/toolkit';
+
 import axios, { AxiosError } from 'axios';
 
 import { RootState } from '../../app/store';
@@ -21,8 +21,10 @@ export type Good = {
   photo: string;
 };
 
+export type MyError = ErrorResponse | Error | SerializedError | null;
+
 export type GoodsState = {
-  readonly error?: ErrorResponse | Error | SerializedError | null;
+  readonly error?: MyError;
   readonly status: 'idle' | 'loading' | 'failed';
 };
 
@@ -138,19 +140,6 @@ const goodsSlice = createSlice({
   name: 'goods',
   initialState,
   reducers: {
-    goodsAdded: {
-      reducer(state, action: PayloadAction<Good>) {
-        goodsAdapter.addOne(state, action.payload);
-      },
-      prepare(
-        price: string,
-        sizes: number[],
-        description: string,
-        photo: string
-      ) {
-        return { payload: { id: nanoid(), price, sizes, description, photo } };
-      },
-    },
     goodsErrorsReset(state) {
       state.error = null;
       state.status = 'idle';

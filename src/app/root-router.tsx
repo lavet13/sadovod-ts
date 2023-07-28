@@ -7,6 +7,8 @@ import ErrorPage from '../pages/error-page.component';
 import App from './App';
 import { PAGES, PAGES_COMPONENTS } from '../pages';
 import MyAdminPage from '../pages/my-admin/my-admin-page.component';
+import MyAdminGoodsList from '../features/goods/my-admin-goods-list.component';
+import MyAdminAddEditGoodItem from '../features/goods/my-admin-goods-add-edit-item.component';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,10 +22,20 @@ export const router = createBrowserRouter(
       </Route>
 
       <Route
-        path='/my-admin/*'
+        path='/my-admin'
         element={<MyAdminPage />}
         errorElement={<ErrorPage />}
-      />
+      >
+        <Route errorElement={<ErrorPage />}>
+          <Route path='goods' element={<MyAdminGoodsList />} />
+          {/* Back button (index element) */}
+          <Route
+            path='goods/edit/:goodId'
+            element={<MyAdminAddEditGoodItem />}
+          />
+          <Route path='goods/add' element={<MyAdminAddEditGoodItem />} />
+        </Route>
+      </Route>
     </>
   )
 );

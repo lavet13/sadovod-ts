@@ -3,7 +3,7 @@
     {
       "id": 1,
       "description": "Кросовки Nike",
-      "price": "303",
+      "price": "30311",
       "photo": "",
       "sizes": [
         30,
@@ -23,6 +23,11 @@
         55,
         65
       ]
+    },
+    {
+      "id": "PSbC8ygcnVOpSTbx9GJn0",
+      "description": "1123123",
+      "price": "1123123"
     }
   ]
 }

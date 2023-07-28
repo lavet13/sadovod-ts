@@ -14,14 +14,14 @@ const ErrorPage = () => {
     navigate(-1);
   }, [navigate]);
 
-  let errorMessage = '';
+  let errorMessage: string | undefined = '';
 
   if (isRouteErrorResponse(error)) {
-    errorMessage = error.error?.message || error.statusText;
+    errorMessage = error.error?.message || error?.statusText;
   } else if (isErrorResponse(error)) {
-    errorMessage = error.errorMessage;
+    errorMessage = error?.errorMessage;
   } else if (isError(error)) {
-    errorMessage = error.message;
+    errorMessage = error?.message;
   }
 
   return (
