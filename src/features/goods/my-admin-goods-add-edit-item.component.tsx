@@ -163,14 +163,16 @@ const MyAdminAddEditGoodItem = () => {
   useEffect(() => {
     if (!good) dispatch(fetchGoods());
 
-    if (goodsIsIdle && !good && !isAddMode) {
-      throw createError('Товара не существует!', 'Product not found!');
-    }
-
     if (good) {
       objectKeys(defaultValues).forEach(field => setValue(field, good[field]));
     }
   }, [good]);
+
+  useEffect(() => {
+    if (goodsIsIdle && !good && !isAddMode) {
+      throw createError('Товара не существует!', 'Product not found!');
+    }
+  }, [goodsIsIdle]);
 
   if (goodsIsFailed) {
     if (isErrorResponse(error)) {

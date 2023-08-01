@@ -12,12 +12,13 @@ import {
 } from './goods-slice';
 
 import { CircularProgress, Stack } from '@mui/material';
-import { Delete, Edit } from '@mui/icons-material';
+import { AddBox, Delete, Edit } from '@mui/icons-material';
 import {
   GridRowsProp,
   GridColDef,
   DataGrid,
   GridRenderCellParams,
+  GridToolbarContainer,
 } from '@mui/x-data-grid';
 import GenericButtonComponent from '../../components/button/button.component';
 import { Link } from 'react-router-dom';
@@ -30,6 +31,21 @@ const MyAdminGoodsList = () => {
   const goods = useAppSelector(selectGoods);
   const goodsStatus = useAppSelector(selectGoodsStatus);
   const error = useAppSelector(selectGoodsError);
+
+  const CustomToolbar = () => {
+    return (
+      <GridToolbarContainer>
+        <GenericButtonComponent
+          variant='long-btn'
+          component={Link}
+          to={'add'}
+          endIcon={<AddBox />}
+        >
+          Добавить
+        </GenericButtonComponent>
+      </GridToolbarContainer>
+    );
+  };
 
   const RenderActions = (props: GridRenderCellParams<any, string>) => {
     const [isDeleting, setIsDeleting] = useState(false);
@@ -135,7 +151,13 @@ const MyAdminGoodsList = () => {
           <CircularProgress color='primary' />
         </Stack>
       ) : (
-        <DataGrid autoHeight rows={rows} columns={columns} />
+        <DataGrid
+          sx={{ mt: 5 }}
+          autoHeight
+          rows={rows}
+          columns={columns}
+          slots={{ toolbar: CustomToolbar }}
+        />
       )}
     </>
   );
