@@ -75,7 +75,6 @@ export const fetchGoods = createAsyncThunk<
 });
 
 type GoodData = Omit<Good, 'id'>;
-
 export const addNewGood = createAsyncThunk<
   Good,
   GoodData,
@@ -136,6 +135,35 @@ export const editGood = createAsyncThunk<
   }
 });
 
+export const deleteGood = createAsyncThunk<
+  { goodId: string },
+  string,
+  { rejectValue: ErrorResponse }
+>('goods/deleteGood', async (goodId, thunkAPI) => {
+  try {
+    const response = await axios.delete<Good>(
+      `${import.meta.env.VITE_JSON_SERVER_URL}/goods/${goodId}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    );
+    console.log(response);
+
+    return { goodId };
+  } catch (err) {
+    const error = err as AxiosError<ErrorResponse>;
+
+    if (!error.response) {
+      throw err;
+    }
+
+    return thunkAPI.rejectWithValue(error.response.data);
+  }
+});
+
 const goodsSlice = createSlice({
   name: 'goods',
   initialState,
@@ -184,6 +212,20 @@ const goodsSlice = createSlice({
         goodsAdapter.updateOne(state, { id, changes });
       })
       .addCase(editGood.rejected, (state, action) => {
+        if (action.payload) {
+          state.error = action.payload;
+        } else {
+          state.error = action.error;
+        }
+      })
+
+      .addCase(deleteGood.fulfilled, (state, action) => {
+        const { goodId } = action.payload;
+
+        state.error = null;
+        goodsAdapter.removeOne(state, goodId);
+      })
+      .addCase(deleteGood.rejected, (state, action) => {
         if (action.payload) {
           state.error = action.payload;
         } else {

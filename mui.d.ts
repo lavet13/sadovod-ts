@@ -1,5 +1,7 @@
 import '@material-ui/core/styles/createPalette';
 
+import type {} from '@mui/x-data-grid/themeAugmentation';
+
 declare module '@mui/material/styles/createPalette' {
   interface Palette {
     yellow: Palette['primary'];
@@ -25,6 +27,7 @@ declare module '@mui/material/Button' {
     'tel-btn': true;
     'logo-btn': true;
     'md-btn': true;
+    'round-btn': true;
     'long-btn': true;
     'footer-link': true;
   }
@@ -103,5 +106,6 @@ declare module '@mui/system' {
     sm: number;
     md: number;
     lg: number;
+    xl: number;
   }
 }

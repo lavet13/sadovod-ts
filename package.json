@@ -34,6 +34,7 @@
     "react-swipeable-views": "^0.14.0",
     "react-swipeable-views-utils": "^0.14.0",
     "redux-logger": "^3.0.6",
+    "redux-undo": "^1.1.0",
     "swiper": "^10.0.4",
     "vite-plugin-svgr": "^3.2.0",
     "yup": "^1.2.0"
